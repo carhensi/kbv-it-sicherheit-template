@@ -6,6 +6,8 @@
 **KBV-IT-Sicherheitsrichtlinie umsetzen?**  
 Diese Vorlage liefert eine **praxisnahe, auditfähige IT-Sicherheitsdokumentation** inklusive Vorlagen/Anhängen. Als Startpunkt, den Sie **anpassen**, **erweitern** oder **verschlanken** können.
 
+> 💡 **Compliance-Grundsatz:** *„Schreibe nur auf, was du tust – und tue, was du aufgeschrieben hast."*
+
 **📄 Beispiel-PDFs herunterladen:**
 
 - [Standard-Version](https://github.com/carhensi/kbv-it-sicherheit-template/releases/latest/download/IT-Sicherheitsdokumentation_v2025.09.01.pdf)

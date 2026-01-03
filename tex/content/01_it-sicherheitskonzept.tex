@@ -151,7 +151,7 @@ praxisgerechte Überwachungsarchitektur statt zentralem SIEM:
 \begin{itemize}
   \item Dezentrale Logs (Router, macOS, PVS) für gezielte Analyse
   \item Honeypots (Canary Tokens) für Anomalie-Erkennung (siehe \cref{sec:honeypots})
-  \item Quartalsweise Stichproben-Auswertung in TOMs-Prüfung
+  \item Halbjährliche Stichproben-Auswertung in TOMs-Prüfung (angestrebt)
   \item Ereignisbasierte Tiefenanalyse bei Sicherheitsvorfällen
 \end{itemize}
 
@@ -178,7 +178,8 @@ Updates verantwortlich. Der IT-Ansprechpartner unterstützt bei kritischen Updat
 
 \textbf{Identifizierung ausbleibender Updates:}
 \begin{itemize}
-  \item \textbf{macOS/iOS:} Systemeinstellungen → Softwareupdate (wöchentliche Kontrolle)
+  \item \textbf{macOS/iOS:} Systemeinstellungen → Softwareupdate (automatische Benachrichtigungen 
+aktiviert, stichprobenartige Kontrolle monatlich oder bei Bedarf)
   \item \textbf{\MDMTool{}:} MDM-Dashboard zeigt Update-Status aller verwalteten Geräte
   \item \textbf{\PVSName{}:} Automatische Update-Benachrichtigungen im System
   \item \textbf{\RouterKurz{}:} Admin-Interface zeigt verfügbare Firmware-Updates
@@ -231,7 +232,7 @@ alle Sharing-Dienste deaktiviert, Gastaccount deaktiviert, separater Admin-Accou
 Systemverwaltung, automatisches Login deaktiviert, Passwort sofort nach Bildschirmschoner
 erforderlich, Safari Auto-Open Downloads deaktiviert, Remote Management deaktiviert,
 Standortdienste nur für \enquote{Wo ist?} (Fernlöschung bei Verlust).
-Halbjährliche Überprüfung der Baseline-Konfiguration in den TOMs-Prüfungen.
+Jährliche Überprüfung der Baseline-Konfiguration, halbjährlich angestrebt.
 
 \textbf{Zugangsschutz:} Starke Passwörter/Biometrie für alle Benutzerkonten. Keine
 Gastkonten oder geteilte Accounts. Separater lokaler Admin-Account (\texttt{\AdminUser{}}) für
@@ -290,7 +291,7 @@ Keine Windows-Systeme vorhanden (auch nicht virtualisiert).
   \item Keine Wiederverwendung
   \item 2FA wo möglich (iCloud, \PasswortManager{}, \HostingAnbieter{})
   \item Passwort-Rotation: Nur bei Verdacht auf Kompromittierung
-  \item \PasswortManager{} Sicherheits-Dashboard Score: Ziel $\geq$\PasswortSecurityScore{} (quartalsweise Prüfung in TOMs, Abweichungen werden dokumentiert und bewertet)
+  \item \PasswortManager{} Sicherheits-Dashboard Score: Ziel $\geq$\PasswortSecurityScore{} (halbjährliche Prüfung angestrebt, mindestens jährlich in TOMs-Prüfung, Abweichungen werden dokumentiert und bewertet)
 \end{itemize}
 
 \textbf{Datenschutz:} Patientendaten werden nicht in öffentlichen Cloud-Diensten gespeichert.
@@ -335,9 +336,14 @@ der Datensicherung, tägliche Backup-Kontrolle, Restore-Tests und Meldung bei Pr
 Der IT-Ansprechpartner ist für die technische Konfiguration zuständig und
 steht bei Fragen zur Verfügung.
 
-\textbf{Tägliche Backup-Kontrolle:} Die \PraxisInhaberBezeichnung{} prüft täglich den Time Machine-Status
-(Letztes Backup < 24h). \PVSName{} meldet automatisch bei nicht erfolgreichem Backup.
-Bei Fehlern wird der IT-Ansprechpartner unverzüglich informiert.
+\textbf{Backup-Überwachung:} Das Backup erfolgt automatisiert über Time Machine und \PVSName{}. 
+Bei Fehlern erfolgt automatische Benachrichtigung. Die \PraxisInhaberBezeichnung{} führt 
+stichprobenartige Kontrollen durch (wöchentlich angestrebt, mindestens monatlich). 
+Bei Problemen wird der IT-Ansprechpartner unverzüglich informiert.
+
+\textbf{Hinweis für Einzelpraxen:} Eine tägliche manuelle Prüfung ist bei automatisierter 
+Überwachung und Benachrichtigung nicht erforderlich. Regelmäßige Stichproben gewährleisten 
+die Funktionsfähigkeit ohne unverhältnismäßigen Aufwand.
 
 Das Offsite-Backup wird verschlüsselt auf einem NAS am \BackupStandort{}
 gespeichert. Durch die Verschlüsselung ist ein Zugriff auf Praxisdaten durch andere
