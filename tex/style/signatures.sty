@@ -1,0 +1,73 @@
+\ProvidesPackage{style/signatures}[2025/01/02 v1 Signature Macros]
+
+% Praxis-Signatur (falls Signatur-Datei vorhanden)
+\newcommand{\praxissignatur}{%
+\AccessibleSwitch{
+  % Accessible: Einfache Struktur ohne minipage
+  \vspace{1cm}
+  \noindent
+  \Label{Ort, Datum} \SignatureLine\\[0.5cm]
+  \Label{Unterschrift} \SignatureLine\\[0.3cm]
+  {\small \PraxisInhaberin\\(Praxisinhaberin)}
+}{
+  % Standard: Professionelle zwei-Spalten Layout
+  \vspace{1cm}
+  \noindent
+  \begin{minipage}[t]{5cm}
+    \centering
+    \rule{4cm}{0.3pt} \\[0.3cm]
+    {\small Ort, Datum}
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{5cm}
+    \centering
+    \rule{4cm}{0.3pt} \\[0.3cm]
+    {\small \PraxisInhaberin \\
+    (Praxisinhaberin)}
+  \end{minipage}
+}
+}
+
+% Doppel-Signatur für Vier-Augen-Prinzip
+\newcommand{\doppelsignatur}{%
+\ifaccessible
+  % Accessible: Vertikale Liste
+  \vspace{1cm}
+  \noindent
+  \textbf{Ort, Datum:} \rule{4cm}{0.3pt}\\[0.5cm]
+  \textbf{Praxisinhaberin:} \rule{4cm}{0.3pt}\\[0.3cm]
+  {\small \PraxisInhaberin\\(Praxisinhaberin)}\\[0.8cm]
+  \textbf{Ort, Datum:} \rule{4cm}{0.3pt}\\[0.5cm]
+  \textbf{IT-Ansprechpartner:} \rule{4cm}{0.3pt}\\[0.3cm]
+  {\small \ITAnsprechpartner\\(IT-Ansprechpartner)}
+\else
+  % Standard: Professionelle vier-Spalten Layout
+  \vspace{1cm}
+  \noindent
+  \begin{minipage}[t]{3.7cm}
+    \centering
+    \rule{3.4cm}{0.3pt} \\[0.3cm]
+    \small Ort, Datum
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{3.7cm}
+    \centering
+    \rule{3.4cm}{0.3pt} \\[0.3cm]
+    \small \PraxisInhaberin \\
+    (Praxisinhaberin)
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{3.7cm}
+    \centering
+    \rule{3.4cm}{0.3pt} \\[0.3cm]
+    \small Ort, Datum
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{3.7cm}
+    \centering
+    \rule{3.4cm}{0.3pt} \\[0.3cm]
+    \small \ITAnsprechpartner \\
+    \mbox{(IT-Ansprechpartner)}
+  \end{minipage}
+\fi
+}

@@ -1,0 +1,399 @@
+% PDF/A-3u + optional PDF/UA-1 Compliance
+% Zwei Varianten: Standard (kompakt) vs. Accessible (mit Tagging)
+% Build: make build-standard / make build-accessible
+
+% Switch für Build-Varianten (wird per CLI gesetzt: \def\accessible{})
+\newif\ifaccessible
+\ifdefined\accessible\accessibletrue\else\accessiblefalse\fi
+
+\ifaccessible
+  % Accessible-Version: PDF/A-3u + PDF/UA-1 mit Tagging (article statt scrartcl)
+  \DocumentMetadata{
+    pdfversion  = 1.7,
+    pdfstandard = {a-3u, ua-1},
+    lang        = de-DE,
+    testphase   = {phase-II,phase-III}
+  }
+  \PassOptionsToClass{11pt,twoside}{article}
+  \documentclass[ngerman]{article}
+\else
+  % Standard-Version: PDF/A-3u ohne Tagging-Infrastruktur (scrartcl)
+  \RequirePackage{pdfmanagement}
+  \SetKeys[document/metadata]{
+    pdfversion  = 1.7,
+    pdfstandard = a-3u,
+    lang        = de-DE
+  }
+  \PassOptionsToClass{11pt}{scrartcl}
+  \documentclass[ngerman,twoside]{scrartcl}
+\fi
+
+% Tagging-Setup für Accessible-Version (nach \documentclass!)
+\ifaccessible
+  \tagpdfsetup{
+    activate/all,         % Korrekter Name (nicht deprecated activate-all)
+    role/map-tags=pdf,    % Standard-PDF-Tags für alle LaTeX-Strukturen
+    para/maintag = Div    % /Div statt /Part für Absatz-Wrapper (PAC-freundlicher)
+  }
+\fi
+
+% Flag für Hauptdokument vs. Arbeitsvorlagen
+\newif\ifmaindoc
+\maindoctrue
+
+% Flag für Sample-Build (wird per CLI gesetzt: \def\samplebuild{})
+\newif\ifsamplebuild
+\ifdefined\samplebuild\samplebuildtrue\else\samplebuildfalse\fi
+
+% Konfiguration und Metadaten
+\input{config/metadata}
+
+% Pakete
+\input{config/packages}
+
+% PDF/UA: DisplayDocTitle aktivieren
+\hypersetup{
+  pdfdisplaydoctitle=true,
+  pdftitle={IT-Sicherheitsdokumentation nach §390 SGB V},
+  pdfauthor={\PraxisInhaberin},
+  pdfa=true,              % PDF/A-Modus
+  hidelinks=true,         % Entfernt Link-Boxen
+  unicode=true,           % Unicode-Support
+  linktoc=all             % Titel UND Seitenzahl klickbar
+}
+
+% Deutsche Referenz-Namen für autoref
+\renewcommand{\sectionautorefname}{Kapitel}
+\renewcommand{\subsectionautorefname}{Abschnitt}
+\renewcommand{\subsubsectionautorefname}{Unterabschnitt}
+\renewcommand{\paragraphautorefname}{Absatz}
+\renewcommand{\figureautorefname}{Abbildung}
+\renewcommand{\tableautorefname}{Tabelle}
+
+% Styling und Makros
+\usepackage{style/theme}
+\usepackage{style/macros}
+\usepackage{style/signatures}
+\input{style/columntypes}
+
+% KOMA-Script Optionen
+\AccessibleSwitch{
+  % Accessible: Standard article - keine KOMA-Optionen
+  \setlength{\parskip}{0.5\baselineskip}
+  \setlength{\parindent}{0pt}
+}{
+  % Standard: KOMA-Script Optionen
+  \KOMAoptions{parskip=half}
+}
+
+% Optional Git-Version aus Repository (falls vorhanden, als Fallback)
+\IfFileExists{gitHeadInfo.gin}{%
+  \usepackage[dirty]{gitinfo2}%
+  \newcommand{\Version}{\DocumentVersion-\gitAbbrevHash}%
+}{%
+  \newcommand{\Version}{\DocumentVersion}%
+}
+
+% TOC-Seitenzahl-Box vergrößern für Anhang-Nummern (A-1, A-2, etc.)
+\makeatletter
+\renewcommand{\@pnumwidth}{2em}  % Standard: 1.55em
+\makeatother
+
+\title{IT-Sicherheitsdokumentation nach §~390 SGB~V\\ \large Praxis
+für Psychotherapie \PraxisInhaberin}
+\author{Praxisinhaberin: \PraxisInhaberin}
+\date{\DocumentDate}
+
+% Kopf-/Fußzeile konfigurieren
+\ifaccessible
+  % Accessible: fancyhdr statt scrlayer-scrpage
+  \usepackage{fancyhdr}
+  \pagestyle{fancy}
+  \fancyhf{}
+  \fancyhead[LE,RO]{\PraxisInhaberin}
+  \fancyhead[LO,RE]{IT-Sicherheitsdokumentation}
+  \fancyfoot[C]{%
+    \ifmaindoc
+    Seite \thepage{} von~\pageref*{LastPage} \quad | \quad Version \Version\TemplateAttribution%
+    \else
+    \thepage{} \quad | \quad Version \Version\TemplateAttribution%
+    \fi
+  }
+  \renewcommand{\headrulewidth}{0.4pt}
+\else
+  % Standard: KOMA scrlayer-scrpage
+  \clearpairofpagestyles
+  \ihead{Praxis für Psychotherapie \PraxisInhaberin}
+  \ohead{IT-Sicherheitsdokumentation}
+  \cfoot{%
+    \ifmaindoc
+    Seite \thepage{} von~\pageref*{LastPage} \quad | \quad Version \Version\TemplateAttribution%
+    \else
+    \thepage{} \quad | \quad Version \Version\TemplateAttribution%
+    \fi
+  }
+  \setkomafont{pageheadfoot}{\normalfont\small}
+  \KOMAoptions{headsepline=0.4pt}
+  \pagestyle{scrheadings}
+\fi
+
+\begin{document}
+\raggedbottom
+
+\input{content/hyphenation-rules.tex}
+
+\begin{titlepage}
+  \centering
+
+  \praxislogo
+
+  \textbf{\LARGE IT-Sicherheitsdokumentation}\\[2mm]
+  {\large nach §~390 SGB~V}\\[8mm]
+  {\Large \PraxisName}
+
+  \vspace{2cm}
+
+  % Praxis-Info in schöner Box
+  \ifaccessible
+    % Accessible: Einfache Struktur statt tikzpicture
+    \begin{center}
+      {\large Praxisinhaberin: \PraxisInhaberin}\\[0.3cm]
+      \PraxisVollAdresse\\
+      Telefon: \PraxisTelefon\\
+      E-Mail: \href{mailto:\PraxisEmail}{\PraxisEmail}\\
+      \url{\PraxisWebsite}
+    \end{center}
+  \else
+    % Standard: TikZ-Box
+    \begin{tikzpicture}
+      \node[rectangle, draw=InfoBoxBorder, fill=InfoBoxFill, rounded corners=5pt,
+      text width=10cm, align=center, inner sep=1cm] {
+        {\large Praxisinhaberin: \PraxisInhaberin}\\[0.3cm]
+        \PraxisVollAdresse\\
+        Telefon: \PraxisTelefon\\
+        E-Mail: \href{mailto:\PraxisEmail}{\PraxisEmail}\\
+        \url{\PraxisWebsite}
+      };
+    \end{tikzpicture}
+  \fi
+
+  \vfill
+
+  % Versions-Info am unteren Rand mit Klassifizierung
+  \ifaccessible
+    % Accessible: Einfacher Text statt tikzpicture
+    \Label{Stand} \DocumentDate\\
+    \Label{Gültig bis} \ValidUntil \quad | \quad \Label{Klassifizierung} \DokumentKlassifizierung{}\\
+    \Label{Nächste Überprüfung} \NextReview
+  \else
+    % Standard: TikZ-Box
+    \begin{tikzpicture}
+      \node[rectangle, draw=VersionBoxBorder, fill=VersionBoxFill, rounded corners=3pt,
+      text width=12cm, align=center, inner sep=0.8cm] {
+        \Label{Stand} \DocumentDate\\[0.2cm]
+        \Label{Gültig bis} \ValidUntil \quad | \quad \Label{Klassifizierung} \DokumentKlassifizierung{}\\[0.2cm]
+        \textbf{Nächste Überprüfung:} \NextReview
+      };
+    \end{tikzpicture}
+  \fi
+
+  \vspace{1cm}
+\end{titlepage}
+
+\clearpage
+\thispagestyle{empty}
+\mbox{}
+
+\clearpage
+% TOC nur bis subsection (Level 2) für bessere Übersichtlichkeit
+% subsubsection würde TOC zu detailliert machen
+\setcounter{tocdepth}{2}
+\tableofcontents
+
+\cleardoublepage
+
+\input{content/00_einleitung.tex}
+\input{content/01_it-sicherheitskonzept.tex}
+\input{content/02_richtlinie-kommunikation.tex}
+\input{content/03_ti-betrieb.tex}
+\input{content/04_mobile-geraete.tex}
+\input{content/045_mobile-device-management.tex}
+\input{content/05_wechseldatentraeger.tex}
+\input{content/06_verschwiegenheit_extern.tex}
+\input{content/07_notfall-incident.tex}
+\input{content/08_toms.tex}
+\input{content/09_rechte-rollenmatrix.tex}
+\clearpage
+\input{content/910_anhang-netzplan.tex}
+
+\clearpage
+\input{content/930_anhang-notfallkarte.tex}
+
+\clearpage
+\input{content/940_anhang-mobile-selbstverpflichtung.tex}
+
+\clearpage
+\input{content/950_anhang-wechseldatentraeger-selbstverpflichtung.tex}
+
+\clearpage
+\input{content/960_anhang-sichere-loeschung-selbstverpflichtung.tex}
+
+\clearpage
+\input{content/970_anhang-verschwiegenheit-extern.tex}
+
+\clearpage
+\input{content/980_anhang-kbv-compliance-mapping.tex}
+
+\clearpage
+\input{content/920_anhang-geraeteliste.tex}
+
+\clearpage
+\input{content/995_anhang-avv-register.tex}
+
+\clearpage
+\input{content/996_anhang-vvt.tex}
+
+\clearpage
+\input{content/993_anhang-changelog.tex}
+
+\clearpage
+\input{content/999_glossar.tex}
+
+% Label für letzte Seite des Hauptdokuments (vor Arbeitsvorlagen)
+\label{LastPage}
+
+% TRENNSEITE
+\clearpage
+\ifaccessible
+  % Accessible: Manuell twoside=false simulieren
+  \let\cleardoublepage\clearpage
+\else
+  % Standard: KOMA twoside=false
+  \KOMAoptions{twoside=false}
+\fi
+\thispagestyle{empty}
+\begin{center}
+  \vspace*{1.2cm}
+
+  \praxislogo[2.5cm]
+
+  {\LARGE\bfseries Arbeitsvorlagen}\\[2mm]
+  {\large zur IT-Sicherheitsdokumentation}\\[8mm]
+  {\Large \PraxisName}
+
+  \vspace{1.0cm}
+
+  \ifaccessible
+    % Accessible: Einfache Struktur statt tikzpicture
+    Regelmäßig zu füllende Arbeitsblätter\\
+    für kontinuierliche Compliance-Dokumentation
+
+    \textbf{Inhalt der Arbeitsvorlagen:}
+    \begin{itemize}
+      \item Jährliche IT-Sicherheitsevaluation
+      \item Backup-Wiederherstellungstests (halbjährlich)
+      \item TOMS-Überprüfungen (jährlich und quartalsweise)
+      \item IT-Sicherheits-Schulungsplan
+      \item Breach-Register (DSGVO Art. 33)
+      \item SOP Remote-Support (unter Aufsicht)
+      \item Betroffenenrechte (DSGVO Art. 12--23)
+      \item Tabletop-Übung (Notfallsimulation)
+      \item Mitarbeiter On-/Offboarding-Checklisten
+    \end{itemize}
+  \else
+    % Standard: TikZ-Box
+    \begin{tikzpicture}
+      \node[rectangle, draw=InfoBoxBorder, fill=InfoBoxFill, rounded corners=5pt,
+      text width=10cm, align=left, inner sep=0.6cm] {
+        \begin{center}
+          Regelmäßig zu füllende Arbeitsblätter\\
+          für kontinuierliche Compliance-Dokumentation\\[0.3cm]
+        \end{center}
+
+        \vspace{0.3cm}
+
+        \begin{center}
+        \textbf{Inhalt der Arbeitsvorlagen:}
+        \end{center}
+        \begin{itemize}
+          \item Jährliche IT-Sicherheitsevaluation
+          \item Backup-Wiederherstellungstests (halbjährlich)
+          \item TOMS-Überprüfungen (jährlich und quartalsweise)
+          \item IT-Sicherheits-Schulungsplan
+          \item Breach-Register (DSGVO Art. 33)
+          \item SOP Remote-Support (unter Aufsicht)
+          \item Betroffenenrechte (DSGVO Art. 12--23)
+          \item Tabletop-Übung (Notfallsimulation)
+          \item Mitarbeiter On-/Offboarding-Checklisten
+        \end{itemize}
+      };
+    \end{tikzpicture}
+  \fi
+
+  \vspace{0.6cm}
+
+  \vfill
+
+  % Versions-Info am unteren Rand (wie Hauptdokument)
+  \ifaccessible
+    % Accessible: Einfacher Text statt tikzpicture
+    \textbf{Stand:} \DocumentDate\\
+    \textbf{Separate Mappe} \quad | \quad \textbf{Klassifizierung:} \DokumentKlassifizierung{}
+  \else
+    % Standard: TikZ-Box
+    \begin{tikzpicture}
+      \node[rectangle, draw=VersionBoxBorder, fill=VersionBoxFill, rounded corners=3pt,
+      text width=12cm, align=center, inner sep=0.8cm] {
+        \textbf{Stand:} \DocumentDate\\[0.2cm]
+        \textbf{Separate Mappe} \quad | \quad \textbf{Klassifizierung:} \DokumentKlassifizierung{}
+      };
+    \end{tikzpicture}
+  \fi
+
+  % \vspace{1cm}
+\end{center}
+
+% ARBEITSVORLAGEN (neue Seitenzählung ab 1)
+\clearpage
+\maindocfalse
+\newgeometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
+\setcounter{page}{1}
+\renewcommand{\thepage}{V-\arabic{page}}
+
+\cfoot{\thepage{} \quad | \quad Version \Version\TemplateAttribution}
+
+\addcontentsline{toc}{section}{Arbeitsvorlagen (separate Mappe)}
+
+\input{content/992_vorlage-eigenpruefung.tex}
+
+\clearpage
+\input{content/985_vorlage-restore-tests.tex}
+
+\clearpage
+\input{content/990_vorlage-toms-pruefung.tex}
+
+\clearpage
+\input{content/991_vorlage-schulungsplan.tex}
+
+\clearpage
+\input{content/993_vorlage-breach-register.tex}
+
+\clearpage
+\input{content/994_vorlage-remote-support.tex}
+
+\clearpage
+\input{content/995_vorlage-betroffenenrechte.tex}
+
+\clearpage
+\input{content/996_vorlage-tabletop.tex}
+
+\clearpage
+\input{content/997_vorlage-einarbeitung.tex}
+
+\clearpage
+\input{content/998_vorlage-offboarding.tex}
+
+% Geometry zurücksetzen (falls später noch Inhalte folgen)
+\restoregeometry
+
+\end{document}

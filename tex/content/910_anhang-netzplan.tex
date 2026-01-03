@@ -1,0 +1,95 @@
+\begin{landscape}
+  \enlargethispage{2cm}
+
+  % Alles zusammen etwas nach oben ziehen (Bild + Überschrift + Text)
+  \vspace*{-2.5cm}   % vorher -2.0cm → jetzt 0.5cm höher
+
+  % Phantom Section für TOC-Eintrag mit Nummer
+  \phantomsection
+  \refstepcounter{section}
+  \addcontentsline{toc}{section}{\protect\numberline{\thesection}Anhang – Netzplan (Praxisnetz)}
+  \label{sec:anhang-netzplan}
+
+  % Bild + Überschrift im TikZ-Rahmen
+  \begin{center}
+    \begin{tikzpicture}[alt={Überschrift-Overlay für Netzplan-Diagramm}]
+      % Bild-Knoten: seitenfüllend, linksbündig
+      \node[inner sep=0, anchor=north west] (img) at (0,0) {%
+        \includegraphics[
+          width=\paperwidth,     % praktisch ganze Seite im Querformat
+          height=0.84\textheight,
+          keepaspectratio,
+          alt={Netzplan der Praxis mit Router, Arbeitsplätzen und Netzwerk-Segmentierung. Zeigt die Trennung zwischen Praxisnetz und Standortnetz über einen dedizierten Router.}
+        ]{assets/netzplan.png}%
+      };
+
+      % Überschrift oben links auf dem Bild mit Nummer
+      \node[
+        anchor=north west,
+        xshift=-35mm,   % näher an die linke Kante (0mm = direkt am Bildrand)
+        yshift=-4mm   % leicht ins Bild nach unten
+      ] at (img.north west) {%
+        \ifaccessible
+          % Accessible: Keine TikZ-Überschrift
+        \else
+          % Standard: TikZ-Überschrift
+          \usekomafont{sectioning}\Large \thesection{} Anhang – Netzplan (Praxisnetz)%
+        \fi
+      };
+    \end{tikzpicture}
+  \end{center}
+
+  % Textblock unter dem Bild 0.6cm näher ans Bild heranziehen
+  \vspace*{-0.6cm}   % vorher -0.5cm → jetzt 0.6cm näher am Bild
+
+  % Info-Boxen nebeneinander
+  \ifaccessible
+    % Accessible: Einfache vertikale Struktur ohne minipage
+    \textbf{\large \RouterKurz{} Konfiguration}\\
+    \begin{small}
+      \textbf{Modell:} \RouterModell{} (\RouterName)\\
+      \textbf{LAN:} \PraxisSubnetz{}, Router: .1, DHCP: .20–.250\\
+      \textbf{WLAN:} \WLANName{} (5GHz), WPA2/3, 23–07h aus\\
+      \textbf{Gäste-WLAN:} \WLANGastName, WPA2/3, Mo–Fr 8–18h, Gastgeräte isoliert\\
+      \textbf{Sicherheit:} Keine Portfreigaben, UPnP aus, Remote-Admin aus\\
+      \textbf{Updates:} Firmware Auto-Update aktiviert
+    \end{small}
+
+    \vspace{0.5cm}
+    \textbf{\large Netzwerk-Segmentierung}\\
+    \begin{small}
+      \textbf{Trennung:} \RouterModell{} isoliert Praxisnetz von \StandortTyp{}\\
+      \textbf{Verkabelung:} \NetzwerkUplink{}\\
+      \textbf{Netz:} Separates Subnetz \PraxisSubnetz{} mit eigenem DHCP\\
+      \textbf{Firewall:} NAT/Firewall-Schutz gegen externe Zugriffe\\
+      \textbf{Kontrolle:} Vollständige Verwaltungshoheit über Praxisgeräte\\
+      \textbf{Physische Sicherheit:} \RouterKurz{} in abgeschlossenem Praxisraum
+    \end{small}
+  \else
+    % Standard: minipage nebeneinander
+    \begin{minipage}[t]{0.5\textwidth}
+      \textbf{\large \RouterKurz{} Konfiguration}\\
+      \begin{small}
+        \textbf{Modell:} \RouterModell{} (\RouterName)\\
+        \textbf{LAN:} \PraxisSubnetz{}, Router: .1, DHCP: .20–.250\\
+        \textbf{WLAN:} \WLANName{} (5GHz), WPA2/3, 23–07h aus\\
+        \textbf{Gäste-WLAN:} \WLANGastName, WPA2/3, Mo–Fr 8–18h, Gastgeräte isoliert\\
+        \textbf{Sicherheit:} Keine Portfreigaben, UPnP aus, Remote-Admin aus\\
+        \textbf{Updates:} Firmware Auto-Update aktiviert
+      \end{small}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.49\textwidth}
+      \textbf{\large Netzwerk-Segmentierung}\\
+      \begin{small}
+        \textbf{Trennung:} \RouterModell{} isoliert Praxisnetz von \StandortTyp{}\\
+        \textbf{Verkabelung:} \NetzwerkUplink{}\\
+        \textbf{Netz:} Separates Subnetz \PraxisSubnetz{} mit eigenem DHCP\\
+        \textbf{Firewall:} NAT/Firewall-Schutz gegen externe Zugriffe\\
+        \textbf{Kontrolle:} Vollständige Verwaltungshoheit über Praxisgeräte\\
+        \textbf{Physische Sicherheit:} \RouterKurz{} in abgeschlossenem Praxisraum
+      \end{small}
+    \end{minipage}
+  \fi
+
+\end{landscape}

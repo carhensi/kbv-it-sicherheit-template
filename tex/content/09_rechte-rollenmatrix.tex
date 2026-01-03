@@ -1,0 +1,165 @@
+\section{Rechte- und Rollenmatrix}
+\label{sec:rechte-rollenmatrix}
+
+\subsection{Übersicht}
+
+Die Rechte- und Rollenmatrix definiert systematisch die Zugriffsberechtigung auf alle
+IT-Systeme der Praxis. Sie gewährleistet das Prinzip der minimalen Berechtigung und
+unterstützt die Nachvollziehbarkeit von Systemzugriffen gemäß §~390 SGB~V.
+
+\subsection{Rollendefinitionen}
+
+\begin{tabular}{>{\raggedright\arraybackslash}p{3cm}>{\raggedright\arraybackslash}p{4cm}>{\raggedright\arraybackslash}p{7cm}}
+\toprule
+\textbf{Rolle} & \textbf{Beschreibung} & \textbf{Verantwortlichkeiten} \\
+\midrule
+Praxisinhaberin & \PraxisInhaberBezeichnung{} & Gesamtverantwortung IT-Sicherheit, Patientendaten, Compliance \\
+IT-Support & Externer IT-Ansprechpartner & Technische Betreuung, Wartung, Updates (unter Aufsicht) \\
+\PVSName{}-Support & PVS-Hersteller (extern) & \PVSName{}-System-Support, \RemoteTool{}-Fernwartung (unter Aufsicht) \\
+Therapeut/in & Angestellte Therapeuten & Patientenbehandlung, Dokumentation (zukünftig) \\
+Verwaltung & Verwaltungsangestellte & Termine, Abrechnung, Organisation (zukünftig) \\
+Vertretung & Praxisvertretung & Notfall-Patientenversorgung (zukünftig) \\
+\bottomrule
+\end{tabular}
+
+\subsection{Aktuelle Rollenzuordnung}
+
+\begin{tabular}{ll}
+\toprule
+\textbf{Person} & \textbf{Rolle} \\
+\midrule
+\PraxisInhaberin & Praxisinhaberin \\
+\ITAnsprechpartner{} (extern) & IT-Support \\
+\PVSName{} GmbH (extern) & \PVSName{}-Support \\
+\textit{(noch nicht besetzt)} & \textit{Therapeut/in (inkl. Vertretung)} \\
+\textit{(noch nicht besetzt)} & \textit{Verwaltung (zukünftig)} \\
+\bottomrule
+\end{tabular}
+
+\subsection{Systemberechtigungen nach Rollen}
+
+\subsubsection{Praxisverwaltungssystem (\PVSName{})}
+
+\begin{tabular}{p{4cm}p{2.5cm}p{2.5cm}p{2.5cm}p{2.5cm}}
+\toprule
+\textbf{Funktion} & \textbf{Praxisinhaberin} & \textbf{IT-Support} & \textbf{Therapeut/in*} & \textbf{Verwaltung*} \\
+\midrule
+Admin-Account & \cmark & \xmark & \xmark & \xmark \\
+Standard-Benutzer & \cmark & \xmark & \cmark & \cmark \\
+Patientendaten & Vollzugriff & \xmark & Eigene Patienten & Lesezugriff \\
+Termine & Vollzugriff & \xmark & Eigene Termine & Vollzugriff \\
+Abrechnung & Vollzugriff & \xmark & \xmark & Vollzugriff \\
+Systemeinstellungen & \cmark & \xmark & \xmark & \xmark \\
+\bottomrule
+\end{tabular}
+
+\textit{* = Zukünftige Rollen, noch nicht besetzt}
+
+\textbf{Hinweis:} \PVSName{}-Support hat Admin-Zugriff auf alle PVS-Funktionen, jedoch nur unter Aufsicht der Praxisinhaberin via \RemoteTool{}-Session. \RemoteTool{} wird nur bei Bedarf gestartet und ist standardmäßig nicht aktiv. Alle Remote-Support-Sitzungen werden nach der SOP in \cref{sec:vorlage-remote-support} durchgeführt und dokumentiert.
+
+\subsubsection{Sicherheit und Passwörter}
+
+\begin{tabular}{p{4cm}p{2.5cm}p{2.5cm}p{2.5cm}p{2.5cm}}
+\toprule
+\textbf{System} & \textbf{Praxisinhaberin} & \textbf{IT-Support} & \textbf{Therapeut/in} & \textbf{Verwaltung} \\
+\midrule
+\PasswortManager{} Praxis-Vault & Vollzugriff & Emergency & \xmark & \xmark \\
+\PasswortManager{} Shared Vault & \cmark & \cmark & \xmark & \xmark \\
+TLS-Zertifikate & \cmark & \cmark & \xmark & \xmark \\
+\bottomrule
+\end{tabular}
+
+\subsubsection*{Netzwerk-Infrastruktur}
+
+\begin{tabular}{p{4cm}p{2.5cm}p{2.5cm}p{2.5cm}p{2.5cm}}
+\toprule
+\textbf{Komponente} & \textbf{Praxisinhaberin} & \textbf{IT-Support} & \textbf{Therapeut/in} & \textbf{Verwaltung} \\
+\midrule
+\RouterKurz{} Admin & \cmark & \cmark & \xmark & \xmark \\
+WLAN-Verwaltung & \cmark & \cmark & \xmark & \xmark \\
+Gastnetz-Aktivierung & \cmark & \cmark & \xmark & \xmark \\
+Netzwerk-Monitoring & \cmark & \cmark & \xmark & \xmark \\
+\bottomrule
+\end{tabular}
+
+\tabellenheader{Hardware und Geräte}
+\begin{tabular}{p{4cm}p{2.5cm}p{2.5cm}p{2.5cm}p{2.5cm}}
+\toprule
+\textbf{Gerät} & \textbf{Praxisinhaberin} & \textbf{IT-Support} & \textbf{Therapeut/in} & \textbf{Verwaltung} \\
+\midrule
+MacBook (Benutzer) & Persönlicher User & Aufsicht & Persönlicher User & Persönlicher User \\
+MacBook (Admin) & \texttt{\AdminUser{}}-Account & Aufsicht & \xmark & \xmark \\
+Drucker (Nutzung) & \cmark & \cmark & \cmark & \cmark \\
+Drucker (Admin) & \cmark & \cmark & \xmark & \xmark \\
+TI-Terminal & \cmark & Updates & \xmark & \xmark \\
+Mobile Geräte & \xmark & \xmark & \xmark & \xmark \\
+\bottomrule
+\end{tabular}
+
+\tabellenheader{TI-Infrastruktur}
+\begin{tabular}{p{4cm}p{2.5cm}p{2.5cm}p{2.5cm}p{2.5cm}}
+\toprule
+\textbf{Komponente} & \textbf{Praxisinhaberin} & \textbf{IT-Support} & \textbf{Therapeut/in} & \textbf{Verwaltung} \\
+\midrule
+SMC-B Karte & Geteilte Praxiskarte & \xmark & Geteilte Praxiskarte & \xmark \\
+KIM/ePA/eAU & \cmark & \xmark & \cmark & \xmark \\
+TI-Gateway & Monitoring & Updates & \xmark & \xmark \\
+\bottomrule
+\end{tabular}
+
+\tabellenheader{Backup und Wiederherstellung}
+\begin{tabular}{p{4cm}p{2.5cm}p{2.5cm}p{2.5cm}p{2.5cm}}
+\toprule
+\textbf{System} & \textbf{Praxisinhaberin} & \textbf{IT-Support} & \textbf{Therapeut/in} & \textbf{Verwaltung} \\
+\midrule
+NAS-Backup & Vollzugriff & \xmark & \xmark & \xmark \\
+USB-Backup & Vollzugriff & \xmark & \xmark & \xmark \\
+Restore-Durchführung & \cmark & Unterstützung & \xmark & \xmark \\
+\bottomrule
+\end{tabular}
+
+\tabellenheader{Web-Services und Cloud}
+\begin{tabular}{p{4cm}p{2.5cm}p{2.5cm}p{2.5cm}p{2.5cm}}
+\toprule
+\textbf{Service} & \textbf{Praxisinhaberin} & \textbf{IT-Support} & \textbf{Therapeut/in} & \textbf{Verwaltung} \\
+\midrule
+Website (\HostingAnbieter{}/\IaCTool{}) & \xmark & Vollzugriff & \xmark & \xmark \\
+\HostingAnbieter{}/\CodeRepo{} & \xmark & Vollzugriff & \xmark & \xmark \\
+E-Mail-Postfach & Persönlich + info@ & \xmark & \xmark & \xmark \\
+iCloud-Zugriff & \cmark & \xmark & \xmark & \xmark \\
+\MDMTool{} MDM & Vollzugriff & Vollzugriff & \xmark & \xmark \\
+\KIToolName{} KI-Dokumentation & \cmark & \xmark & \cmark & \xmark \\
+\bottomrule
+\end{tabular}
+
+\subsection{Berechtigungsprinzipien}
+
+\textbf{Minimale Berechtigung:} Jede Rolle erhält nur die für ihre Aufgaben erforderlichen
+Mindestrechte.
+
+\textbf{Funktionstrennung:} Administrative und operative Tätigkeiten sind klar getrennt.
+
+\textbf{Datenschutz:} Therapeuten haben nur Zugriff auf ihre eigenen Patientendaten.
+
+\textbf{Vier-Augen-Prinzip:} Kritische Systemänderungen erfolgen in Abstimmung zwischen
+Praxisinhaberin und IT-Support.
+
+\textbf{Aufsichtspflicht:} Externe IT-Support-Tätigkeiten erfolgen grundsätzlich unter
+Aufsicht der Praxisinhaberin.
+
+\subsection{Änderungsmanagement}
+
+\textbf{Neue Mitarbeitende:} Erhalten standardmäßig die Mindestrechte ihrer Rolle.
+Erweiterte Berechtigungen werden individuell geprüft und genehmigt.
+
+\textbf{Rollenwechsel:} Bei Funktionsänderungen werden Berechtigungen entsprechend
+angepasst und alte Zugänge deaktiviert.
+
+\textbf{Ausscheiden:} Alle Zugänge werden sofort deaktiviert, Passwörter geändert,
+Hardware zurückgegeben.
+
+\textbf{Regelmäßige Überprüfung:} Die Rechte-Matrix wird jährlich im Rahmen der
+TOMs-Überprüfung auf Aktualität und Angemessenheit geprüft.
+
+\Dokumentation Alle Änderungen werden im Changelog der IT-Sicherheitsdokumentation
+erfasst.

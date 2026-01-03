@@ -1,0 +1,211 @@
+\ProvidesPackage{style/macros}[2025/09/09 v1 IT-Sicherheitsdokumentation Macros]
+
+\RequirePackage{xparse,longtable,colortbl}
+
+% Einheitliche Kopfzeilenfarbe
+\newcommand{\TableHead}{\rowcolor[HTML]{E6EEF7}}
+
+% VVT-Footer-Helfer: erzeugt die beiden Abschluss-Zeilen
+\NewDocumentCommand{\VVTFooter}{m m}{%
+  \textbf{Drittland}    & #1 \\
+  \textbf{Löschfristen} & #2 \\
+}
+
+% VVT-Box mit 9 Argumenten (9. Argument enthält Footer)
+\NewDocumentCommand{\VVTBox}{m m m m m m m m m}{%
+\ifaccessible
+  % Accessible: Einfache Struktur ohne multicolumn für besseres Tagging
+  \begin{longtable}{p{3.5cm} p{11.0cm}}
+    \toprule
+    \textbf{Verarbeitungstätigkeit} & \textbf{#2} \\
+    \midrule
+    \textbf{Datum}           & Anlegung: #3 \quad | \quad Letzte Änderung: #4 \\
+    \textbf{Zwecke}          & #5 \\
+    \textbf{Betroffene}      & #6 \\
+    \textbf{Datenkategorien} & #7 \\
+    \textbf{Empfänger}       & #8 \\
+    #9
+    \bottomrule
+  \end{longtable}
+\else
+  % Standard: Original mit Farben und multicolumn
+  \begin{longtable}{p{3.5cm} p{11.0cm}}
+    \noalign{\global\aboverulesep=0pt\global\belowrulesep=0pt}%
+    \toprule
+    \multicolumn{2}{c}{\cellcolor{#1}\textbf{#2}}\\
+    \midrule
+    \noalign{\global\aboverulesep=0.4ex\global\belowrulesep=0.65ex}%
+    \textbf{Datum}           & Anlegung: #3 \quad | \quad Letzte Änderung: #4 \\
+    \textbf{Zwecke}          & #5 \\
+    \textbf{Betroffene}      & #6 \\
+    \textbf{Datenkategorien} & #7 \\
+    \textbf{Empfänger}       & #8 \\
+    #9
+    \bottomrule
+  \end{longtable}
+\fi
+}
+
+% AVV-Zeile als Kommando (einheitliche Schreibweise)
+\NewDocumentCommand{\AVVRow}{m m m m m}{#1 & #2 & #3 & #4 & #5 \\}
+
+% Accessible-freundliche Tabellen-Header
+\ifaccessible
+  % Accessible: Keine multicolumn, normale Zeilen
+  \NewDocumentCommand{\AccessibleTableHeader}{m m}{%
+    \textbf{#1} & #2 \\
+  }
+  \NewDocumentCommand{\AccessibleSectionHeader}{m}{%
+    \textbf{#1} & & & \\
+  }
+\else
+  % Standard: multicolumn wie gewohnt
+  \NewDocumentCommand{\AccessibleTableHeader}{m m}{%
+    \multicolumn{2}{l}{\textbf{#1}} \\
+  }
+  \NewDocumentCommand{\AccessibleSectionHeader}{m}{%
+    \textbf{#1} & & & \\
+  }
+\fi
+
+% Template-Attribution für Fußzeilen
+\NewDocumentCommand{\TemplateAttribution}{}{%
+  \ifaccessible%
+    \\{\tiny Vorlage • https://hensiek.com/kbv • CC BY-SA 4.0}%
+  \else%
+    \\{\tiny Vorlage • \href{https://hensiek.com/kbv}{hensiek.com/kbv} • CC BY-SA 4.0}%
+  \fi%
+}
+
+% Schulungsplan-Box (ähnlich VVT-Box)
+\NewDocumentCommand{\SchulungsBox}{m m m m m m m}{%
+\ifaccessible
+  % Accessible: Einfache Struktur ohne multicolumn
+  \begin{longtable}{p{3.5cm} p{11.0cm}}
+    \toprule
+    \textbf{Schulungsmodul} & \textbf{#2} \\
+    \midrule
+    \textbf{Zielgruppe} & #3 \\
+    \textbf{Dauer} & #4 \\
+    \textbf{Quellen} & #5 \\
+    \textbf{Checkliste} & #6 \\
+    \textbf{Mini-Test} & #7 \\
+    \textbf{Dokumentation} & Teilnahmeblatt \\
+    \bottomrule
+  \end{longtable}
+\else
+  % Standard: Original mit Farben und multicolumn
+  \begin{longtable}{p{3.5cm} p{11.0cm}}
+    \noalign{\global\aboverulesep=0pt\global\belowrulesep=0pt}%
+    \toprule
+    \multicolumn{2}{c}{\cellcolor{#1}\textbf{#2}}\\
+    \midrule
+    \noalign{\global\aboverulesep=0.4ex\global\belowrulesep=0.65ex}%
+    \textbf{Zielgruppe} & #3 \\
+    \textbf{Dauer} & #4 \\
+    \textbf{Quellen} & #5 \\
+    \textbf{Checkliste} & #6 \\
+    \textbf{Mini-Test} & #7 \\
+    \textbf{Dokumentation} & Teilnahmeblatt \\
+    \bottomrule
+  \end{longtable}
+\fi
+}
+\NewDocumentEnvironment{AVVTable}{ O{} }{%
+  \begin{longtable}{p{3cm} p{4cm} p{3cm} p{3cm} p{3cm}}
+  \toprule
+  \TableHead \textbf{Dienstleister} & \textbf{Zweck} & \textbf{AVV-Status} & \textbf{AVV-Datum} & \textbf{Nächste Prüfung} \\
+  \midrule
+}{%
+  \bottomrule
+  \end{longtable}
+}
+
+% Checkbox-Makros (Unicode für PDF/A-2u)
+\newcommand{\BoxEmpty}{□}  % U+25A1
+\newcommand{\BoxChecked}{☑}  % U+2611
+
+% Check/Cross-Marks (Unicode für PDF/A-2u)
+\newcommand{\cmark}{✓}  % U+2713
+\newcommand{\xmark}{✗}  % U+2717
+
+% Signatur-Makro für Formulare
+\NewDocumentCommand{\SignatureBox}{m}{%
+  \begin{minipage}[t]{6cm}
+    \rule{4cm}{0.3pt} \\[0.3cm]
+    \small #1 \\
+    (Praxisinhaberin)
+  \end{minipage}%
+}
+
+% Telefonnummern-Makros (mit klickbarem tel:-Link für Barrierefreiheit)
+\NewDocumentCommand{\tel}{m}{\href{tel:+49#1}{+49~#1}}
+
+% Tabellen-Überschrift mit konsistenten Abständen
+\NewDocumentCommand{\tabellenheader}{m}{%
+  \vspace{0.3cm}%
+  \subsubsection*{#1}%
+}
+
+% Schulungsplan-Tabelle vereinfacht für accessible
+\NewDocumentCommand{\SchulungsTabelle}{m m m m m m m m}{%
+\ifaccessible
+  % Accessible: Einfache Tabelle ohne noalign/cellcolor
+  \begin{longtable}{p{3.5cm} p{11.0cm}}
+    \toprule
+    \textbf{Schulungsmodul} & \textbf{#1} \\
+    \midrule
+    \textbf{Dauer \& Ort} & #2 \\
+    \textbf{Lernziel} & #3 \\
+    \textbf{Rechtsbezug} & #4 \\
+    \textbf{Quellen} & #5 \\
+    \textbf{Checkliste} & #6 \\
+    \textbf{Mini-Test} & #7 \\
+    \textbf{Dokumentation} & #8 \\
+    \bottomrule
+  \end{longtable}
+\else
+  % Standard: Original mit noalign/cellcolor
+  \begin{longtable}{p{3.5cm} p{11.0cm}}
+    \noalign{\global\aboverulesep=0pt\global\belowrulesep=0pt}%
+    \toprule
+    \AccessibleTableHeader{#1}{}\\
+    \midrule
+    \noalign{\global\aboverulesep=0.4ex\global\belowrulesep=0.65ex}%
+    \textbf{Dauer \& Ort} & #2 \\
+    \textbf{Lernziel} & #3 \\
+    \textbf{Rechtsbezug} & #4 \\
+    \textbf{Quellen} & #5 \\
+    \textbf{Checkliste} & #6 \\
+    \textbf{Mini-Test} & #7 \\
+    \textbf{Dokumentation} & #8 \\
+    \bottomrule
+  \end{longtable}
+\fi
+  \vspace{-0.2cm}%
+}
+
+% Praxis-Logo mit optionaler Höhe (Standard: 3cm)
+\NewDocumentCommand{\praxislogo}{ O{3cm} }{%
+  \IfFileExists{assets/logo.pdf}{%
+    \includegraphics[height=#1]{assets/logo.pdf}\\[1cm]%
+  }{}%
+}
+
+% Einfache Schulungsbox für accessible (ohne Tabelle)
+\NewDocumentCommand{\EinfacheSchulungsbox}{m m m m m m m}{%
+  \subsection*{#1}
+  \textbf{Dauer \& Ort:} #2
+
+  \textbf{Lernziel:} #3
+
+  \textbf{Rechtsbezug:} #4
+
+  \textbf{Quellen:} #5
+
+  \textbf{Checkliste:} #6
+
+  \textbf{Mini-Test:} #7
+
+  \textbf{Dokumentation:} Teilnahmeblatt
+}

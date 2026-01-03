@@ -1,0 +1,107 @@
+%\section*{} % Keine sichtbare Überschrift
+%\stepcounter{section} % Zähler erhöhen für korrekte Nummerierung
+%\addcontentsline{toc}{section}{\protect\numberline{\thesection}Anhang – Jährliche
+% IT-Sicherheitsevaluation}
+\section{Vorlage – Jährliche IT-Sicherheitsevaluation}
+
+\label{sec:vorlage-eigenpruefung}
+
+%\subsection*{Jährliche IT-Sicherheitsevaluation (§390 SGB V)}
+\textbf{Praxis für Psychotherapie \PraxisInhaberin}\\
+%\textbf{Version der IT-Sicherheitsdokumentation:} \Version\\
+\textbf{Zeitraum der Überprüfung:} Januar \rule{1.5cm}{0.3pt} -- Dezember \rule{1.5cm}{0.3pt}
+
+%\Hinweis Die nachfolgende Tabelle ist als Template vorgesehen und wird im
+%laufenden Betrieb handschriftlich geführt. Spätestens zum Zeitpunkt einer Prüfung liegen
+%ausgefüllte Blätter vor.
+
+\noindent\Hinweis Die jährliche IT-Sicherheitsevaluation dient dem Nachweis der
+Aktualität gemäß \S390 SGB~V/KBV.
+Pro Prüffeld Ja/Nein ankreuzen und ggf.\ kommentieren und Maßnahmen einleiten.
+
+% Verwende einzelne Checkbox für cmark/xmark System
+\newcommand{\CheckboxSize}{1.0ex}
+\newcommand{\checkbox}{\fbox{\rule{0pt}{\CheckboxSize}\rule{\CheckboxSize}{0pt}}}
+
+{%
+\renewcommand{\arraystretch}{1.4}
+\setlength{\tabcolsep}{6pt}
+\footnotesize
+
+\begin{longtable}{p{0.55\textwidth} p{0.16\textwidth} p{0.19\textwidth}}
+  \toprule
+  \textbf{Prüffeld} & \textbf{Erfüllt?} & \textbf{Bemerkungen} \\
+  \midrule
+  \ifaccessible\else\endhead\fi
+
+  \textbf{Alle Geräte und Software erfasst?} (Geräteliste vollständig und aktuell) &
+  \checkbox & \\ \midrule
+
+  \textbf{End-of-Life-Geräte} (Router/Clients erhalten noch Sicherheitsupdates oder
+  Austausch bis \NextReview{} geplant) & \checkbox & \\ \midrule
+
+  \textbf{Netzwerkschutz} (\RouterKurz{} aktuell, keine Portfreigaben, WPA2/3 aktiv) &
+  \checkbox & \\ \midrule
+
+  \textbf{Änderungen der Netzwerkkonfiguration} (Alle Änderungen dokumentiert) &
+  \checkbox & \\ \midrule
+
+  \textbf{Endgeräte} (File\-Vault/Passcode aktiv, Auto-Update an) & \checkbox & \\ \midrule
+
+  \textbf{Backups} (lokal + Offsite funktionsfähig, \textit{Restore-Test durchgeführt}) &
+  \checkbox & \\ \midrule
+
+  \textbf{TI-Komponenten} (Gateway/TI-Terminal aktuell, SMC-B sicher verstaut) & \checkbox & \\ \midrule
+
+  \textbf{E-Mail-Sicherheit} (TLS/S/MIME, SPF/DKIM/DMARC, MTA-STS, CAA, Spam-Handling) & \checkbox & \\ \midrule
+
+  \textbf{Website-Sicherheit} (HTTPS, HSTS, CSP, X-Content-Type-Options, Referrer-Policy,
+  30-Tage-Logs) & \checkbox & \\ \midrule
+
+  \textbf{Updates von Richtlinien oder Verfahren} (Alle Änderungen dokumentiert und
+  umgesetzt) & \checkbox & \\ \midrule
+
+  \textbf{S/MIME-Zertifikat} (Erneuerung alle 2 Jahre durchgeführt oder geplant) &
+  \checkbox & \\ \midrule
+
+  \textbf{Restore-Tests} (Mindestens jährlich, angestrebt halbjährlich Januar/Juli) &
+  \checkbox & \\ \midrule
+
+  \textbf{IT-Sicherheitsrichtlinie auf Aktualität geprüft?} (Richtlinien entsprechen
+  aktuellen Anforderungen) & \checkbox & \\ \midrule
+
+  \textbf{Passwort-Hygiene} (Starke Passwörter $\geq$\PasswortMindestlaenge{} Zeichen, 2FA aktiv,
+  Security Score $\geq$\PasswortSecurityScore{}) & \checkbox & \\ \midrule
+
+  \textbf{Ggf. vorhandene Sicherheitsvorfälle dokumentiert?} (Keine Vorfälle oder
+  vollständig dokumentiert) & \checkbox & \\ \midrule
+
+  \textbf{Ggf. vorhandene Entsorgung von Datenträgern dokumentiert?} (Keine Entsorgung
+  oder sichere Löschung dokumentiert) & \checkbox & \\ \midrule
+
+  \textbf{Schulung/Sensibilisierung} (Strukturierte Selbstschulung dokumentiert) &
+  \checkbox & \\ \midrule
+
+  \Label{Dokumentation} (Changelog gepflegt, Geräteliste aktuell) & \checkbox & \\
+  \bottomrule
+
+\end{longtable}
+}% Ende der footnotesize-Gruppe für Tabelle
+
+{\footnotesize
+\Legende \fbox{\cmark} = Erfüllt, \fbox{\xmark} = Nicht erfüllt
+}% Ende der footnotesize-Gruppe für Legende
+
+\noindent\textbf{Ergebnis:} Die jährliche IT-Sicherheitsevaluation wurde am
+\rule{3.8cm}{0.3pt} durchgeführt.\quad
+Alle Anforderungen sind \BoxEmpty~erfüllt \quad/\quad Anpassungen \BoxEmpty~erforderlich.
+
+\praxissignatur
+
+% \vspace{1.5em}
+% \noindent\textbf{Verwendung:}
+% \begin{itemize}
+%   \item Seite ausdrucken, ankreuzen, unterschreiben → im Ordner abheften
+%   \item Für das Folgejahr Jahr in der Überschrift anpassen und neu generieren
+%   \item Bei \enquote{Nein}-Antworten: Maßnahmen einleiten und dokumentieren
+% \end{itemize}

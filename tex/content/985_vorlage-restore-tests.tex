@@ -1,0 +1,55 @@
+\section{Vorlage – Protokoll der Backup-Wiederherstellungstests}
+\label{sec:vorlage-restore-tests}
+
+Restore-Tests werden mindestens einmal jährlich, angestrebt halbjährlich (Januar/Juli)
+sowie anlassbezogen mit repräsentativen Testdateien durchgeführt und dokumentiert,
+um die vollständige Wiederherstellbarkeit aller Backup-Daten zu gewährleisten:
+
+\textbf{Hinweis:} Die nachfolgende Tabelle ist als Template vorgesehen und wird im
+laufenden Betrieb handschriftlich geführt. Spätestens zum Zeitpunkt einer Prüfung liegen
+ausgefüllte Blätter vor.
+
+% Stellschrauben - verwende gleiche Checkboxen wie TOMS
+\providecommand{\qsize}{1.05ex}
+\renewcommand{\qsize}{1.05ex}
+\providecommand{\q}{\fbox{\rule{0pt}{\qsize}\rule{\qsize}{0pt}}}
+\renewcommand{\q}{\fbox{\rule{0pt}{\qsize}\rule{\qsize}{0pt}}}
+\renewcommand{\arraystretch}{1.0}% Zeilenhöhe wie TOMS
+\setlength{\tabcolsep}{6pt}       % Zell-Innenabstand
+
+% Sexy Tabelle mit booktabs (ohne vertikale Linien)
+\begin{center}
+  {\small
+  \begin{tabular}{p{0.15\textwidth} p{0.15\textwidth} p{0.12\textwidth} p{0.42\textwidth}}
+    \toprule
+    \Label{Datum} & \textbf{Time Machine (Lokal)} & \textbf{NAS (Offsite)} & \textbf{Bemerkungen} \\
+    \midrule
+    \rule{0pt}{2.6ex} & \q & \q & \\
+    \midrule
+    \rule{0pt}{2.6ex} & \q & \q & \\
+    \midrule
+    \rule{0pt}{2.6ex} & \q & \q & \\
+    \midrule
+    \rule{0pt}{2.6ex} & \q & \q & \\
+    \midrule
+    \rule{0pt}{2.6ex} & \q & \q & \\
+    \midrule
+    \rule{0pt}{2.6ex} & \q & \q & \\
+    \midrule
+    \rule{0pt}{2.6ex} & \q & \q & \\
+    \midrule
+    \rule{0pt}{2.6ex} & \q & \q & \\
+    \bottomrule
+  \end{tabular}
+  } % Ende der small-Gruppe
+\end{center}
+
+\Legende \fbox{\cmark} = Erfolgreich bestanden, \fbox{\xmark} = Fehler aufgetreten
+
+\textbf{Anleitung zum Ausfüllen:}
+\begin{itemize}
+  \item \textbf{Datum:} Testdatum eintragen (TT.MM.JJJJ).
+  \item \textbf{Bemerkungen:} Probleme oder besondere Vorkommnisse kurz notieren.
+  \item \textbf{Gerät:} MacBook Air (fest vorgegeben).
+  \item \textbf{Häufigkeit:} Alle 6 Monate (empfohlen: Januar \& Juli).
+\end{itemize}

@@ -1,0 +1,1 @@
+Place your logo as logo.pdf in this folder.

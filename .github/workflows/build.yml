@@ -1,0 +1,288 @@
+name: Build Documentation
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      initial_release:
+        description: 'Use fixed initial release date'
+        required: false
+        default: 'false'
+        type: boolean
+      initial_release_date:
+        description: 'Fixed date for initial release (YYYY.MM.DD)'
+        required: false
+        default: '2025.09.01'
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: docs-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  INITIAL_RELEASE: ${{ github.event.inputs.initial_release || 'false' }}
+  INITIAL_RELEASE_DATE: ${{ github.event.inputs.initial_release_date || '2025.09.01' }}
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      version_date: ${{ steps.date.outputs.version_date }}
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Quality Gate
+      run: make validate
+
+    - name: Setup data files
+      run: |
+        if [ "${{ vars.USE_SAMPLE_DATA }}" = "true" ]; then
+          make use-sample
+        fi
+        make mermaid
+
+    - name: Determine version date
+      id: date
+      run: |
+        if [ "${{ env.INITIAL_RELEASE }}" = "true" ]; then
+          echo "version_date=$(echo '${{ env.INITIAL_RELEASE_DATE }}' | sed 's/\./-/g')" >> $GITHUB_OUTPUT
+        elif [[ "${{ github.ref_name }}" =~ ^v[0-9]{4}\.[0-9]{2}\.[0-9]{2}$ ]]; then
+          echo "version_date=$(echo '${{ github.ref_name }}' | sed 's/^v//' | sed 's/\./-/g')" >> $GITHUB_OUTPUT
+        else
+          echo "version_date=" >> $GITHUB_OUTPUT
+        fi
+
+    - name: Upload tex sources
+      uses: actions/upload-artifact@v4
+      with:
+        name: tex-sources
+        path: |
+          tex/
+          Makefile
+          scripts/
+          CHANGELOG.md
+        retention-days: 1
+
+  build-standard:
+    needs: prepare
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download sources
+      uses: actions/download-artifact@v4
+      with:
+        name: tex-sources
+
+    - name: Build standard PDF
+      run: |
+        if [ "${{ vars.USE_SAMPLE_DATA }}" = "true" ]; then
+          if [ -n "${{ needs.prepare.outputs.version_date }}" ]; then
+            make build-sample-standard VERSION_DATE="${{ needs.prepare.outputs.version_date }}"
+          else
+            make build-sample-standard
+          fi
+        else
+          if [ -n "${{ needs.prepare.outputs.version_date }}" ]; then
+            make build-standard VERSION_DATE="${{ needs.prepare.outputs.version_date }}"
+          else
+            make build-standard
+          fi
+        fi
+
+    - name: Validate PDF/A-3u
+      run: |
+        docker run --rm -v $(pwd)/tex:/data verapdf/cli \
+          --flavour 3u --format mrr /data/main-standard.pdf > pdfa-report.xml 2>&1 || true
+        
+        PASSED=$(grep -oP 'passedChecks="\K[0-9]+' pdfa-report.xml | head -1)
+        FAILED=$(grep -oP 'failedChecks="\K[0-9]+' pdfa-report.xml | head -1)
+        
+        if [ "$FAILED" != "0" ]; then
+          echo "❌ PDF/A-3u: $FAILED checks failed"
+          exit 1
+        fi
+        echo "✅ PDF/A-3u: $PASSED checks passed"
+
+    - name: Upload standard PDF
+      uses: actions/upload-artifact@v4
+      with:
+        name: pdf-standard
+        path: tex/main-standard.pdf
+        retention-days: 1
+
+  build-accessible:
+    needs: prepare
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download sources
+      uses: actions/download-artifact@v4
+      with:
+        name: tex-sources
+
+    - name: Build accessible PDF
+      run: |
+        if [ "${{ vars.USE_SAMPLE_DATA }}" = "true" ]; then
+          if [ -n "${{ needs.prepare.outputs.version_date }}" ]; then
+            make build-sample-accessible VERSION_DATE="${{ needs.prepare.outputs.version_date }}"
+          else
+            make build-sample-accessible
+          fi
+        else
+          if [ -n "${{ needs.prepare.outputs.version_date }}" ]; then
+            make build-accessible VERSION_DATE="${{ needs.prepare.outputs.version_date }}"
+          else
+            make build-accessible
+          fi
+        fi
+
+    - name: Validate PDF/A-3u
+      run: |
+        docker run --rm -v $(pwd)/tex:/data verapdf/cli \
+          --flavour 3u --format mrr /data/main-accessible.pdf > pdfa-report.xml 2>&1 || true
+        
+        PASSED=$(grep -oP 'passedChecks="\K[0-9]+' pdfa-report.xml | head -1)
+        FAILED=$(grep -oP 'failedChecks="\K[0-9]+' pdfa-report.xml | head -1)
+        
+        if [ "$FAILED" != "0" ]; then
+          echo "❌ PDF/A-3u: $FAILED checks failed"
+          exit 1
+        fi
+        echo "✅ PDF/A-3u: $PASSED checks passed"
+
+    - name: Validate PDF/UA-1
+      run: |
+        docker run --rm -v $(pwd)/tex:/data verapdf/cli \
+          --flavour ua1 --format mrr /data/main-accessible.pdf > ua-report.xml 2>&1 || true
+        
+        PASSED=$(grep -oP 'passedChecks="\K[0-9]+' ua-report.xml | head -1)
+        FAILED=$(grep -oP 'failedChecks="\K[0-9]+' ua-report.xml | head -1)
+        
+        if [ "$FAILED" != "0" ]; then
+          echo "❌ PDF/UA-1: $FAILED checks failed"
+          exit 1
+        fi
+        echo "✅ PDF/UA-1: $PASSED checks passed"
+
+    - name: Upload accessible PDF
+      uses: actions/upload-artifact@v4
+      with:
+        name: pdf-accessible
+        path: tex/main-accessible.pdf
+        retention-days: 1
+
+  package:
+    needs: [prepare, build-standard, build-accessible]
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Download standard PDF
+      uses: actions/download-artifact@v4
+      with:
+        name: pdf-standard
+        path: pdfs/
+
+    - name: Download accessible PDF
+      uses: actions/download-artifact@v4
+      with:
+        name: pdf-accessible
+        path: pdfs/
+
+    - name: Extract version
+      id: version
+      run: |
+        if [ -n "${{ needs.prepare.outputs.version_date }}" ]; then
+          VERSION=$(echo "${{ needs.prepare.outputs.version_date }}" | sed 's/-/./g')
+        elif [ -f tex/config/metadata.tex ]; then
+          VERSION=$(grep -oP '\\newcommand\{\\DocumentVersion\}\{\K[^}]+' tex/config/metadata.tex)
+        else
+          VERSION=$(grep -oP '\\newcommand\{\\DocumentVersion\}\{\K[^}]+' tex/config/metadata-sample.tex)
+        fi
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+    - name: Collect metrics
+      run: |
+        sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
+        
+        PDF_SIZE_STD=$(du -h pdfs/main-standard.pdf | cut -f1)
+        PDF_SIZE_ACC=$(du -h pdfs/main-accessible.pdf | cut -f1)
+        PAGES_STD=$(pdfinfo pdfs/main-standard.pdf | grep 'Pages:' | awk '{print $2}')
+        PAGES_ACC=$(pdfinfo pdfs/main-accessible.pdf | grep 'Pages:' | awk '{print $2}')
+        
+        cat >> $GITHUB_STEP_SUMMARY <<EOF
+        ## 📊 Build Metrics
+        
+        | Version | Size | Pages |
+        |---------|------|-------|
+        | Standard | $PDF_SIZE_STD | $PAGES_STD |
+        | Accessible | $PDF_SIZE_ACC | $PAGES_ACC |
+        | Document Version | ${{ steps.version.outputs.version }} | |
+        EOF
+
+    - name: Rename and checksum
+      run: |
+        VERSION="${{ steps.version.outputs.version }}"
+        mv pdfs/main-standard.pdf "IT-Sicherheitsdokumentation_v${VERSION}.pdf"
+        mv pdfs/main-accessible.pdf "IT-Sicherheitsdokumentation_v${VERSION}-accessible.pdf"
+
+    - name: Generate SBOM
+      uses: anchore/sbom-action@v0
+      with:
+        path: ./
+        format: spdx-json
+        output-file: IT-Sicherheitsdokumentation_v${{ steps.version.outputs.version }}.sbom.json
+
+    - name: Upload final artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: IT-Sicherheitsdokumentation_v${{ steps.version.outputs.version }}
+        path: |
+          IT-Sicherheitsdokumentation_v${{ steps.version.outputs.version }}.pdf
+          IT-Sicherheitsdokumentation_v${{ steps.version.outputs.version }}-accessible.pdf
+          IT-Sicherheitsdokumentation_v${{ steps.version.outputs.version }}.sbom.json
+        if-no-files-found: error
+        retention-days: 90
+
+  release:
+    if: github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch'
+    needs: package
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - name: Download artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: IT-Sicherheitsdokumentation_v${{ needs.package.outputs.version }}
+
+    - name: Create Release
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: "v${{ needs.package.outputs.version }}"
+        name: "IT-Sicherheitsdokumentation v${{ needs.package.outputs.version }}"
+        files: |
+          IT-Sicherheitsdokumentation_v${{ needs.package.outputs.version }}.pdf
+          IT-Sicherheitsdokumentation_v${{ needs.package.outputs.version }}-accessible.pdf
+        generate_release_notes: true
+        make_latest: true
+        body: |
+          📄 **IT-Sicherheitsdokumentation nach §390 SGB V**
+          
+          **Zwei Versionen:**
+          - **Standard**: PDF/A-3u
+          - **Accessible**: PDF/A-3u + PDF/UA-1 (100%)
+          
+          Die PDFs können über GitHub's automatische SHA256-Hashes verifiziert werden.
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

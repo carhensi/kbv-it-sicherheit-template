@@ -1,0 +1,81 @@
+\section{Vorlage – SOP Remote-Support (unter Aufsicht)}
+\label{sec:vorlage-remote-support}
+
+\Hinweis Template zur sicheren Durchführung von Fernwartung durch externe
+Dienstleister. 10 Jahre Aufbewahrung.
+
+%% Präambel - definiere nur wenn nicht schon vorhanden
+\providecommand{\qsize}{1.05ex}
+\renewcommand{\qsize}{1.05ex}
+\providecommand{\q}{\fbox{\rule{0pt}{\qsize}\rule{\qsize}{0pt}}}
+\renewcommand{\q}{\fbox{\rule{0pt}{\qsize}\rule{\qsize}{0pt}}}
+
+\textbf{Zweck \& Geltung:} Diese SOP regelt Fernwartung durch externe Dienstleister für Praxis-IT (z.\,B. PVS,
+Netzwerk, Endgeräte). Ziel ist eine nachvollziehbare, sichere Durchführung unter
+Aufsicht der Praxisinhaberin bei minimalen Rechten und lückenloser Protokollierung.
+
+\textbf{Voraussetzungen:}
+\begin{itemize}
+  \item Zugelassen sind nur benannte Dienstleister lt. AVV/Vertrag; Identität wird vor jeder Sitzung geprüft.
+  \item Kein dauerhafter Fernzugang. Sitzungen sind \emph{terminiert}, \emph{zeitlich begrenzt} und \emph{einmalig freizugeben}.
+  \item Nutzung eines \emph{temporären, eingeschränkten} Kontos; \emph{kein} Einsatz persönlicher Konten der Dienstleister.
+  \item Bildschirmfreigabe \emph{unter Aufsicht}; Dateiübertragungen nur nach expliziter Zustimmung.
+  \item Aktive Schutzfunktionen (AV, Firewall, FileVault) bleiben eingeschaltet; Protokollierung ist aktiviert.
+\end{itemize}
+
+\textbf{Ablauf:}
+
+\textbf{Vorher:}
+\begin{itemize}
+  \item[\q] Ticket/Anlass definieren (Fehlerbild, Ziel, betroffene Systeme)
+  \item[\q] Temporäres Konto anlegen, \emph{Least-Privilege} (nur benötigte Rechte)
+  \item[\q] Zeitfenster vereinbaren; Nutzer informiert; Backups aktuell
+\end{itemize}
+
+\textbf{Während:}
+\begin{itemize}
+  \item[\q] Sitzung unter Aufsicht der Praxisinhaberin/IT-Ansprechpartner:in
+  \item[\q] Änderungsliste mitschreiben (Komponenten, Befehle, Versionen)
+  \item[\q] Keine Persistenz hinterlassen (keine dauerhaften Dienste/Tunnel)
+\end{itemize}
+
+\textbf{Danach:}
+\begin{itemize}
+  \item[\q] Sitzung beenden; temporäre Konten/Token \emph{sofort} sperren/löschen
+  \item[\q] Funktionstest (Smoke-Test); ggf. Rollback aus Backup
+  \item[\q] Ticket schließen mit Freigabe durch Praxisinhaberin
+\end{itemize}
+
+\textbf{Abbruchkriterien:} Unklare Identität, ungeplante Dateiübertragungen oder Deaktivierung von Schutzmechanismen.
+
+{%
+\renewcommand{\arraystretch}{1.0}
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+
+\begin{longtable}{p{0.30\textwidth} p{0.66\textwidth}}
+\toprule
+\AccessibleTableHeader{Remote-Support Protokoll}{}
+\midrule
+\textbf{Dienstleister / Techniker} & \FormField[7cm] \\[0.15cm]
+\textbf{Ticket / Anlass / Ziel} & \FormField[7cm] \\
+& \FormField[7cm] \\[0.15cm]
+\textbf{Datum / Zeit / Dauer} & \FormField[7cm] \\[0.15cm]
+\textbf{Betroffene Systeme} & (Host, OS, Inventar-ID) \FormField[5cm] \\[0.15cm]
+\textbf{Zugänge} & (temporäres Konto, Rechte, 2FA) \FormField[5cm] \\[0.15cm]
+\textbf{Durchgeführte Änderungen} & (Schritte, Versionen, Konfigs) \\
+& \FormField[7cm] \\
+& \FormField[7cm] \\[0.15cm]
+\textbf{Dateiübertragungen} & (Quelle/Ziel, Zweck) \FormField[5cm] \\[0.15cm]
+\textbf{Ergebnis / Tests} & (Smoke-Test ok/Fehler) \FormField[5cm] \\[0.15cm]
+\textbf{Nacharbeiten} & (Passwortrotation, Cleanup) \FormField[5cm] \\[0.15cm]
+\textbf{Freigabe Praxisinhaberin} & Name: \FormField[3cm] Datum: \FormField[2cm] \\
+& Unterschrift: \FormField[4cm] \\
+\bottomrule
+\end{longtable}
+
+}% Ende der footnotesize-Gruppe
+
+\BestandteilZehnJahre
+
+\Legende \fbox{\cmark} = Erledigt, \fbox{\xmark} = Fehler aufgetreten, \q = Noch nicht durchgeführt

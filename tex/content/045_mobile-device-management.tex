@@ -1,0 +1,155 @@
+\section{Mobile Device Management}
+\label{sec:mdm}
+
+\subsection{Grundsätze und Zielsetzung}
+
+Das Mobile Device Management (MDM) der Praxis erfolgt über \textbf{\MDMTool{}} und gewährleistet
+die sichere Verwaltung aller Apple-Geräte entsprechend den Anforderungen der KBV-Richtlinie
+nach §390 SGB V. Ziel ist die Balance zwischen Sicherheit, Datenschutz und praktischer
+Nutzbarkeit im Praxisalltag.
+
+\textbf{Verwaltete Geräte:} Alle Apple-Geräte der Praxis werden über \MDMTool{} verwaltet. Die vollständige Geräteliste mit technischen Details befindet sich in Anhang~\ref{sec:geraeteliste}.
+
+\subsection{\MDMTool{} Konfiguration}
+
+Die MDM-Konfiguration erfolgt über ein einheitliches \textbf{Blueprint} mit folgenden
+Sicherheitsrichtlinien:
+
+\subsubsection{Passcode und Authentifizierung}
+\begin{itemize}
+  \item \textbf{Code erforderlich:} Auf allen Geräten (iPhone, iPad, Mac)
+  \item \textbf{Komplexer Code:} Keine Wiederholungen oder Sequenzen (123, ABC)
+  \item \textbf{Mindestlänge:} 8 Zeichen
+  \item \textbf{Schonfrist:} Maximal 5 Minuten
+  \item \textbf{Fehlversuche:} Maximal 10 vor automatischer Löschung (iOS)
+  \item \textbf{Automatische Sperre:} 1 Minute (iOS), 5 Minuten Bildschirmschoner (Mac)
+\end{itemize}
+
+\subsubsection{Verschlüsselung und Datenschutz}
+\begin{itemize}
+  \item \textbf{FileVault:} Vollständige Festplattenverschlüsselung auf Mac-Geräten
+  \item \textbf{Verschlüsselte Backups:} iCloud Backup mit erweitertem Datenschutz aktiviert (Ende-zu-Ende-Verschlüsselung)
+  \item \textbf{iCloud-Beschränkungen:} Schlüsselbund-Sync und Dokumentensync deaktiviert
+
+\textbf{Hinweis:} Nutzung des lokalen macOS-Schlüsselbunds (kein iCloud-Keychain-Sync).
+  \item \textbf{Schreibtisch/Dokumente:} iCloud-Synchronisation deaktiviert (Mac)
+\end{itemize}
+
+\subsubsection{Netzwerk und Konnektivität}
+\begin{itemize}
+  \item \textbf{Praxis-WLAN:} Automatische Verbindung mit WPA3-Verschlüsselung
+  \item \textbf{MAC-Randomisierung:} \MACRandomisierung{}
+  \item \textbf{AirDrop/USB:} Externe Datenübertragung beschränkt
+  \item \textbf{Passwortfreigabe:} Verhindert über AirDrop
+\end{itemize}
+
+\subsubsection{Privacy und Tracking}
+\begin{itemize}
+  \item \textbf{Website-übergreifendes Tracking:} In Safari verhindert
+  \item \textbf{Ad-Tracking:} Mit Apple-Werbeplattform eingeschränkt
+  \item \textbf{Diagnoseberichte:} Automatisches Senden an Apple deaktiviert
+  \item \textbf{Siri:} Deaktiviert auf iOS-Geräten
+  \item \textbf{Spotlight Internet-Suche:} Deaktiviert
+\end{itemize}
+
+\subsubsection{Sperrbildschirm und Zugriffskontrolle}
+\begin{itemize}
+  \item \textbf{Benachrichtigungen:} Auf Sperrbildschirm verborgen
+  \item \textbf{Kontrollzentrum:} Auf Sperrbildschirm verborgen
+  \item \textbf{Apple Watch:} Entsperren und Kopplung deaktiviert
+  \item \textbf{Bildschirmzeit:} Aktivierung deaktiviert
+\end{itemize}
+
+\subsection{Gerätespezifische Zugriffe und Anwendungen}
+
+\subsubsection{MacBook (\PraxisInhaberBezeichnung{})}
+\begin{itemize}
+  \item \textbf{\PVSName{} PVS:} Lokale Installation mit Vollzugriff auf Patientendaten
+  \item \textbf{Kalender:} Organisatorische Termine über \EmailAnbieter{} oder lokal
+  \item \textbf{Backup:} Verschlüsselte iCloud-Backups (MDM-verwaltet)
+  \item \textbf{Verschlüsselung:} FileVault mit hinterlegtem Wiederherstellungsschlüssel
+  \item \textbf{Updates:} Siehe Abschnitt~\ref{sec:it-sicherheit} - sicherheitskritische Updates in Abstimmung mit PVS-Kompatibilität
+\end{itemize}
+
+\subsubsection{iPad (Behandlungsraum)}
+\begin{itemize}
+  \item \textbf{\PVSName{} PVS App:} Verschlüsselter Zugriff auf Praxissystem
+  \item \textbf{Lokale Daten:} \PVSName{} App speichert keine Patientendaten persistent lokal
+  \item \textbf{E-Mail/Kalender:} Ausschließlich organisatorische Kommunikation
+\end{itemize}
+
+\subsubsection{iPhone (\PraxisInhaberBezeichnung{})}
+\begin{itemize}
+  \item \textbf{Kein Praxiszugriff:} Ausschließlich organisatorische Nutzung
+  \item \textbf{E-Mail/Kalender:} Termine und allgemeine Korrespondenz
+\end{itemize}
+
+\subsection{App-Management und Sicherheitsrichtlinien}
+
+\subsubsection{Verbotene Anwendungen}
+\begin{itemize}
+  \item \textbf{WhatsApp:} Installation und Nutzung untersagt
+  \item \textbf{Alternative Marketplace Apps:} Installation deaktiviert
+  \item \textbf{Compliance-Überwachung:} Automatische Erkennung verbotener Apps über \MDMTool{}
+\end{itemize}
+
+\subsubsection{Erlaubte Anwendungen}
+\begin{itemize}
+  \item \textbf{\PVSName{} PVS:} Auf MacBook und iPad
+  \item \textbf{\EmailAnbieter{}:} E-Mail und Kalender für organisatorische Zwecke
+  \item \textbf{Safari:} Mit aktivierten Tracking-Schutzmaßnahmen
+  \item \textbf{Standard-iOS/macOS Apps:} Nach Sicherheitskonfiguration
+\end{itemize}
+
+\subsection{Incident Response und Notfallmaßnahmen}
+
+\subsubsection{Geräteverlust oder -diebstahl}
+\begin{enumerate}
+  \item \textbf{Sofortige Meldung:} An \PraxisInhaberBezeichnung{} binnen 2 Stunden
+  \item \textbf{Remote Wipe:} Fernlöschung über \MDMTool{} innerhalb von 4 Stunden
+  \item \textbf{Geolocation:} Aktivierung zur Geräteortung (falls möglich)
+  \item \textbf{Passwort-Änderung:} Alle betroffenen Accounts (E-Mail, \PVSName{})
+  \item \Dokumentation Incident-Protokoll gemäß Abschnitt~\ref{sec:notfall}
+\end{enumerate}
+
+\subsubsection{Compliance-Verstöße}
+\begin{enumerate}
+  \item \textbf{Automatische Erkennung:} Über \MDMTool{} Device Compliance Status
+  \item \textbf{Benachrichtigung:} Sofortige Meldung an \PraxisInhaberBezeichnung{}
+  \item \textbf{Remediation:} Wiederherstellung der Compliance binnen 72 Stunden
+  \item \textbf{Eskalation:} Bei wiederholten Verstößen temporäre Gerätesperre
+\end{enumerate}
+
+\subsection{Verschlüsselung und Datenübertragung}
+
+\textbf{Keine VPN-Infrastruktur erforderlich}, da:
+\begin{itemize}
+  \item \textbf{\PVSName{} App:} Verschlüsselte Verbindung (TLS/HTTPS) zum Praxissystem
+  \item \textbf{MacBook:} Lokale PVS-Installation, keine Fernzugriffe
+  \item \textbf{Kalender:} \EmailAnbieter{} oder lokal (keine Cloud-Synchronisation von Patientendaten)
+  \item \textbf{Backup:} Verschlüsselte iCloud-Backups (MDM-verwaltet, AVV vorhanden)
+  \item \textbf{Organisatorische Trennung:} Keine externen Zugriffe auf Praxisinfrastruktur
+\end{itemize}
+
+\subsection{Monitoring und Wartung}
+
+\subsubsection{Regelmäßige Überprüfungen}
+\begin{itemize}
+  \item \textbf{Monatlich:} Device Compliance Status in \MDMTool{}
+  \item \textbf{Quartalsweise:} Überprüfung der Blueprint-Konfiguration
+  \item \textbf{Halbjährlich:} Bewertung der MDM-Richtlinien und Anpassungen
+  \item \textbf{Jährlich:} Vollständige Sicherheitsevaluation aller verwalteten Geräte
+\end{itemize}
+
+\subsubsection{Dokumentation und Compliance}
+\begin{itemize}
+  \item \textbf{Geräteliste:} Alle Apple-Geräte der Praxis - siehe vollständige Geräteliste in Anhang~\ref{sec:geraeteliste}
+  \item \textbf{AVV \MDMTool{}:} Siehe Anhang~\ref{sec:avv-register}
+  \item \textbf{VVT MDM:} Siehe Anhang~\ref{sec:vvt}
+  \item \textbf{Incident-Protokolle:} Archivierung für 3 Jahre
+\end{itemize}
+
+\textbf{Verantwortlichkeit:} Die \PraxisInhaberBezeichnung{} ist für die Einhaltung der MDM-Richtlinien
+und die ordnungsgemäße Konfiguration aller verwalteten Geräte verantwortlich.
+IT-Ansprechpartner administriert \MDMTool{} (siehe Rechte-Matrix \cref{sec:rechte-rollenmatrix}).
+\MDMTool{} ist für bis zu 3 Geräte kostenfrei.

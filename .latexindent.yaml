@@ -1,0 +1,83 @@
+# LaTeX Indent Configuration for Professional Documents
+# Based on best practices for German academic/professional documents
+
+defaultIndent: "  "  # 2 spaces for indentation
+
+# Indentation rules
+indentRules:
+  document: 1
+  section: 1
+  subsection: 1
+  subsubsection: 1
+  paragraph: 1
+  subparagraph: 1
+  item: 1
+  enumerate: 1
+  itemize: 1
+  description: 1
+  tabular: 1
+  longtable: 1
+  array: 1
+  matrix: 1
+  cases: 1
+  align: 1
+  equation: 1
+  figure: 1
+  table: 1
+
+# Environment handling
+environments:
+  BeginStartsOnOwnLine: 1
+  BodyStartsOnOwnLine: 1
+  EndStartsOnOwnLine: 1
+  EndFinishesWithLineBreak: 1
+
+# Command handling
+commands:
+  CommandStartsOnOwnLine: 0
+  CommandNameFinishesWithLineBreak: 0
+
+# Special environments (don't indent content)
+noIndentBlock:
+  verbatim: 1
+  lstlisting: 1
+  minted: 1
+
+# Line breaks and spacing
+modifyLineBreaks:
+  preserveBlankLines: 1
+  condenseMultipleBlankLinesInto: 2
+  
+# German-specific settings
+specialBeginEnd:
+  displayMath:
+    begin: '\['
+    end: '\]'
+    lookForThis: 1
+
+# File extensions to process
+fileExtensionPreference:
+  - .tex
+  - .sty
+  - .cls
+
+# Backup settings
+onlyOneBackUp: 1
+maxNumberOfBackUps: 3
+cycleThroughBackUps: 1
+
+# Output settings
+logFilePreferences:
+  showEveryYamlRead: 0
+  showAmalgamatedSettings: 0
+  showDecorationStartCodeBlockTrace: 0
+  showDecorationFinishCodeBlockTrace: 0
+  endLogFileWith: ""
+  showGitHubInfoFooter: 0
+
+# Verbatim environments (don't touch these)
+verbatimEnvironments:
+  verbatim: 1
+  lstlisting: 1
+  minted: 1
+  alltt: 1

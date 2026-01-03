@@ -1,0 +1,62 @@
+flowchart TD
+
+  %% ===== Externe gesicherte Dienste =====
+  TI["☁️ TI-Infrastruktur<br/>TI‑Gateway · TI‑Dienste (KIM, ePA, eAU)"]
+  HomeNAS["🏠 Offsite (Zweitstandort)<br/>💾 NAS Backup · VPN"]
+
+  %% ===== Oberes Netz =====
+  Internet(("🌐<br/>Internet"))
+
+  subgraph Praxisnetz["🔒 Praxisnetz Musterpraxis für Psychotherapie"]
+    subgraph RouterSec["🛡️ Muster-Router (eigene Subnetz‑Grenze)"]
+      RouterWAN["WAN (Internet)"]
+      RouterLAN["LAN 192.168.178.0/24<br/>DHCP .20–.250<br/>NAT/Firewall"]
+
+      %% Integrierte Router-Funktionen
+      LAN_SWITCH["🔌 Ethernet Switch<br/>integriert"]
+      WLAN_AP["📡 WLAN MusterPraxis-WLAN<br/>5GHz · WPA2/3-PSK<br/>integriert"]
+      WLAN_GUEST["📡 Gäste-WLAN MusterPraxis-Gast<br/>WPA2/3-PSK · Gastgeräte isoliert<br/>Mo-Fr 8-18h · integriert"]
+    end
+
+    %% Geräte
+    IPH["📱 iPhone 15<br/>PIN/FaceID"]
+    IPAD["📱 iPad Air<br/>PIN/FaceID"]
+    MB["💻 MacBook Pro 14<br/>PVS Server/Client · TI‑VPN‑Softclient"]
+    TI_TERMINAL["🏥 TI-Terminal<br/>SMC‑B versiegelt<br/>🔑 eHBA sicher verwahrt (bei Bedarf)"]
+    BKUP["💾 Backup‑Festplatte<br/>USB · temporär · verschlüsselt"]
+    PRINTER["🖨️ HP LaserJet<br/>Laserdrucker · LAN"]
+  end
+
+  %% ===== Verbindungen =====
+  Internet --> RouterWAN
+  RouterWAN --> RouterLAN
+
+  %% Netzwerk-Verbindungen
+  RouterLAN --> LAN_SWITCH
+  RouterLAN --> WLAN_AP
+  RouterLAN --> WLAN_GUEST
+
+  %% Ethernet-Geräte
+  LAN_SWITCH ---|Ethernet| MB
+  LAN_SWITCH ---|Ethernet| TI_TERMINAL
+  LAN_SWITCH ---|Ethernet| PRINTER
+
+  %% WLAN-Geräte
+  WLAN_AP -.-|WLAN| IPH
+  WLAN_AP -.-|WLAN| IPAD
+
+  %% USB-Verbindungen
+  MB ---|USB temporär| BKUP
+
+  %% VPN-Verbindungen
+  MB -.->|🔒 VPN TI‑Softclient| TI
+  MB -.->|🔒 VPN| HomeNAS
+
+  %% ===== Styles =====
+  classDef internet fill:#ffebee,stroke:#d32f2f,stroke-width:1.5px,color:#000,font-size:15px
+  classDef sicherNetz fill:#e8f5e8,stroke:#388e3c,stroke-width:1.5px,color:#000,font-size:15px
+  classDef privatNetz fill:#e3f2fd,stroke:#1976d2,stroke-width:1.5px,color:#000,font-size:15px
+
+  class Internet internet
+  class Praxisnetz,RouterSec sicherNetz
+  class TI,HomeNAS privatNetz

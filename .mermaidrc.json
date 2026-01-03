@@ -1,0 +1,17 @@
+{
+  "theme": "default",
+  "themeVariables": {
+    "fontFamily": "Arial, sans-serif",
+    "fontSize": "14px"
+  },
+  "flowchart": {
+    "useMaxWidth": true,
+    "htmlLabels": true
+  },
+  "sequence": {
+    "useMaxWidth": true
+  },
+  "gantt": {
+    "useMaxWidth": true
+  }
+}

@@ -1,0 +1,61 @@
+\section{Telematikinfrastruktur}
+\label{sec:ti}
+
+\subsection{TI-Komponenten}
+
+Die Praxis nutzt das von \PVSName{} gehostete TI-Gateway (Managed Service).
+Die Verbindung erfolgt verschlüsselt über VPN-Softclient gemäß \PVSName{}-Vorgaben.
+
+\textbf{Vorteile des gehosteten TI-Gateway:}
+\begin{itemize}
+  \item Keine lokale Hardware erforderlich
+  \item Automatische Updates durch \PVSName{}
+  \item 24/7-Monitoring durch \PVSName{}
+  \item Verschlüsselte VPN-Verbindung
+\end{itemize}
+
+Zusätzlich wird ein Kartenterminal am Praxisstandort für Kartenzugriffe genutzt
+(Details siehe Geräteliste \cref{sec:geraeteliste}).
+
+\subsection{Sicherheitsmaßnahmen}
+
+Alle Standard-Passwörter der TI-Komponenten wurden geändert. Updates werden zeitnah nach
+Verfügbarkeit eingespielt. Die Administrationsdaten werden sicher aufbewahrt, wobei der
+Praxis-Zugriff auf alle TI-Komponenten gewährleistet bleibt.
+
+Die SMC-B-Karte (Praxisausweis) bleibt dauerhaft im Terminal gesteckt und wird versiegelt.
+Der eHBA (Therapeutenausweis) wird nur bei Bedarf eingesteckt und anschließend sicher verwahrt.
+
+\subsection{KIM – Kommunikation im Medizinwesen}
+\label{sec:kim}
+
+Für die sichere Kommunikation mit anderen Leistungserbringern wird KIM (Kommunikation
+im Medizinwesen) genutzt. KIM ist der offizielle TI-Dienst für verschlüsselte
+Nachrichten zwischen Praxen, Krankenhäusern und anderen TI-Teilnehmern.
+
+\textbf{Nutzung:} KIM wird direkt über das PVS (\PVSName{}) verwendet – nicht als
+separater E-Mail-Client. Arztbriefe, Befunde und andere medizinische Dokumente
+werden ausschließlich über KIM versendet, nicht per unverschlüsselter E-Mail oder Fax.
+
+\textbf{Sicherheitsmerkmale:}
+\begin{itemize}
+  \item Ende-zu-Ende-Verschlüsselung
+  \item Authentifizierung über TI-Zertifikate
+  \item Zustellung nur an verifizierte TI-Teilnehmer
+\end{itemize}
+
+\subsection{Außerbetriebnahme und Entsorgung}
+\label{sec:ti-ausserbetriebnahme}
+
+Bei Außerbetriebnahme von TI-Komponenten (Kartenterminal, Konnektor):
+\begin{enumerate}
+  \item SMC-B und gSMC-KT aus Terminal entfernen
+  \item Karten über Herstellerportal (D-Trust, medisign oder T-Systems) sperren
+  \item Terminal/Konnektor auf Werkseinstellungen zurücksetzen
+  \item Geräte an Lieferanten zurückgeben oder zertifiziert entsorgen
+  \item PIN/PUK-Dokumentation datenschutzkonform vernichten
+\end{enumerate}
+
+\textbf{Bei Verlust oder Diebstahl von SMC-B/eHBA:}
+Sofortige Sperrung über Herstellerportal, ersatzweise über \KV{} (Arztregister).
+Anschließend Incident-Response-Prozess gemäß \cref{sec:notfall} einleiten.

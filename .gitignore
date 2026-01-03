@@ -1,0 +1,103 @@
+# LaTeX build files
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+*.synctex.gz
+*.synctex(busy)
+*.toc
+*.nav
+*.snm
+*.vrb
+*.xdv
+*.figlist
+*.makefile
+*.fignums
+*.figaux
+*.eledsec*
+*.lof
+*.lot
+*.glo
+*.idx
+*.ilg
+*.ind
+*.ist
+*.acn
+*.acr
+*.alg
+*.glg
+*.gls
+*.glsdefs
+*.lol
+*.brf
+*.nlo
+*.nls
+*.nlg
+*.auxlock
+*.xmpi
+
+# Generated PDFs (keep source, ignore builds)
+tex/main.pdf
+*.pdf
+*.sha256
+
+# Generated images
+tex/assets/netzplan.png
+
+# macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+tex-fmt
+infrastructure
+
+# Praxisspezifische Daten (nicht versioniert)
+tex/config/metadata.tex
+tex/config/metadata-real.tex
+tex/assets/geraeteliste.csv
+tex/assets/geraeteliste-real.csv
+tex/assets/netzplan.mmd
+tex/assets/netzplan-real.mmd
+
+# AI
+.serena
+tex/ua1-report.xml
+tex/ua1-report.txt
+TODO.md
+
+# Accessibility and spell check reports
+ua-detailed.xml
+ua-report.xml
+.aspell.de.pws

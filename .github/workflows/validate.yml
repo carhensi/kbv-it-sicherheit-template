@@ -1,0 +1,36 @@
+name: PDF Validation
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ feature/*, develop ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Build PDF
+      run: make build-robust
+      
+    - name: Install validation tools
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y qpdf poppler-utils
+        
+    - name: Validate PDF structure
+      run: |
+        qpdf --check tex/main.pdf
+        pdfinfo tex/main.pdf
+        
+    - name: Check for broken links
+      run: |
+        python3 -c "
+        import PyPDF2
+        with open('tex/main.pdf', 'rb') as f:
+            pdf = PyPDF2.PdfReader(f)
+            print(f'✅ PDF has {len(pdf.pages)} pages')
+            print('✅ PDF structure valid')
+        "

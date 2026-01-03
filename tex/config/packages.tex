@@ -1,0 +1,123 @@
+% Tabellen-Pakete
+\usepackage{makecell}
+
+% Layout und Typografie
+\usepackage[main=ngerman]{babel}
+% LuaLaTeX nutzt automatisch OpenType-Fonts ohne fontspec
+\usepackage{microtype}
+
+% Symbol-Fallback für Unicode-Zeichen (PDF/A-2u)
+\usepackage{fontspec}
+\newfontfamily\symbolsfont{DejaVu Sans}[Scale=MatchLowercase]
+\usepackage{newunicodechar}
+\newunicodechar{✓}{{\symbolsfont ✓}} % U+2713
+\newunicodechar{✗}{{\symbolsfont ✗}} % U+2717
+\newunicodechar{□}{{\symbolsfont □}} % U+25A1
+\newunicodechar{☑}{{\symbolsfont ☑}} % U+2611
+
+% Seitenlayout (print-optimiert)
+\usepackage[a4paper,inner=28mm,outer=22mm,top=22mm,bottom=26mm]{geometry}
+\usepackage{setspace}
+\usepackage[absolute,overlay]{textpos}
+\setstretch{1.15}
+
+% PDF und Hyperlinks
+\usepackage[
+    bookmarks=true,
+    bookmarksopen=true,
+    bookmarksnumbered=true,
+    hidelinks,
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=blue,
+    citecolor=black,
+    pdfstartview=FitH,
+    pdfpagelayout=OneColumn,
+    pdfa
+]{hyperref}
+\usepackage{hyperxmp} % richer PDF metadata (load after hyperref)
+
+% Fix für hyperref PDF-String Warnungen
+\pdfstringdefDisableCommands{%
+  \def\\{ }% Zeilenumbruch als Leerzeichen in PDF-Strings
+  \let\tel\@firstofone% \tel{123} wird zu 123 in PDF-Strings
+}
+\usepackage{bookmark}
+
+% Tabellen und Daten
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{csvsimple}
+\usepackage{array}
+\usepackage{adjustbox}
+
+% Tabellenlinien für sauberen Druck optimieren
+\setlength{\arrayrulewidth}{0.5pt}
+
+% Grafiken und Diagramme
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes,calc}
+\usepackage[rgb]{xcolor}  % RGB-Modus für PDF/A-2u
+\usepackage{colortbl}
+
+% Listen und Formatierung - Standard LaTeX für besseres Tagging
+\ifaccessible
+  % Accessible: Standard-Listen ohne enumitem für korrektes Tagging
+  \setlength{\topsep}{0pt}
+  \setlength{\partopsep}{0pt}
+  \setlength{\itemsep}{0pt}
+  \setlength{\parsep}{0pt}
+\else
+  % Standard: enumitem für kompakte Listen
+  \usepackage{enumitem}
+  \setlist{
+    topsep=0pt,
+    partopsep=0pt,
+    itemsep=0pt,
+    parsep=0pt,
+    before={\setlength{\parskip}{0pt}},
+    after={}
+  }
+\fi
+
+% Code und Listings
+\usepackage{listings}
+\lstset{
+  basicstyle=\ttfamily\small,
+  frame=single,
+  columns=fullflexible,
+  breaklines=true
+}
+
+% Seitenlayout
+\ifaccessible
+  % Accessible: fancyhdr statt scrlayer-scrpage
+  \usepackage{fancyhdr}
+\else
+  % Standard: KOMA scrlayer-scrpage
+  \usepackage{scrlayer-scrpage}
+\fi
+\usepackage{refcount}
+\usepackage{pdflscape}
+
+% Deutsche Typografie
+\usepackage[babel,german=quotes]{csquotes}
+\usepackage{xspace}
+
+% VVT Table Macros
+\usepackage{ragged2e}   % \RaggedRight in Tabellen
+
+% Hilfsmakro: farbige Kopfzeile ohne Weißsaum
+\newcommand{\VVTHeader}[2]{%
+  \noalign{\global\aboverulesep=0pt\global\belowrulesep=0pt}%
+  \specialrule{\heavyrulewidth}{0pt}{0pt}% oben (entspricht \toprule)
+  \rowcolor{#1}\multicolumn{2}{c}{\textbf{#2}}\\
+  \specialrule{\lightrulewidth}{0pt}{0pt}% unten (entspricht \midrule)
+  \noalign{\global\aboverulesep=0.4ex\global\belowrulesep=0.65ex}%
+}
+
+% Tabellenspalten: links 26%, rechts 66% (Summe < 100%)
+\newcolumntype{L}{>{\RaggedRight\arraybackslash}p{0.26\textwidth}}
+\newcolumntype{R}{>{\RaggedRight\arraybackslash}p{0.66\textwidth}}

@@ -1,0 +1,170 @@
+% ============================================================================
+% ZENTRALE METADATEN-KONFIGURATION
+% ============================================================================
+% Alle praxisspezifischen Daten als Makros
+% HINWEIS: Kopieren Sie diese Datei nach metadata.tex und passen Sie die Werte an.
+
+% ============================================================================
+% 1. PRAXIS-GRUNDDATEN
+% ============================================================================
+\newcommand{\PraxisName}{Musterpraxis für Psychotherapie Dr. Erika Mustermann}
+\newcommand{\PraxisNameMitUmbruch}{Musterpraxis für Psychotherapie\\Dr. Erika Mustermann}
+\newcommand{\PraxisInhaberin}{Dr. Erika Mustermann}
+\newcommand{\PraxisInhaberBezeichnung}{Praxisinhaberin} % oder: Praxisinhaber
+\newcommand{\PraxisGroesse}{Einzelpraxis ($\leq$ 5 Mitarbeitende), nur eine Betriebsstätte}
+\newcommand{\StandortTyp}{Einzelpraxis}
+\newcommand{\PraxisFachrichtung}{Psychotherapie (Verhaltenstherapie)}
+
+% Adresse und Kontakt
+\newcommand{\PraxisAdresse}{Musterstraße 1}
+\newcommand{\PraxisOrt}{12345~Musterstadt}
+\newcommand{\PraxisVollAdresse}{\PraxisAdresse, \PraxisOrt}
+\newcommand{\PraxisTelefon}{\tel{151 12345678}}
+\newcommand{\PraxisInhaberinPrivatTelefon}{\tel{170 1234567}}
+
+% Online-Präsenz
+\newcommand{\PraxisDomain}{musterpraxis-psychotherapie.de}
+\newcommand{\PraxisEmail}{info@\PraxisDomain}
+\newcommand{\PostmasterEmail}{dmarc-reports@\PraxisDomain}
+\newcommand{\PraxisWebsite}{https://www.\PraxisDomain}
+\newcommand{\PraxisWebsiteDatenschutz}{\PraxisWebsite/datenschutz/}
+
+% ============================================================================
+% 2. VERANTWORTLICHKEITEN UND ROLLEN
+% ============================================================================
+\newcommand{\Gesamtverantwortung}{\PraxisInhaberin{} (Praxisinhaberin)}
+\newcommand{\ITSicherheitsbeauftragte}{\PraxisInhaberin}
+\newcommand{\Datenschutzbeauftragte}{\PraxisInhaberin}
+
+% IT-Support
+\newcommand{\ITAnsprechpartner}{Max Mustermann}
+\newcommand{\ITAnsprechpartnerAdresse}{Beispielweg~42, 54321 Beispielstadt}
+\newcommand{\ITAnsprechpartnerTelefon}{\tel{172 9876543}}
+\newcommand{\ITAnsprechpartnerMail}{it@example.com}
+
+% Notfall-Kontakte
+\newcommand{\NotfallVollmachtPerson}{Volker Vollmacht}
+
+% ============================================================================
+% 3. BEHÖRDEN UND RECHTLICHES
+% ============================================================================
+% Bundesland und Behörden (Beispiel: Muster-Bundesland – bitte anpassen!)
+\newcommand{\Bundesland}{Muster-Bundesland}
+\newcommand{\Gerichtsstand}{Musterstadt, Deutschland}
+
+% Kassenärztliche Vereinigung
+\newcommand{\KV}{Muster-KV}
+\newcommand{\KVLang}{Kassenärztliche Vereinigung Muster-Bundesland}
+
+% Kammer
+\newcommand{\Kammer}{Muster-Kammer}
+\newcommand{\KammerLang}{Psychotherapeutenkammer Muster-Bundesland}
+
+% Datenschutzbehörde
+\newcommand{\Datenschutzbehoerde}{LfD \Bundesland}
+\newcommand{\DatenschutzbehoerdeAdresse}{Musterstraße 1, 12345 Musterstadt}
+\newcommand{\DatenschutzbehoerdeURL}{lfd.muster-bundesland.de}
+
+% ============================================================================
+% 4. IT-INFRASTRUKTUR UND NETZWERK
+% ============================================================================
+\newcommand{\PraxisITInfrastruktur}{Lokales PVS (\PVSName{}), extern gehostetes TI-Gateway}
+
+% Netzwerk-Grundkonfiguration
+\newcommand{\PraxisSubnetz}{192.168.178.0/24}
+\newcommand{\NetzwerkUplink}{Uplink via DSL-Modem}
+
+% Router
+\newcommand{\RouterName}{praxis-router}
+\newcommand{\RouterKurz}{Router}
+\newcommand{\RouterModell}{Muster-Router}
+
+% WLAN
+\newcommand{\WLANName}{MusterPraxis-WLAN}
+\newcommand{\WLANGastName}{MusterPraxis-Gast}
+\newcommand{\WLANAbschaltung}{20:00–06:00~Uhr}
+\newcommand{\MACRandomisierung}{Konfiguriert gemäß Praxisanforderungen}
+
+% ============================================================================
+% 5. SOFTWARE UND TOOLS
+% ============================================================================
+% Praxisverwaltungssystem
+\newcommand{\PVSName}{MusterPVS}
+\newcommand{\PVSHersteller}{PVS-Anbieter GmbH}
+\newcommand{\PVSSupportTel}{0800 123 4567}
+
+% Sicherheits-Tools
+\newcommand{\PasswortManager}{Passwort-Manager}
+\newcommand{\MDMTool}{MusterMDM}
+\newcommand{\RemoteTool}{Remote-Support-Tool}
+
+% KI-Tools
+\newcommand{\KIToolName}{MusterAI Docs}
+\newcommand{\KIToolAnbieter}{MusterAI GmbH}
+\newcommand{\KIToolSicherheitURL}{https://example.com/ki-sicherheit}
+
+% Patientenkommunikation
+\newcommand{\PatKomTool}{Patienten-App}
+\newcommand{\PatKomAnbieter}{Patienten-App GmbH}
+
+% Entwicklung und Deployment
+\newcommand{\IaCTool}{IaC}
+\newcommand{\IaCToolLang}{Infrastructure-as-Code (z.B. Terraform)}
+\newcommand{\CodeRepo}{Code-Repository}
+
+% ============================================================================
+% 6. HOSTING UND EXTERNE DIENSTE
+% ============================================================================
+% E-Mail
+\newcommand{\EmailAnbieter}{E-Mail-Anbieter}
+\newcommand{\EmailAnbieterFirma}{E-Mail-Anbieter GmbH}
+
+% Hosting
+\newcommand{\HostingAnbieter}{Hosting-Anbieter}
+\newcommand{\HostingRegion}{EU (Frankfurt)}
+
+% CDN und DNS
+\newcommand{\CDNService}{CDN}
+\newcommand{\DNSService}{DNS-Service}
+
+% Internet und Mobilfunk
+\newcommand{\InternetAnbieter}{Internetanbieter}
+\newcommand{\InternetSperrnummer}{0800 XXX XXXX}
+\newcommand{\MobilfunkAnbieter}{Mobilfunkanbieter}
+\newcommand{\SIMSperrnummer}{116 116}
+
+% ============================================================================
+% 7. SICHERHEIT UND ZERTIFIKATE
+% ============================================================================
+% Passwort-Richtlinien
+\newcommand{\PasswortMindestlaenge}{14}
+\newcommand{\PasswortSecurityScore}{90\%}
+
+% S/MIME Zertifikate
+\newcommand{\SMIMEIssuer}{Zertifikatsanbieter}
+\newcommand{\SMIMEValidity}{2-Jahres-Zyklus}
+
+% System-Accounts
+\newcommand{\AdminUser}{praxisadmin}
+
+% ============================================================================
+% 8. BACKUP UND NOTFALL
+% ============================================================================
+\newcommand{\BackupStandort}{georedundanter externer Standort}
+\newcommand{\NotfallkitVerwahrung}{Sicherer externer Aufbewahrungsort}
+
+% ============================================================================
+% 9. REPOSITORY UND ENTWICKLUNG
+% ============================================================================
+\newcommand{\GitHubRepoDoc}{https://github.com/carhensi/kbv-it-sicherheit-template}
+\newcommand{\GitHubRepoWeb}{https://github.com/beispiel/praxis-web}
+
+% ============================================================================
+% 10. DOKUMENT-METADATEN
+% ============================================================================
+% Versionierung (wird von build.py überschrieben)
+\newcommand{\DocumentVersion}{2025.12.28}
+\newcommand{\DocumentDate}{26. Dezember 2025}
+\newcommand{\ValidUntil}{25.12.2028}
+\newcommand{\NextReview}{Dezember 2027}
+\newcommand{\DokumentKlassifizierung}{Vorlage (nicht vertraulich)}

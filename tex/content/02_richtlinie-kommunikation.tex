@@ -1,0 +1,149 @@
+\section{E-Mail und Kommunikation}
+\label{sec:kommunikation}
+
+\subsection{E-Mail-Sicherheit}
+
+Als E-Mail-Anbieter wird \EmailAnbieter{} genutzt (Custom Domain \PraxisDomain).
+
+\textbf{Wichtig:} \EmailAnbieter{} wird ausschließlich für organisatorische Kommunikation
+verwendet (keine Gesundheitsdaten). AVV mit \EmailAnbieterFirma{}
+vom 30.11.2025 abgeschlossen (siehe AVV-Register Anhang).
+
+\textbf{Mail-Gateway-Architektur (Anlage 3):} Die Praxis nutzt \EmailAnbieter{}
+als hochverfügbare Gateway-Lösung mit überlegenen Sicherheitsfeatures:
+
+\begin{itemize}
+  \item 24/7 Spam-/Virenfilter mit Machine Learning
+  \item Automatische DKIM-Signierung und SPF-Validierung
+  \item TLS 1.3 Transportverschlüsselung mit Perfect Forward Secrecy
+  \item 99.9\% SLA-garantierte Verfügbarkeit
+\end{itemize}
+
+\textbf{Architektur-Vorteil:} Diese Managed-Service-Architektur übertrifft lokale
+Gateway-Lösungen in Sicherheit, Verfügbarkeit und Wartungsaufwand. Lokale
+Mail-Gateways erfordern kontinuierliche Updates, Monitoring und Expertise,
+die in Einzelpraxen nicht wirtschaftlich darstellbar sind.
+
+Digitale Signatur aller ausgehenden E-Mails (Authentizität, Integrität) per S\slash
+MIME-Si\-gna\-tur standardmäßig aktiv.
+Ende-zu-Ende-Verschlüsselung per S\slash MIME sofern ein gültiges Empfängerzertifikat
+vorliegt; andernfalls erfolgt der Versand transportverschlüsselt (TLS). Patienten können
+unverschlüsselt Kontakt aufnehmen.
+
+\textbf{E-Mail-Policy für Patienten:} Sensible Inhalte (Diagnosen, Therapieinhalte,
+Befunde) werden nicht per E-Mail übermittelt. Sichere Kommunikation erfolgt über
+\PatKomTool{}-App, KIM (mit anderen Leistungserbringern, siehe \cref{sec:kim}) oder
+persönlich in der Praxis.
+
+\textbf{E-Mail-Signatur:} Alle ausgehenden E-Mails enthalten folgenden Hinweis:
+\begin{quote}
+\textit{Hinweis: Bitte keine medizinischen Inhalte per E-Mail.
+Für sichere Kommunikation nutzen Sie \PatKomTool{} oder rufen Sie an.}
+\end{quote}
+
+\textbf{Arbeitsanweisung bei medizinischen E-Mail-Inhalten:} Erhält die Praxis
+E-Mails mit medizinischen Inhalten (Diagnosen, Symptome, Befunde):
+\begin{enumerate}
+  \item Vorgang kurz im PVS protokollieren (Datum, Patient, \enquote{E-Mail erhalten, sicherer Kanal genutzt})
+  \item E-Mail sofort löschen (nicht weiterleiten oder speichern)
+  \item Patient telefonisch kontaktieren
+  \item Inhalt über \PatKomTool{} oder persönlich anfordern
+  \item Patienten über sichere Kommunikationswege informieren
+\end{enumerate}
+
+\textbf{Wichtig:} E-Mails mit Gesundheitsdaten werden nach Übernahme ins PVS in der
+Mailbox gelöscht. Es erfolgt keine Ablage gesundheitsbezogener Inhalte in
+iCloud-Mail, iCloud-Drive oder Kalendernotizen.
+
+\textbf{Technische Umsetzung der E-Mail-Sicherheit:} Um diese organisatorischen
+Maßnahmen technisch zu unterstützen, implementiert die Praxis folgende
+Verschlüsselungs- und Authentifizierungsverfahren:
+
+\textbf{S/MIME-Zertifikat (nur Signatur):} Ausgehende E-Mails werden mit S/MIME
+signiert (nicht verschlüsselt). Die Signatur bestätigt die Authentizität des Absenders.
+\begin{itemize}
+  \item \textbf{Aussteller}: \SMIMEIssuer{}
+  \item \textbf{Gültigkeit}: \SMIMEValidity{}
+  \item \textbf{Speicherung}: \PasswortManager{} + macOS Keychain
+\end{itemize}
+
+\textbf{S/MIME-Rotation:}
+\begin{enumerate}
+  \item Kalender-Erinnerung 60 Tage vor Ablauf (\PraxisInhaberBezeichnung{})
+  \item Neues Zertifikat beim Anbieter bestellen (IT-Ansprechpartner)
+  \item Installation in macOS Keychain und Test (IT-Ansprechpartner)
+  \item Altes Zertifikat in \PasswortManager{} archivieren
+\end{enumerate}
+
+Die Domain-Sicherheit wird durch folgende technisch implementierte Maßnahmen
+gewährleistet (öffentlich prüfbar via DNS-Abfrage):
+\begin{itemize}
+  \item \textbf{DNSSEC} zur Authentizität von DNS-Einträgen
+  \item \textbf{CAA-Records} zur Kontrolle der Zertifikatsausstellung
+  \item \textbf{Registrar Lock} verhindert unbefugte Domain-Transfers
+\end{itemize}
+
+\subsubsection{E-Mail-Sicherheitsstandards}
+Für die Domain \texttt{\PraxisDomain} sind folgende Sicherheitsstandards aktiv:
+\begin{itemize}
+\item \textbf{SPF}: Autorisiert \EmailAnbieter{} als legitimen Mailserver
+\item \textbf{DKIM}: Digitale Signierung durch \EmailAnbieter{}
+\item \textbf{DMARC}: Policy \texttt{p=reject} verwirft nicht-authentifizierte E-Mails
+\item \textbf{MTA-STS}: Erzwingt verschlüsselten Transport (TLS 1.2+)
+\end{itemize}
+
+\textbf{Implementierung:} SPF/DKIM-Signierung über \EmailAnbieter{}, DMARC mit Policy \texttt{p=reject}.
+
+\textbf{DMARC-Report-Strategie:} Da ausschließlich \EmailAnbieter{} als Managed Service
+genutzt wird (keine eigenen Mailserver), erfolgt die Sicherheitsüberwachung durch:
+\begin{itemize}
+  \item \EmailAnbieter{} überwacht automatisch Zustellbarkeit und Authentifizierung
+  \item DMARC-Reports an \texttt{\PostmasterEmail} (quartalsweise Prüfung)
+  \item Quartalsweise Prüfung: DKIM/SPF-Authentifizierung, Zustellbarkeit, Auffälligkeiten
+  \item Jährliche DNS-Validierung im Rahmen der IT-Evaluation (\cref{sec:vorlage-eigenpruefung})
+  \item Bei Zustellproblemen: Analyse über MXToolbox oder dmarcian
+\end{itemize}
+
+DNS-Änderungen werden über \IaCTool{} verwaltet und versioniert
+(siehe \cref{sec:website-sicherheit}).
+
+\subsection{Spam-Behandlung}
+
+Gemäß Anlage 1 Nr. 41 der IT-Sicherheitsrichtlinie werden Spam-E-Mails grundsätzlich
+ignoriert und gelöscht. Verdächtige E-Mails werden konsequent gelöscht ohne Öffnen von
+Links oder Anhängen aus unbekannten Quellen. Links in verdächtigen E-Mails werden nicht
+angeklickt, Anhänge aus unbekannten Quellen nicht geöffnet. Bei Unsicherheit wird die
+E-Mail an den IT-Ansprechpartner weitergeleitet, ansonsten sofort gelöscht.
+
+\subsection{E-Mail-Client-Konfiguration}
+
+Apple Mail ist sicherheitsorientiert konfiguriert: Externe Inhalte werden standardmäßig
+unterdrückt, aktive Inhalte sind deaktiviert (Anlage 1 Nr. 40), und die automatische
+Bildanzeige ist deaktiviert. E-Mail-Anhänge werden vor dem Öffnen durch die integrierten
+macOS-Sicherheitsmechanismen (XProtect, Gatekeeper) geprüft.
+
+\subsection{Website-Sicherheit}
+\label{sec:website-sicherheit}
+
+Die Praxis-Website wird bei \HostingAnbieter{} (DSGVO-konform mit AVV) gehostet und nutzt erzwungene
+HTTPS-Verschlüsselung. Infrastructure as Code via \IaCTool{} für sichere und nachvollziehbare
+Konfiguration (privates Repository: \url{\GitHubRepoWeb}).
+Security-Header konfiguriert (u.a. HSTS, CSP, X-Content-Type-Options, Referrer-Policy);
+jährliche Sichtprüfung (siehe \cref{sec:vorlage-eigenpruefung}).
+
+\textbf{Wartung:} IT-Ansprechpartner ist für Wartung und Updates verantwortlich.
+Da statisches HTML ohne Datenbank oder CMS, sind regelmäßige Updates nicht erforderlich.
+Inhaltliche Änderungen erfolgen anlassbezogen.
+
+\textbf{Anlage~1 Nr.~45–48 (nicht anwendbar):} Die Website bietet keine Logins oder
+geschützten Ressourcen. Authentifizierung, WAF und Anti-Automation-Maßnahmen sind
+daher nicht erforderlich - die statische Informationsseite benötigt nur die
+implementierten Security-Header.
+
+Es werden keine Cookies, Tracking- oder Analysetools eingesetzt.
+
+Technisch notwendige Server-Log-Dateien (Browsertyp, Betriebssystem, Referrer, Hostname,
+Uhrzeit der Anfrage, IP-Adresse) werden 30 Tage gespeichert und danach automatisch gelöscht.
+Eine Zusammenführung mit anderen Datenquellen findet nicht statt. Rechtsgrundlage ist
+Art.\ 6 Abs.\ 1 lit. f\ DSGVO\ (berechtigtes Interesse an Betrieb, Sicherheit und
+Optimierung der Website).

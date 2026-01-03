@@ -1,0 +1,124 @@
+\section{Einleitung und Zweck}
+
+\subsection{Zweck der Dokumentation}
+
+Diese IT-Sicherheitsdokumentation wurde gemäß §~390 SGB~V erstellt und dient dem Nachweis
+der ordnungsgemäßen Umsetzung der gesetzlich vorgeschriebenen
+IT-Sicher\-heits\-maß\-nah\-men in der \PraxisName.
+
+\textbf{Praxisprofil:}
+\begin{itemize}
+  \item \textbf{Praxisgröße:} \PraxisGroesse
+  \item \textbf{Fachrichtung:} \PraxisFachrichtung
+  \item \textbf{IT-Infrastruktur:} \PraxisITInfrastruktur
+\end{itemize}
+
+\textbf{Rechtsgrundlage:} KBV-Richtlinie nach §~390 SGB~V, Version 1.1 (ab
+01.10.2025). Pflicht zur jährlichen Evaluation gem. Abschnitt A.IV letzter Abs.\ (siehe
+\cref{sec:vorlage-eigenpruefung}).
+
+Die Dokumentation richtet sich an Prüfer der \KVLang{}
+(\KV) und andere befugte Kontrollinstanzen zur Überprüfung der Einhaltung der
+IT-Sicherheitsrichtlinie.
+
+\subsection{Rechtliche Grundlagen}
+
+\begin{itemize}
+  \item \S~390 SGB~V – IT-Sicherheit in der vertragsärztlichen Versorgung und
+    –psychotherapeutischen Versorgung
+  \item Anlage~1 zur IT-Sicherheitsrichtlinie (Richtlinie über die Anforderungen an die
+    IT-Sicherheit)
+  \item Art.~32 DSGVO – Sicherheit der Verarbeitung
+  \item \S\S~203, 204 StGB – Verletzung von Privatgeheimnissen
+  \item Berufsordnung der \KammerLang
+\end{itemize}
+
+\subsection{Dokumentenerstellung}
+
+Diese Dokumentation wird regelmäßig aktualisiert und versioniert. Änderungen werden
+nachvollziehbar dokumentiert und sicher archiviert. Das private Repository ist verfügbar
+unter: \url{\GitHubRepoDoc} (Zugang nur für autorisierte Personen).
+
+\textbf{Hinweis zur Druckversion:} Bei geringfügigen Änderungen wird die Druckversion
+nicht neu erstellt. Die jeweils aktuelle digitale Fassung ist maßgeblich und im
+Repository hinterlegt.
+
+Sicherheitsmerkmale: SHA256-Checksummen für Integrität, versionierte
+Änderungsnachverfolgung, sichere digitale Archivierung.
+
+\subsection{Geltungsbereich}
+
+Diese Dokumentation umfasst alle IT-Systeme, Netzwerke und Prozesse der
+\PraxisName, die zur Verarbeitung von Patientendaten oder anderen
+schützenswerten Informationen eingesetzt werden.
+
+\textbf{Räumlicher Geltungsbereich:} Praxisräume \PraxisVollAdresse
+
+\textbf{Zeitlicher Geltungsbereich:} Gültig vom \DocumentDate{} bis \ValidUntil
+
+\subsection{Aufbau der Dokumentation}
+
+Die Dokumentation ist thematisch strukturiert und umfasst folgende Hauptbereiche:
+
+\begin{itemize}
+  \item \textbf{IT-Sicherheitskonzept} (\cref{sec:it-sicherheit}) -- Allgemeine
+    Sicherheitsprinzipien, Personal, Netzwerk, Updates und Endgeräte-Sicherheit
+  \item \textbf{E-Mail und Kommunikation} (\cref{sec:kommunikation}) -- Sichere
+    E-Mail-Konfiguration, Spam-Behandlung und Website-Sicherheit
+  \item \textbf{Telematikinfrastruktur} (\cref{sec:ti}) -- TI-Komponenten und
+    sichere Anbindung
+  \item \textbf{Mobile Geräte} (\cref{sec:mobile-geraete}) -- Umfassende
+    Richtlinien für iPhone/iPad inkl. Apps und Datenverarbeitung
+  \item \textbf{Mobile Device Management} (\cref{sec:mdm}) -- Zentrale
+    Geräteverwaltung, Sicherheitsrichtlinien und Compliance
+  \item \textbf{Wechseldatenträger} (\cref{sec:wechseldatentraeger}) --
+    Verschlüsselung, Mitnahme-Regelungen und sichere Entsorgung
+  \item \textbf{Verschwiegenheit und externe Dienstleister}
+    (\cref{sec:verschwiegenheit}) -- AVV und Vertraulichkeitsvereinbarungen
+  \item \textbf{Notfall- und Incident-Management} (\cref{sec:notfall}) --
+    Backup-Konzept und Wiederherstellungsverfahren
+  \item \textbf{Technische und Organisatorische Maßnahmen} (\cref{sec:toms}) --
+    DSGVO Art.\ 32 Compliance
+  \item \textbf{Rechte- und Rollenmatrix} (\cref{sec:rechte-rollenmatrix}) --
+    Systematische Zugriffsberechtigung auf alle IT-Systeme
+  \item \textbf{Referenzdokumente} -- Netzplan, Geräteliste, AVV-Register,
+    Verzeichnis von Verarbeitungstätigkeiten (VVT)
+  \item \textbf{Anhänge} -- IT-Notfall-Checkliste, Selbstverpflichtungen,
+    Verschwiegenheitserklärungen, KBV-Compliance-Mapping, Changelog
+\end{itemize}
+
+\textbf{Arbeitsmappe (getrennt von der Dokumentation):} Die Arbeitsmappe enthält
+regelmäßig zu füllende Arbeitsblätter: Restore-Tests (mindestens jährlich, angestrebt halbjährlich),
+TOMs-Prüfung (jährlich/quartalsweise) und IT-Sicherheitsevaluation (jährlich).
+Diese werden kontinuierlich gepflegt, während die Hauptdokumentation als
+Regelwerk weitgehend stabil bleibt.
+
+Jedes Kapitel behandelt die jeweiligen Anforderungen der IT-Sicherheitsrichtlinie
+vollständig und praxisnah. Querverweise ermöglichen eine themenübergreifende Navigation.
+
+\textbf{Hinweis für Prüfer:} Diese Dokumentation muss nicht linear gelesen werden.
+Das \textbf{KBV-Compliance-Mapping} (\cref{sec:kbv-compliance}) ermöglicht die gezielte
+Prüfung einzelner Anforderungen: Jede Anforderung der Anlage~1, 2 und 5 ist dort
+mit Erfüllungsstatus und Kapitelreferenz aufgeführt. So kann z.\,B. direkt
+\enquote{Anlage~1 Nr.~21 -- Datensicherung} nachgeschlagen und im referenzierten Kapitel
+vertieft werden.
+
+\textbf{Arbeitsmappe:} Ausgefüllte Vorlagen liegen in der separaten Arbeitsmappe
+(Arbeitsvorlagen, On-/Offboarding-Vorlagen, Protokolle, regelmäßige Checks).
+
+\subsection{Verantwortlichkeiten}
+
+\textbf{Gesamtverantwortung:} \Gesamtverantwortung
+
+\textbf{IT-Sicherheitsbeauftragte:} \ITSicherheitsbeauftragte
+
+\textbf{IT-Ansprechpartner:} \ITAnsprechpartner{} (externer IT-Ansprechpartner)
+
+Die \PraxisInhaberBezeichnung{} trägt die Gesamtverantwortung für die Umsetzung und Einhaltung aller
+IT-Sicher\-heits\-maß\-nah\-men gemäß §~390 SGB~V.
+
+\subsection{Datenschutz-Information für Patienten}
+
+Die Datenschutz-Information nach Art. 13 DSGVO ist in der Praxis ausgehängt und
+online unter \url{https://\PraxisDomain/#datenschutz} abrufbar. Änderungen werden
+versioniert dokumentiert und Patienten bei wesentlichen Änderungen informiert.

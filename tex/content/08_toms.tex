@@ -1,0 +1,113 @@
+\section{Technische und Organisatorische Maßnahmen}
+\label{sec:toms}
+
+\textbf{Hinweis zur Darstellung der TOMs nach Art.\ 32 DSGVO:}\\
+Gemäß Art.\ 32 DSGVO sind alle Maßnahmen vollständig zu dokumentieren.
+Die nachfolgende Übersicht stellt daher die TOMs in rechtlicher Vollständigkeit dar.
+Zur Vermeidung von Redundanz verweisen einzelne Maßnahmen auf die entsprechenden Fachkapitel
+(z.\,B.\ \ref{sec:netzwerk} Netzwerksicherheit,~\ref{sec:kommunikation} E-Mail-Kommunikation),
+in denen die technische Umsetzung detailliert beschrieben ist.
+Zusätzlich dient der Netzplan im Anhang zur Visualisierung der Konfiguration.
+
+\subsection{Übersicht}
+Die technischen und organisatorischen Maßnahmen nach Art.\ 32 DSGVO gewährleisten\ die
+Datensicherheit durch ein mehrstufiges Schutzkonzept.
+
+\subsection{Zugangs- und Zutrittskontrolle}
+
+Die Praxis ist abschließbar mit Schlüsseln nur bei der \PraxisInhaberBezeichnung{}
+und dem Reinigungspersonal (mit Verschwiegenheitserklärung). Benutzerkonten
+existieren nur für autorisierte Personen mit starken Passwörtern (\PasswortManager{}) und
+automatischer Bildschirmsperre. Zwei-Faktor-Authentifizierung wird wo möglich eingesetzt.
+
+\subsection{Zugriffs- und Weitergabekontrolle}
+
+Rollenbasierte Zugriffe im PVS (\PVSName{}) beschränken Berechtigungen auf erforderliche
+Daten. Gemeinsam genutzte Accounts existieren nicht. Die systematische Zugriffskontrolle
+ist in der Rechte- und Rollenmatrix (\cref{sec:rechte-rollenmatrix}) vollständig
+dokumentiert. Bei Datenübertragung werden verschlüsselte Datenträger und sichere
+Übertragungswege (HTTPS) verwendet.
+
+\subsection{Eingabe- und Auftragskontrolle}
+
+Dateneingaben erfordern Benutzer-Authentifizierung und werden in \PVSName{} protokolliert.
+Änderungshistorien werden bei kritischen Daten geführt. Auftragsverarbeitungsverträge
+(AVV) mit Dienstleistern regeln die Verarbeitung nach Weisung, ergänzt durch
+Vertraulichkeitsvereinbarungen.
+
+\subsection{Verfügbarkeits- und Trennungskontrolle}
+
+Backup-Konzept und redundante Systeme sichern die Verfügbarkeit (Details siehe
+\cref{sec:datensicherung}). Separate Benutzerkonten für verschiedene Aufgaben und
+getrennte Netzwerke (Praxis vs. privat)\ gewährleisten\ die Zwecktrennung.
+
+\subsection{Verschlüsselung und Pseudonymisierung}
+
+Festplattenverschlüsselung (FileVault), verschlüsselte Backups und Wechseldatenträger
+schützen personenbezogene Daten. E-Mail-Verschlüsselung siehe
+\cref{sec:kommunikation}. Statistiken und Berichte werden pseudonymisiert erstellt.
+
+\subsection{Netzwerk- und Systemsicherheit}
+
+Netzwerksicherheit durch Firewall-Konfiguration (Details siehe
+\cref{sec:netzwerk}). Systemlogs werden anlassbezogen ausgewertet, zusätzlich
+stichprobenartige Sichtung im jährlichen Eigencheck. Automatische Software-Updates und
+integrierte macOS-Sicherheitsfeatures (XProtect, Gatekeeper) gewährleisten aktuellen
+Schutzstand (Details siehe \cref{sec:endgeraete}).
+
+\subsection{Physische Sicherheit}
+
+\textbf{Zutrittskonzept:} Die Praxis ist abschließbar, Schlüssel werden nur an
+autorisiertes Personal ausgegeben. Bei zukünftigen
+Einstellungen: Schlüsselvergabe dokumentiert, Rückgabe beim Ausscheiden.
+Büro/IT-Räume sind zusätzlich gesichert und nur für Praxisinhaberin und IT-Support
+unter Aufsicht zugänglich.
+
+\textbf{Clean-Desk-Policy:} Digitale Arbeitsweise ohne Papierakten. Bildschirme werden
+bei Verlassen des Arbeitsplatzes gesperrt (automatisch nach 5 Min). Wechseldatenträger
+werden verschlüsselt und in abschließbaren Schränken aufbewahrt. Ausdrucke mit
+Patientendaten werden unmittelbar nach Verwendung geschreddert.
+
+\textbf{Besucherregelung:} Patienten haben Zugang zum Wartebereich und Behandlungsräumen,
+nicht zu Büro/IT-Räumen. Externe Dienstleister (IT-Support, Wartung) arbeiten nur unter
+Aufsicht oder außerhalb der Praxiszeiten. Alle externen Zugriffe werden dokumentiert
+(siehe \cref{sec:vorlage-remote-support}).
+
+\textbf{Geräte- und Bildschirmsicherheit:} IT-Geräte sind in abschließbaren Räumen
+untergebracht. Mobile Geräte werden bei Nichtgebrauch sicher verwahrt. Bildschirme sind
+vor Einsicht Unbefugter geschützt positioniert und mit Sichtschutzfolien ausgestattet.
+Kameras sind mit Abdeckungen versehen.
+
+\subsection{Regelmäßige Überprüfung}
+
+Jährliche Überprüfung der TOMs und quartalsweise IT-Sicherheitsprüfungen gewährleisten
+kontinuierliche Verbesserung. Die Rechte- und Rollenmatrix wird jährlich auf Aktualität
+und Angemessenheit geprüft. Anpassungen erfolgen bei Änderungen der Technik oder
+Rechtslage mit vollständiger Dokumentation.
+
+Die strukturierte Überprüfung aller TOMS-Bereiche erfolgt nach den Arbeitsvorlagen
+in \cref{sec:vorlage-toms-pruefung} mit dokumentierten Prüfzyklen und Nachweisführung.
+
+IT-Sicherheitsschulungen werden quartalsweise durch die \PraxisInhaberBezeichnung{} durchgeführt
+und nach dem Schulungsplan in \cref{sec:vorlage-schulungsplan} dokumentiert.
+Bei zukünftigen Einstellungen sind alle neuen Mitarbeitenden vor Systemzugang zu schulen.
+
+Alle Prüfungen werden systematisch durchgeführt und 10 Jahre aufbewahrt.
+
+\subsection{Betroffenenrechte nach Art. 12--23 DSGVO}
+
+Die Praxis gewährleistet die ordnungsgemäße Bearbeitung aller Betroffenenanfragen
+nach DSGVO Art. 15 (Auskunft), Art. 16 (Berichtigung), Art. 17 (Löschung),
+Art. 18 (Einschränkung), Art. 20 (Datenübertragbarkeit) und Art. 21 (Widerspruch).
+
+\textbf{Verfahren:} Eingehende Anträge werden registriert, die Identität des
+Antragstellers geprüft (Geburtsdatum, Adresse) und binnen einem Monat bearbeitet.
+Bei komplexen Anfragen erfolgt eine begründete Fristverlängerung um maximal zwei Monate.
+Alle betroffenen Datenbestände (PVS, E-Mail, Papierakten, Backups) werden systematisch
+geprüft und die Bearbeitung vollständig dokumentiert.
+
+\textbf{Verantwortlichkeit:} \PraxisInhaberBezeichnung{} als Verantwortliche nach Art. 4 Nr. 7 DSGVO.
+
+\Dokumentation Strukturierte Bearbeitung nach Arbeitsvorlage in
+\cref{sec:vorlage-betroffenenrechte} mit Nachweis über Eingang, Identitätsprüfung,
+Fristberechnung, Datenbestandsprüfung und Antwortversendung.

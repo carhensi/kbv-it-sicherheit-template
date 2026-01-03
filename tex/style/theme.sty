@@ -1,0 +1,147 @@
+\ProvidesPackage{style/theme}[2025/09/09 v1 IT-Sicherheitsdokumentation Theme]
+
+% Farben zentral definieren
+\RequirePackage{xcolor}
+
+% Hilfsmakro für accessible/standard Switches (DRY)
+\NewDocumentCommand{\AccessibleSwitch}{m m}{%
+  \ifaccessible #1 \else #2 \fi
+}
+
+% Hilfsmakro für konsistente Labels (DRY)
+\NewDocumentCommand{\Label}{m}{\textbf{#1:}}
+
+% Hilfsmakro für Signatur-Minipage (DRY)
+\NewDocumentCommand{\SignatureMinipage}{m m}{%
+  \begin{minipage}[t]{#1}
+    \centering
+    #2
+  \end{minipage}
+}
+
+% Hilfsmakro für Signatur-Linien (DRY)
+\NewDocumentCommand{\SignatureLine}{O{4cm}}{\rule{#1}{0.3pt}}
+
+% Hilfsmakro für Formularfelder (Accessibility-freundlich)
+\NewDocumentCommand{\FormField}{O{3cm}}{\rule{#1}{0.4pt}}
+
+% Hilfsmakro für Hinweis-Labels (konsistent mit Leerzeichen)
+\NewDocumentCommand{\Hinweis}{}{\ifaccessible Hinweis:\else\textbf{Hinweis:}\fi\ }
+
+% Hilfsmakros für häufige Labels (DRY)
+\NewDocumentCommand{\Legende}{}{\textbf{Legende: }}
+\NewDocumentCommand{\Dokumentation}{}{\textbf{Dokumentation:}}
+
+% Hilfsmakros für Bestandteil-Hinweise
+\NewDocumentCommand{\BestandteilJaehrlich}{}{%
+  \Hinweis Bestandteil der IT-Sicherheitsdokumentation nach §~390 SGB~V. Jährliche Überprüfung.%
+}
+\NewDocumentCommand{\BestandteilZehnJahre}{}{%
+  \Hinweis Bestandteil der IT-Sicherheitsdokumentation nach §~390 SGB~V. Aufbewahrung: 10 Jahre.%
+}
+
+% Primärfarben
+\definecolor{AuditBlue}{RGB}{30,90,150}
+\definecolor{RowGray}{RGB}{245,245,245}
+
+% TikZ-Box-Farben
+\definecolor{InfoBoxBorder}{RGB}{179,179,179}      % black!30
+\definecolor{InfoBoxFill}{RGB}{242,242,242}        % gray!5
+\definecolor{VersionBoxBorder}{RGB}{179,204,230}   % blue!30
+\definecolor{VersionBoxFill}{RGB}{242,247,252}     % blue!5
+\definecolor{EmergencyBoxBorder}{RGB}{230,102,102} % red!60
+\definecolor{EmergencyBoxFill}{RGB}{255,230,230}   % red!10
+
+% WCAG AA-konforme Status-Farben (Kontrast ≥4.5:1 gegen weiß)
+\definecolor{StatusGreen}{RGB}{0,100,0}        % Dunkelgrün
+\definecolor{StatusOrange}{RGB}{180,95,6}      % Dunkelorange
+\definecolor{StatusRed}{RGB}{180,0,0}          % Dunkelrot
+\definecolor{StatusGray}{RGB}{90,90,90}        % Dunkelgrau
+
+% Print-optimierte Überschriften
+\ifaccessible
+  % Accessible: Standard article sectioning mit titlesec
+  \RequirePackage{titlesec}
+  \titlespacing*{\section}{0pt}{1.0\baselineskip}{0.5\baselineskip}
+  \titlespacing*{\subsection}{0pt}{0.8\baselineskip}{0.4\baselineskip}
+  \titlespacing*{\subsubsection}{0pt}{0.6\baselineskip}{0.3\baselineskip}
+
+  \titleformat{\section}{\large\bfseries\sffamily}{\thesection}{1em}{}
+  \titleformat{\subsection}{\normalsize\bfseries\sffamily}{\thesubsection}{1em}{}
+  \titleformat{\subsubsection}{\normalsize\bfseries\sffamily}{\thesubsubsection}{1em}{}
+\else
+  % Standard: KOMA RedeclareSectionCommand
+  \RedeclareSectionCommand[beforeskip=1.0\baselineskip,afterskip=0.5\baselineskip]{section}
+  \RedeclareSectionCommand[beforeskip=0.8\baselineskip,afterskip=0.4\baselineskip]{subsection}
+
+  \setkomafont{section}{\large\bfseries}
+  \setkomafont{subsection}{\normalsize\bfseries}
+  \setkomafont{subsubsection}{\normalsize\bfseries}
+\fi
+
+% Tabellen-Styling (makecell vor accessibility laden)
+\RequirePackage{booktabs,longtable,tabularx,array,makecell}
+% makecell wird in packages.tex vor accessibility geladen
+\setlength{\arrayrulewidth}{0.6pt}
+\renewcommand{\arraystretch}{1.25}
+
+% Bessere Zeilenumbrüche in Tabellen
+\setlength{\emergencystretch}{3em}
+\tolerance=1000
+\hbadness=1000
+
+% Listen-Konfiguration
+\RequirePackage{enumitem}
+\setlist{nosep,leftmargin=2.2em}
+
+% Professionelle Typografie: Sans-Serif für Überschriften
+\AccessibleSwitch{
+  % Accessible: Captions manuell formatieren
+  \RequirePackage{caption}
+  \captionsetup{font={sf,small},labelfont=bf}
+}{
+  % Standard: KOMA addtokomafont
+  \addtokomafont{sectioning}{\sffamily}
+  \addtokomafont{caption}{\sffamily}
+  \addtokomafont{captionlabel}{\sffamily}
+}
+
+% Einheitliche Sektionsabstände (bereits oben definiert)
+\ifaccessible
+  % Accessible: bereits mit titlesec gemacht
+\else
+  % Standard: KOMA RedeclareSectionCommand
+  \RedeclareSectionCommand[beforeskip=1.2\baselineskip, afterskip=0.6\baselineskip]{section}
+  \RedeclareSectionCommand[beforeskip=1.0\baselineskip, afterskip=0.4\baselineskip]{subsection}
+  \RedeclareSectionCommand[beforeskip=0.8\baselineskip, afterskip=0.3\baselineskip]{subsubsection}
+\fi
+
+% Kopf-/Fußzeile (KOMA)
+\AccessibleSwitch{
+  % Accessible: fancyhdr bereits in main.tex geladen
+}{
+  % Standard: KOMA scrlayer-scrpage
+  \RequirePackage{scrlayer-scrpage}
+  \clearpairofpagestyles
+  \ohead{\leftmark}
+  \cfoot{\thepage}
+}
+
+% Hyperlinks (wird nach Metadaten gesetzt)
+\RequirePackage{hyperref}
+\RequirePackage[nameinlink,noabbrev,capitalize]{cleveref}
+
+% Deutsche cleveref-Bezeichnungen
+\crefname{section}{Abschnitt}{Abschnitte}
+\Crefname{section}{Abschnitt}{Abschnitte}
+\crefname{subsection}{Abschnitt}{Abschnitte}
+\Crefname{subsection}{Abschnitt}{Abschnitte}
+
+\AtBeginDocument{%
+  \hypersetup{
+    pdftitle={IT-Sicherheitsdokumentation - \PraxisName},
+    pdfauthor={\PraxisInhaberin},
+    pdfsubject={IT-Sicherheitskonzept für Arztpraxis},
+    pdfkeywords={IT-Sicherheit, Arztpraxis, Datenschutz, BSI, KBV}
+  }%
+}

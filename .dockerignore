@@ -1,0 +1,30 @@
+# Git
+.git
+.gitignore
+
+# Documentation
+README.md
+*.md
+
+# IDE/Editor files
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# LaTeX build artifacts (will be generated)
+tex/*.aux
+tex/*.fdb_latexmk
+tex/*.fls
+tex/*.log
+tex/*.out
+tex/*.synctex.gz
+tex/*.toc
+
+# Docker
+docker-compose.yml
+Dockerfile*

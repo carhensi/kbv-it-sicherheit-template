@@ -1,0 +1,39 @@
+\begin{landscape}
+  \section{Anhang – Vollständige Geräteliste}
+  \label{sec:geraeteliste}
+  \setlength{\extrarowheight}{0.0ex}
+  \scriptsize
+  \begin{adjustbox}{max width=\linewidth}
+    \csvreader[
+      tabular=|P{1.6cm}|P{2.8cm}|P{3.0cm}|P{1.5cm}|P{1.6cm}|P{1.2cm}|P{1.3cm}|P{1.3cm}|P{1.4cm}|P{1.0cm}|P{3.5cm}|,
+      table head=\hline
+      \rowcolor{gray!20}\textbf{Kate\-gorie} &
+      \Label{Name} &
+      \textbf{Seriennummer} &
+      \textbf{Verschlüs\-selung} &
+      \textbf{Stand\-ort} &
+      \textbf{Eigen\-tum} &
+      \textbf{Nutzung} &
+      \textbf{Backup} &
+      \textbf{Verant\-wortlich} &
+      \textbf{EOL} &
+      \textbf{Bemerkungen}\\\hline,
+      late after line=\\\hline,
+      separator=comma
+    ]{assets/geraeteliste.csv}{%
+      Kategorie=\Kategorie,
+      Name=\Name,
+      Seriennummer=\Seriennummer,
+      Verschluesselung=\Verschluesselung,
+      Standort=\Standort,
+      Eigentum=\Eigentum,
+      Nutzung=\Nutzung,
+      Backup=\Backup,
+      Verantwortlich=\Verantwortlich,
+      EOL=\EOL,
+      Bemerkungen=\Bemerkungen
+    }{%
+      \Kategorie & \Name & \Seriennummer & \Verschluesselung & \Standort & \Eigentum & \Nutzung & \Backup & \Verantwortlich & \EOL & \Bemerkungen
+    }
+  \end{adjustbox}
+\end{landscape}

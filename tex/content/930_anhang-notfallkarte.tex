@@ -1,0 +1,110 @@
+\section*{} % Keine sichtbare Überschrift
+\stepcounter{section} % Zähler erhöhen für korrekte Nummerierung
+\addcontentsline{toc}{section}{\protect\numberline{\thesection}Anhang – IT-Notfall-Checkkarte}
+\label{sec:anhang-notfallkarte}
+
+\ifaccessible
+  % Accessible: Einfache Struktur ohne minipage/tikzpicture
+  \textbf{\Large IT-Notfall-Checkkarte}\\
+  \textbf{Praxis für Psychotherapie \PraxisInhaberin}
+
+  \subsection*{STUFE 1: Sofortmaßnahmen}
+  \begin{enumerate}
+    \item Ruhe bewahren -- Keine Panik
+    \item System isolieren -- Netzwerk trennen
+    \item Nichts löschen -- Spuren erhalten
+    \item IT-Ansprechpartner kontaktieren
+  \end{enumerate}
+
+  \subsection*{STUFE 2: Dokumentation}
+  Was, Wann, Wie notieren\\
+  → Siehe Incident-Management (\cref{sec:notfall})
+
+  \subsection*{STUFE 3: DSGVO-Meldung (72h)}
+  Nur bei Risiko für Betroffene:\\
+  Patientendaten unbefugt zugänglich/verloren
+
+  Aufsichtsbehörde LfD\\
+  \DatenschutzbehoerdeAdresse\\
+  \BoxEmpty{} Art der Verletzung beschreiben\\
+  \BoxEmpty{} Betroffene Daten/Personen angeben\\
+  \BoxEmpty{} Bei hohem Risiko: Betroffene informieren
+
+  \subsection*{Notfallkontakte}
+  SOFORT ANRUFEN:\\
+  IT: \ITAnsprechpartner\\
+  Mobil: \ITAnsprechpartnerTelefon\\
+  E-Mail: \href{mailto:\ITAnsprechpartnerMail}{\ITAnsprechpartnerMail}
+
+  Praxis: \PraxisInhaberin\\
+  Tel: \PraxisTelefon
+
+  \subsection*{Weitere Kontakte}
+  \PVSName{} Support: \PVSSupportTel\\
+  SMC-B/eHBA: Herstellerportal
+
+  Diese Karte ausdrucken und griffbereit halten!
+\else
+  % Standard: Original mit minipage/tikzpicture
+  \begin{center}
+    \textbf{\Large IT-Notfall-Checkkarte}\\
+    \textbf{Praxis für Psychotherapie \PraxisInhaberin}
+  \end{center}
+
+  % Linke Spalte: Stufen-Ablauf
+  \begin{minipage}[t]{0.48\textwidth}
+
+    \subsection*{STUFE 1: Sofortmaßnahmen}
+    \begin{enumerate}
+      \item \textbf{Ruhe bewahren} – Keine Panik
+      \item \textbf{System isolieren} – Netzwerk trennen
+      \item \textbf{Nichts löschen} – Spuren erhalten
+      \item \textbf{IT-Ansprechpartner kontaktieren}
+    \end{enumerate}
+
+    \subsection*{STUFE 2: Dokumentation}
+    \textbf{Was, Wann, Wie notieren}\\
+    → Siehe Incident-Management (\cref{sec:notfall})
+
+    \subsection*{STUFE 3: DSGVO-Meldung (72h)}
+    \textbf{Nur bei Risiko für Betroffene:}\\
+    Patientendaten unbefugt zugänglich/verloren\\[0.2cm]
+    \textbf{Aufsichtsbehörde LfD}\\
+    \DatenschutzbehoerdeAdresse\\
+    \BoxEmpty{} Art der Verletzung beschreiben\\
+    \BoxEmpty{} Betroffene Daten/Personen angeben\\
+    \BoxEmpty{} Bei hohem Risiko: Betroffene informieren
+
+  \end{minipage}
+  \hfill
+  % Rechte Spalte: Kontakte & Support
+  \begin{minipage}[t]{0.48\textwidth}
+
+    \subsection*{Notfallkontakte}
+    \begin{tikzpicture}
+      \node[rectangle, draw=EmergencyBoxBorder, fill=EmergencyBoxFill, rounded corners=3pt,
+      text width=6cm, align=left, inner sep=0.4cm] {
+        \textbf{SOFORT ANRUFEN:}\\[0.1cm]
+        \textbf{IT:} \ITAnsprechpartner\\
+        \textbf{Mobil:} \ITAnsprechpartnerTelefon\\
+        \textbf{E-Mail:} \href{mailto:\ITAnsprechpartnerMail}{\ITAnsprechpartnerMail}\\[0.2cm]
+        \textbf{Praxis:} \PraxisInhaberin\\
+        \textbf{Tel:} \PraxisTelefon\\[0.2cm]
+      };
+    \end{tikzpicture}
+
+    \subsection*{Weitere Kontakte}
+    \textbf{\PVSName{} Support:} \PVSSupport\\
+    \textbf{SMC-B/eHBA:} Herstellerportal
+
+  \end{minipage}
+
+  \begin{center}
+  \begin{tikzpicture}
+    \node[rectangle, draw=EmergencyBoxBorder, fill=EmergencyBoxFill, rounded corners=5pt,
+    text width=8cm, align=center, inner sep=0.5cm] {
+      \textbf{Diese Karte ausdrucken und griffbereit halten!}
+    };
+  \end{tikzpicture}
+  \end{center}
+\fi

@@ -1,0 +1,211 @@
+\section{Anhang – KBV-Compliance-Mapping}
+\label{sec:kbv-compliance}
+
+\subsection*{Zweck und Aufbau}
+
+Dieses Kapitel dokumentiert die Umsetzung und den Erfüllungsstatus der Anforderungen der
+IT-Sicherheitsrichtlinie nach §390 SGB V. Es dient als Nachweis gegenüber KBV-Prüfern
+und ermöglicht die schnelle Lokalisierung relevanter Dokumentationsstellen.
+
+\textbf{Aufbau:} Jede KBV-Anforderung wird mit Status und Verweis auf das entsprechende
+Kapitel dieser Dokumentation verknüpft. Dadurch ist bei Prüfungen sofort ersichtlich,
+wo die Umsetzung dokumentiert ist.
+
+\subsection*{Übersicht Anlage 1 (IT-Sicherheitsrichtlinie §390 SGB V)}
+
+\textit{Basis: KBV-Richtlinie v1.1 (gültig ab Oktober 2025)}
+
+\small
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.7cm}
+    >{\raggedright\arraybackslash}p{6.8cm} >{\centering\arraybackslash}p{1.2cm}
+  >{\raggedright\arraybackslash}p{4.3cm}}
+  \toprule
+  \textbf{Nr.} & \textbf{Anforderung} & \Label{Status} &
+  \textbf{Referenz/Kapitel} \\
+  \midrule  \ifaccessible\else\endfirsthead
+  \toprule
+  \textbf{Nr.} & \textbf{Anforderung} & \Label{Status} &
+  \textbf{Referenz/Kapitel} \\
+  \midrule  \endhead\fi
+
+  1 & Geregelte Einarbeitung neuer Mitarbeitender & + &~\ref{sec:personal} Personal
+  (dokumentiert für zukünftige Einstellungen) \\
+  2 & Geregelte Verfahrensweise beim Weggang von Mitarbeitenden & + &~\ref{sec:personal}
+  Personal (dokumentiert für zukünftige Einstellungen) \\
+  3 & Festlegung von Regelungen für den Einsatz von Fremdpersonal & +
+  &~\ref{sec:personal} Personal \\
+  4 & Vertraulichkeitsvereinbarungen für den Einsatz von Fremdpersonal & +
+  &~\ref{sec:anhang-verschwiegenheit} Verschwiegenheit extern \\
+  5 & Aufgaben und Zuständigkeiten von Mitarbeitenden & + &~\ref{sec:personal} Personal \\
+  6 & Qualifikation des Personals & + &~\ref{sec:personal} Personal \\
+  7 & Überprüfung der Vertrauenswürdigkeit von Mitarbeitenden & + &~\ref{sec:personal}
+  Personal (Einstellungsverfahren dokumentiert) \\
+  8 & Sensibilisierung der Praxisinhaberin für Informationssicherheit & +
+  &~\ref{sec:sensibilisierung} Sensibilisierung \\
+  9 & Einweisung des Personals in den sicheren Umgang mit IT & +
+  &~\ref{sec:sensibilisierung} Sensibilisierung \\
+  10 & Durchführung von Sensibilisierungen und Schulungen zur Informationssicherheit & +
+  &~\ref{sec:sensibilisierung} Sensibilisierung und Schulung \\
+  11 & Absicherung der Netzübergangspunkte & + &~\ref{sec:netzwerk} Netzwerksicherheit \\
+  12 & Dokumentation des Netzes & + &~\ref{sec:anhang-netzplan} Netzplan \\
+  13 & Grundlegende Authentisierung für den Netzmanagement-Zugriff & +
+  &~\ref{sec:netzwerk} Netzwerksicherheit \\
+  14 & Installation von Updates & + &~\ref{sec:patch} Patch-Management \\
+  15 & Verantwortlichkeit für Updates & + &~\ref{sec:patch} Patch-Management \\
+  16 & Identifizierung ausbleibender Updates & + &~\ref{sec:patch} Patch-Management \\
+  17 & Ausmusterung oder Separierung bei ausbleibenden Updates & + &~\ref{sec:patch}
+  Patch-Management \\
+  18 & Verhinderung der unautorisierten Nutzung von Rechner-Mikrofonen und Kameras & +
+  &~\ref{sec:endgeraete} Endgeräte-Sicherheit \\
+  19 & Abmelden nach Aufgabenerfüllung & + &~\ref{sec:endgeraete} Endgeräte-Sicherheit \\
+  20 & Einsatz von Viren-Schutzprogrammen & + &~\ref{sec:endgeraete} Endgeräte-Sicherheit \\
+  21 & Regelmäßige Datensicherung & + &~\ref{sec:datensicherung} Datensicherung \\
+  22 & Schutz der Datensicherung & + &~\ref{sec:datensicherung} Datensicherung \\
+  23 & Art der Datensicherung & + &~\ref{sec:datensicherung} Datensicherung \\
+  24 & Verantwortliche der Datensicherung & + &~\ref{sec:datensicherung} Datensicherung \\
+  25 & Test der Datensicherung & + &~\ref{sec:vorlage-restore-tests} Restore-Tests \\
+  26 & Der Zugriff auf Geräte und Software muss abgesichert werden & +
+  &~\ref{sec:endgeraete} Endgeräte-Sicherheit \\
+  27 & Konfiguration von Synchronisationsmechanismen (Windows) & -- &~\ref{sec:windows}
+  Windows-Endgeräte \\
+  28 & Datei- und Freigabeberechtigungen (Windows) & -- &~\ref{sec:windows} Windows-Endgeräte \\
+  29 & Datensparsamkeit (Windows) & -- &~\ref{sec:windows} Windows-Endgeräte \\
+  30 & Verwendung der SIM-Karten-PIN & + &~\ref{sec:mobile-geraete} Mobile Geräte \\
+  31 & Sichere Grundkonfiguration für mobile Geräte & + &~\ref{sec:mobile-geraete} Mobile Geräte \\
+  32 & Verwendung eines Zugriffschutzes & + &~\ref{sec:mobile-geraete} Mobile Geräte \\
+  33 & Datenschutz-Einstellungen & + &~\ref{sec:mobile-geraete} Mobile Geräte \\
+  34 & Sperrmaßnahmen bei Verlust eines Mobiltelefons & + &~\ref{sec:mobile-geraete}
+  Mobile Geräte \\
+  35 & Nutzung der Sicherheitsmechanismen von Mobiltelefonen & +
+  &~\ref{sec:mobile-geraete} Mobile Geräte \\
+  36 & Schutz vor Schadsoftware (Wechseldatenträger) & + &~\ref{sec:wechseldatentraeger}
+  Wechseldatenträger \\
+  37 & Angemessene Kennzeichnung der Datenträger beim Versand & n.a.
+  &~\ref{sec:wechseldatentraeger} Kein Versand, nur Online-Übertragung \\
+  38 & Sichere Versandart und Verpackung & n.a. &~\ref{sec:wechseldatentraeger} Wechseldatenträger \\
+  39 & Sicheres Löschen der Datenträger vor und nach der Verwendung & +
+  &~\ref{sec:wechseldatentraeger} Wechseldatenträger \\
+  40 & Sichere Konfiguration der E-Mail-Clients & + &~\ref{sec:kommunikation} E-Mail-Sicherheit \\
+  41 & Umgang mit Spam durch Benutzende & + &~\ref{sec:kommunikation} E-Mail-Sicherheit \\
+  42 & Sichere Apps nutzen & + &~\ref{sec:mobile-geraete} Mobile Apps \\
+  43 & Sichere Speicherung lokaler App-Daten & + &~\ref{sec:mobile-geraete} Mobile Apps \\
+  44 & Verhinderung von Datenabfluss & + &~\ref{sec:mobile-geraete} Mobile Apps \\
+  45 & Authentisierung bei Webanwendungen (Anbieter) & n.a. &~\ref{sec:kommunikation}
+  Website-Sicherheit (statische Seite) \\
+  46 & Schutz vertraulicher Daten (Anbieter) & n.a. &~\ref{sec:kommunikation} Website-Sicherheit \\
+  47 & Einsatz von Web Application Firewalls (Anbieter) & n.a. &~\ref{sec:kommunikation}
+  Website-Sicherheit \\
+  48 & Schutz vor unerlaubter automatisierter Nutzung (Anbieter) & n.a.
+  &~\ref{sec:kommunikation} Website-Sicherheit \\
+  49 & Kryptografische Sicherung vertraulicher Daten (Anwender) & + &~\ref{sec:internet}
+  Internet/Cloud \\
+  50 & Sicherheit von Cloud-Dienstleistern & + &~\ref{sec:internet} Internet/Cloud \\
+  \bottomrule
+\end{longtable}
+
+\subsection*{Übersicht Anlage 2 (Zusätzliche Anforderungen für mittlere Praxen) -
+freiwillig (nicht verpflichtend für Praxen $\leq$5)}
+
+\small
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.7cm}
+    >{\raggedright\arraybackslash}p{6.8cm} >{\centering\arraybackslash}p{1.2cm}
+  >{\raggedright\arraybackslash}p{4.3cm}}
+  \toprule
+  \textbf{Nr.} & \textbf{Anforderung} & \Label{Status} &
+  \textbf{Referenz/Kapitel} \\
+  \midrule  \ifaccessible\else\endfirsthead
+  \toprule
+  \textbf{Nr.} & \textbf{Anforderung} & \Label{Status} &
+  \textbf{Referenz/Kapitel} \\
+  \midrule  \endhead\fi
+
+  1 & Alarmierung und Logging: Wichtige Ereignisse auf Netzkomponenten automatisch an zentrales Management-System übermitteln & ± &~\ref{sec:netzwerk} \RouterKurz{}-Logging, macOS-Systemlogs, kein zentrales SIEM (Einzelpraxis-angemessen) \\
+  2 & Nutzung verschlüsselter Verbindungen (TLS): Kryptografische Algorithmen nach Stand der Technik verwenden & + &~\ref{sec:kommunikation} TLS 1.2+, HTTPS, S/MIME dokumentiert \\
+  3 & Restriktive Rechtevergabe: Rechte nach Need-to-know-Prinzip, regelmäßige Überprüfung & + &~\ref{sec:rechte-rollenmatrix} Rollenmatrix, Einzelpraxis-Berechtigungen dokumentiert \\
+  4 & Sichere zentrale Authentisierung in Windows-Netzen (Kerberos/SSO): Ausschließlich Kerberos für SSO & -- & Nicht anwendbar (macOS-Umgebung, kein Windows-Netz) \\
+  5 & Richtlinie für mobile Geräte: Verbindliche Richtlinie für Mitarbeitende zur Benutzung mobiler Geräte & + &~\ref{sec:anhang-mobile} Mobile-Geräte-Richtlinie mit Unterschrift \\
+  6 & Verwendung von Sprachassistenten: Nur bei zwingender Notwendigkeit, sonst deaktivieren & + &~\ref{sec:mobile-geraete} Siri deaktiviert, Hey Siri deaktiviert \\
+  7 & Sicherheitsrichtlinien für Mobiltelefon-Nutzung: Nutzungs- und Sicherheitsrichtlinie erstellen & + &~\ref{sec:mobile-geraete} Mobiltelefon-Richtlinie dokumentiert \\
+  8 & Sichere Datenübertragung über Mobiltelefone: Regelung welche Daten übertragen werden dürfen, Verschlüsselung & + &~\ref{sec:mobile-geraete} Nur organisatorische Daten, S/MIME-Verschlüsselung \\
+  9 & Regelung zur Mitnahme von Wechseldatenträgern: Schriftliche Regeln für Transport außer Haus & + &~\ref{sec:wechseldatentraeger} Wechseldatenträger-Richtlinie mit Unterschrift \\
+  10 & Minimierung und Kontrolle von App-Berechtigungen: App-Berechtigungen auf notwendiges Minimum einschränken & + &~\ref{sec:mdm} App-Berechtigungen restriktiv konfiguriert \\
+  \bottomrule
+\end{longtable}
+
+\subsection*{Übersicht Anlage 5 (TI-Anforderungen)}
+
+\small
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.7cm}
+    >{\raggedright\arraybackslash}p{6.8cm} >{\centering\arraybackslash}p{1.2cm}
+  >{\raggedright\arraybackslash}p{4.3cm}}
+  \toprule
+  \textbf{Nr.} & \textbf{Anforderung} & \Label{Status} &
+  \textbf{Referenz/Kapitel} \\
+  \midrule
+  \ifaccessible\else\endfirsthead
+  \toprule
+  \textbf{Nr.} & \textbf{Anforderung} & \Label{Status} &
+  \textbf{Referenz/Kapitel} \\
+  \midrule
+  \endhead\fi
+
+  1 & Planung und Durchführung der Installation nach gematik-Vorgaben & + &~\ref{sec:ti}
+  TI-Komponenten, \PVSName{}-Gateway nach Herstellervorgaben \\
+  2 & Betrieb der TI-Komponenten & + &~\ref{sec:ti} TI-Betrieb dokumentiert \\
+  3 & Schutz vor unberechtigtem physischem Zugriff & + &~\ref{sec:ti} SMC-B sicher
+  aufbewahrt, Terminal am Praxisstandort \\
+  4 & Internet-Verbindung parallel zur TI-Anbindung absichern & + &~\ref{sec:netzwerk}
+  \RouterKurz{} Firewall, Netzwerksicherheit \\
+  5 & Verbindung zu gehostetes TI-Gateway absichern (VPN) & + &~\ref{sec:ti}
+  \PVSName{}-Gateway mit sicherer Verbindung \\
+  6 & Beachtung der Vorgaben des TI-Gateway-Anbieters & + &~\ref{sec:ti} \PVSName{}-Vorgaben befolgt \\
+  7 & Geschützte Kommunikation mit TI-Gateway (Zertifikate) & + &~\ref{sec:ti}
+  Authentisierung über \PVSName{}-System \\
+  8 & Zeitnahes Installieren verfügbarer Aktualisierungen & + &~\ref{sec:ti} Updates
+  zeitnah eingespielt \\
+  9 & Sicheres Aufbewahren von Administrationsdaten & + &~\ref{sec:ti}
+  Administrationsdaten sicher aufbewahrt \\
+  \bottomrule
+\end{longtable}
+
+\subsection*{Compliance-Status}
+
+\Legende + = Erfüllt, ± = Teilweise erfüllt, × = Nicht erfüllt, n.a. = Nicht anwendbar
+
+\textbf{Anlage 1:} 41 von 41 anwendbaren Anforderungen erfüllt (\textbf{100\% Compliance})
+\begin{itemize}
+  \item 41 Anforderungen: + Vollständig erfüllt
+  \item 9 Anforderungen: n.a. Nicht anwendbar (Kein Versand: Nr. 37,38; Windows: Nr.
+    27–29; Webdienst-Anbieter: Nr. 45–48)
+\end{itemize}
+
+\textbf{Anlage 2:} 7 von 8 anwendbaren Anforderungen vollständig erfüllt (\textbf{88\%
+Compliance}), 1 teilweise erfüllt (\textbf{12\%})
+\begin{itemize}
+  \item 7 Anforderungen: + Vollständig erfüllt (Nr. 2,3,5,6,7,8,9,10)
+  \item 1 Anforderung: ± Teilweise erfüllt (Nr. 1 - Logging vorhanden, kein zentrales SIEM)
+  \item 1 Anforderung: -- Nicht anwendbar (Nr. 4 - macOS-Umgebung, kein Windows-Netz)
+\end{itemize}
+
+\textit{Hinweis: Für Praxen mit weniger als 6 Personen sind gemäß KBV die Anforderungen
+  aus Anlage 1 und Anlage 5 umzusetzen (A.IV.1); Anlage 2 ist nicht verpflichtend, kann
+aber freiwillig dokumentiert werden.}
+
+\textbf{Anlage 5 (TI):} 9 von 9 Anforderungen erfüllt (\textbf{100\% Compliance})
+\begin{itemize}
+  \item 9 Anforderungen: + Vollständig erfüllt (Installation, Betrieb, Schutz, Updates,
+    Administrationsdaten)
+\end{itemize}
+
+\textbf{Gesamtstatus:} Alle verpflichtenden Anforderungen gemäß KBV-Richtlinie v1.1
+erfüllt (Anlage 1: 41 + Anlage 5: 9 = 50). Zusätzlich wurden Anlage-2-Anforderungen
+(freiwillig) 7/8 vollständig und 1/8 teilweise umgesetzt. (Rechtsgrundlage: A.IV.1; neue
+Pflichten ab 01.10.2025).
+
+\textbf{KI-Software Compliance:} \KIToolName{} erfüllt die KBV-Anforderungen für KI-Software
+gemäß KBV-Leitfaden \enquote{Praxiswissen KI} (S. 5): C5-Zertifizierung durch das BSI liegt vor.
+Nachweis: \url{\KIToolSicherheitURL}
+
+\normalsize
+\vspace{1cm}
+% \textit{Stand: \today}

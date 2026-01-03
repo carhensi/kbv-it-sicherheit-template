@@ -1,0 +1,123 @@
+# ChkTeX Configuration for German Professional Documents
+# Optimized for IT security documentation
+
+# Disable warnings that are not relevant for German documents
+CmdLine
+{
+    # Disable these warnings:
+    -n 1    # Command terminated with space
+    -n 8    # Wrong length of dash
+    -n 13   # Intersentence spacing
+    -n 36   # You should use \ldots to achieve an ellipsis
+    -n 44   # User Regex matches
+    -n 46   # Use of \/ before punctuation
+}
+
+# German-specific settings
+QuoteStyle
+{
+    Babel      # Use babel quote style
+}
+
+# Abbreviations commonly used in German IT documents
+Abbrev
+{
+    # German abbreviations
+    z.B.    # zum Beispiel
+    d.h.    # das heißt
+    u.a.    # unter anderem
+    etc.    # et cetera
+    bzw.    # beziehungsweise
+    ggf.    # gegebenenfalls
+    
+    # IT/Legal abbreviations
+    IT      # Information Technology
+    SGB     # Sozialgesetzbuch
+    KVB     # Kassenärztliche Vereinigung
+    DSGVO   # Datenschutz-Grundverordnung
+    TI      # Telematikinfrastruktur
+    VPN     # Virtual Private Network
+    TLS     # Transport Layer Security
+    WLAN    # Wireless Local Area Network
+    USB     # Universal Serial Bus
+    PDF     # Portable Document Format
+    CSV     # Comma Separated Values
+    URL     # Uniform Resource Locator
+    PIN     # Personal Identification Number
+    SMS     # Short Message Service
+    App     # Application
+    iOS     # iPhone Operating System
+    macOS   # Mac Operating System
+    HTTPS   # Hypertext Transfer Protocol Secure
+    DNS     # Domain Name System
+    IP      # Internet Protocol
+    SMTP    # Simple Mail Transfer Protocol
+    IMAP    # Internet Message Access Protocol
+    POP3    # Post Office Protocol 3
+}
+
+# Silent warnings for common LaTeX packages used in German documents
+Silent
+{
+    \usepackage{babel}
+    \usepackage{ngerman}
+    \usepackage{csquotes}
+    \usepackage{microtype}
+    \usepackage{hyperref}
+    \usepackage{geometry}
+    \usepackage{enumitem}
+    \usepackage{booktabs}
+    \usepackage{longtable}
+    \usepackage{tabularx}
+    \usepackage{graphicx}
+    \usepackage{tikz}
+    \usepackage{xcolor}
+    \usepackage{listings}
+    \usepackage{verbatim}
+    \usepackage{adjustbox}
+    \usepackage{pdflscape}
+    \usepackage{lastpage}
+    \usepackage{scrlayer-scrpage}
+    \usepackage{colortbl}
+    \usepackage{csvsimple}
+    \usepackage{pifont}
+    \usepackage{amssymb}
+    \usepackage{xspace}
+}
+
+# Don't warn about these commands in German context
+UserWarn
+{
+    # German-specific commands that are OK
+    \enquote     # csquotes command
+    \textbf      # Bold text is OK in headings
+    \textit      # Italic text is OK for emphasis
+    \emph        # Emphasis is OK
+    \url         # URLs are OK
+    \href        # Hyperlinks are OK
+    \ref         # References are OK
+    \label       # Labels are OK
+    \cite        # Citations are OK (if we had them)
+    \footnote    # Footnotes are OK
+    \newpage     # Page breaks are sometimes necessary
+    \clearpage   # Page clearing is OK
+    \pagebreak   # Page breaks are OK in professional docs
+    \newline     # Line breaks are OK
+    \\           # Line breaks are OK
+    \hline       # Table lines are OK
+    \toprule     # Booktabs rules are OK
+    \midrule     # Booktabs rules are OK
+    \bottomrule  # Booktabs rules are OK
+}
+
+# Increase line length limit for modern documents
+LineLenLimit { 120 }
+
+# Don't be too strict about spacing
+TabSize { 2 }
+
+# Output format
+MsgFormat
+{
+    %f:%l:%c: %m
+}

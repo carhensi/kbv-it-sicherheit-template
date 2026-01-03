@@ -1,0 +1,81 @@
+\section{Anhang – Auftragsverarbeitungsverträge (AVV-Register)}
+\label{sec:avv-register}
+
+\subsection*{Auftragsverarbeitungsverträge (AVV)}
+
+\textbf{Stand:} \today
+
+\vspace{1em}
+
+\begin{longtable}{>{\raggedright\arraybackslash}p{3.8cm} >{\raggedright\arraybackslash}p{4.2cm} >{\raggedright\arraybackslash}p{3.2cm} >{\raggedright\arraybackslash}p{2.3cm}}
+  \toprule
+  \textbf{Dienstleister} & \textbf{Verarbeitungs\-zweck} & \Label{Status} &
+  \Label{Datum} \\
+  \midrule
+
+  \PVSHersteller{} & PVS/Behandlung & \textcolor{StatusGreen}{vorhanden} & 01.09.2025 \\
+
+  \HostingAnbieter{} & Website-Hosting & \textcolor{StatusGreen}{vorhanden, C5-Testat geprüft \DocumentDate} & 01.09.2025 \\
+
+  \EmailAnbieterFirma{} & E-Mail (organisatorisch, keine Gesundheitsdaten) &
+  \textcolor{StatusGreen}{vorhanden} & 30.11.2025 \\
+
+  Apple Inc. (Business Manager) & MDM/Backup (verschlüsselte iCloud-Backups, keine Gesundheitsdaten) &
+  \textcolor{StatusGreen}{vorhanden} & 01.09.2025 \\
+
+  \MDMTool{} Software LLC (\MDMTool{}) & Mobile Device Management & \textcolor{StatusGreen}{vorhanden} & 01.09.2025 \\
+
+  \PatKomAnbieter{} & Sichere~Patienten-Kommunikation & \textcolor{StatusGreen}{vorhanden} & 01.09.2025 \\
+
+  \KIToolAnbieter{} & KI-gestützte Sitzungsdokumentation & \textcolor{StatusGreen}{vorhanden, C5-Testat geprüft \DocumentDate} & 01.09.2025 \\
+
+  \bottomrule
+\end{longtable}
+
+\vspace{1em}
+
+\Legende
+\begin{itemize}
+  \item \textcolor{StatusGreen}{vorhanden} = AVV vorhanden und aktuell
+  \item \textcolor{StatusOrange}{geplant} = AVV geplant/in Bearbeitung
+  \item \textcolor{StatusRed}{zu prüfen} = Status zu prüfen
+  \item \textcolor{StatusGray}{nicht erforderlich} = Kein AVV erforderlich/möglich
+  \item \textcolor{StatusGray}{nicht verfügbar} = AVV derzeit nicht verfügbar
+\end{itemize}
+
+\vspace{1em}
+
+\textbf{Apple Inc. – Detaillierter Status und Monitoring:}
+
+\textbf{Aktuelle Situation:} Apple Business Manager Customer Data Processing Addendum
+ist verfügbar und wurde aktiviert. Apple Business Manager wird ausschließlich für
+Mobile Device Management (MDM) und verschlüsselte iCloud-Backups genutzt.
+Gesundheitsdaten werden grundsätzlich nicht über Apple-Dienste verarbeitet.
+
+\textbf{Wichtig:} E-Mail-Kommunikation erfolgt ausschließlich über \EmailAnbieter{}
+(siehe Kap.~\ref{sec:kommunikation}). Kalender wird über \EmailAnbieter{} oder lokal verwaltet.
+
+\textbf{Halbjährliches Monitoring:}
+\begin{itemize}
+  \item \textbf{AVV-Compliance} - Regelmäßige Prüfung der Vertragsbedingungen
+  \item \textbf{Strikte Datentrennung} - Keine Gesundheitsdaten in Apple-Diensten
+  \item \textbf{Bewertung} bei neuen Apple Business-Optionen für Gesundheitswesen
+  \item \textbf{Nächste Prüfungen:} März 2026, September 2026
+\end{itemize}
+
+\textbf{Rechtliche Einordnung:} Nutzung erfolgt auf Basis berechtigter Interessen
+(Art. 6 Abs. 1 lit. f DSGVO) für organisatorische Zwecke ohne Gesundheitsdatenbezug.
+Gesundheitskommunikation erfolgt ausschließlich über \PatKomTool{} (mit AVV).
+
+\subsection*{Hinweise zur Pflege}
+
+\textbf{Regelmäßige Prüfung:} Dieses Register wird quartalsweise auf Aktualität geprüft
+und bei Änderungen der Dienstleister oder Verträge aktualisiert. \textbf{AVV-Verträge
+werden jährlich überprüft} (siehe TOMs, Maßnahme zur Auftragsverarbeitung).
+
+\Dokumentation Die vollständigen AVV-Verträge werden digital archiviert
+(\PasswortManager{}/sicherer Ordner) und sind bei Prüfungen elektronisch oder als Ausdruck
+vorzulegen.
+
+\textbf{Verantwortlichkeit:} Die \PraxisInhaberBezeichnung{} ist für die Vollständigkeit und
+Aktualität der AVVs verantwortlich.

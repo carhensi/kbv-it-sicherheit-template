@@ -1,0 +1,78 @@
+\section{Vorlage – Breach-Register (DSGVO Art. 33)}
+\label{sec:vorlage-breach-register}
+
+\Hinweis Template zur Dokumentation aller Datenschutzvorfälle mit 72h-Bewertung,
+Meldeentscheidung und Maßnahmen. Nachweise werden in der Arbeitsmappe abgelegt. 10 Jahre Aufbewahrung.
+
+%% Präambel - definiere nur wenn nicht schon vorhanden
+\providecommand{\qsize}{1.05ex}
+\renewcommand{\qsize}{1.05ex}
+\providecommand{\q}{\fbox{\rule{0pt}{\qsize}\rule{\qsize}{0pt}}}
+\renewcommand{\q}{\fbox{\rule{0pt}{\qsize}\rule{\qsize}{0pt}}}
+
+{%
+\renewcommand{\arraystretch}{1.1}
+\setlength{\tabcolsep}{4pt}
+\footnotesize
+
+\begin{longtable}{p{0.28\textwidth} p{0.68\textwidth}}
+\toprule
+\AccessibleTableHeader{Breach-Protokoll}{}
+\midrule
+\textbf{ID / Ticket} & \\[0.2cm]
+\textbf{T0 (Entdeckung)} & Datum \FormField[2.5cm] \quad Uhrzeit \FormField[2cm] \\[0.2cm]
+\textbf{Meldende Person} & Name \FormField[4cm] Kontakt \FormField[3cm] \\[0.2cm]
+\textbf{Kurzbeschreibung} & Was ist passiert? Welche Systeme/Prozesse betroffen? \\
+& \FormField[8cm] \\
+& \FormField[8cm] \\[0.2cm]
+\textbf{Datenarten / Umfang} & Kategorien (z.\,B. Gesundheitsdaten, Kontakt), \# betroffene Personen \\
+& \FormField[8cm] \\[0.2cm]
+\textbf{CIA-Auswirkung} & \q~Vertraulichkeit \q~Integrität \q~Verfügbarkeit \\
+& Bewertung: \q~niedrig \q~mittel \q~hoch \\[0.2cm]
+\textbf{Sofortmaßnahmen} & Eindämmung, Trennung vom Netz, Passwortrücksetzungen \\
+& \FormField[8cm] \\
+& \FormField[8cm] \\[0.2cm]
+\textbf{72h-Timer} & Start: T0 \quad Deadline: T0 + 72h \\
+& Zwischenstatus: \FormField[4cm] \\[0.2cm]
+\textbf{Risikobewertung} & \q~gering \q~mittel \q~hoch \\
+& Begründung: \FormField[5cm] \\[0.2cm]
+\textbf{Meldeentscheidung} & \textbf{LfD melden?} \q~Ja \q~Nein \\
+& Begründung: \FormField[5cm] \\
+& \textbf{Betroffene informieren?} \q~Ja \q~Nein \\[0.2cm]
+\textbf{Meldungen} & LfD: Datum \FormField[2.5cm] Uhrzeit \FormField[2cm] \\
+& Aktenzeichen: \FormField[4cm] \\
+& Betroffene: Datum \FormField[2.5cm] Art: \q~Brief \q~E-Mail \\[0.2cm]
+\textbf{Abschluss-} & Patches, Key-Rotation, Härtung, Wiederherstellung \\
+\textbf{maßnahmen} & \FormField[8cm] \\
+& \FormField[8cm] \\[0.2cm]
+\textbf{Erkenntnisse} & Prozess-/Technik-Anpassungen, Schulungsbedarf \\
+& \FormField[8cm] \\
+& \FormField[8cm] \\[0.2cm]
+\textbf{Verantwortlich} & Name: \FormField[4cm] Funktion: \FormField[2.5cm] \\
+\textbf{Freigabe} & Datum: \FormField[2.5cm] Unterschrift: \FormField[3.5cm] \\
+\bottomrule
+\end{longtable}
+
+}% Ende der footnotesize-Gruppe
+
+\textbf{Anleitung}
+
+\textbf{Sofortmaßnahmen bei Verdacht:}
+\begin{itemize}
+  \item[\q] Vorfall dokumentieren (Zeitpunkt, Umstände, Beweise sichern)
+  \item[\q] Schadensbegrenzung einleiten (System isolieren, Zugriffe sperren)
+  \item[\q] IT-Ansprechpartner informieren (siehe IT-Notfallkarte)
+  \item[\q] 72h-Timer starten und Risikobewertung durchführen
+\end{itemize}
+
+\textbf{Meldepflicht \Datenschutzbehoerde:}
+\begin{itemize}
+  \item \textbf{Immer melden:} Wenn Risiko für Rechte und Freiheiten der Betroffenen
+  \item \textbf{Kontakt:} \DatenschutzbehoerdeAdresse
+  \item \textbf{Frist:} 72 Stunden nach Kenntniserlangung
+  \item \textbf{Formular:} Online-Meldeformular auf \DatenschutzbehoerdeURL{}
+\end{itemize}
+
+\BestandteilZehnJahre
+
+\Legende \fbox{\cmark} = Erledigt, \fbox{\xmark} = Fehler aufgetreten, \q = Noch nicht durchgeführt

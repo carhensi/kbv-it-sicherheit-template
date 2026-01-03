@@ -1,0 +1,70 @@
+\section{Vorlage – Betroffenenrechte (Art. 12--23 DSGVO)}
+\label{sec:vorlage-betroffenenrechte}
+
+\Hinweis Template zur strukturierten Bearbeitung von Betroffenenanfragen
+nach DSGVO. Frist: 1 Monat, max. +2 Monate bei Komplexität. 10 Jahre Aufbewahrung.
+
+%% Präambel - definiere nur wenn nicht schon vorhanden
+\providecommand{\qsize}{1.05ex}
+\renewcommand{\qsize}{1.05ex}
+\providecommand{\q}{\fbox{\rule{0pt}{\qsize}\rule{\qsize}{0pt}}}
+\renewcommand{\q}{\fbox{\rule{0pt}{\qsize}\rule{\qsize}{0pt}}}
+
+{%
+\renewcommand{\arraystretch}{1.0}
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+
+\begin{longtable}{p{0.32\textwidth} p{0.64\textwidth}}
+\toprule
+\AccessibleTableHeader{Betroffenenanfrage-Protokoll}{}
+\midrule
+\textbf{Eingangsdatum} & \FormField[3cm] \quad \textbf{Kanal:} \q~Brief \q~E-Mail \q~Persönlich \\[0.15cm]
+\textbf{Antragsteller/in} & Name: \FormField[5cm] \\
+& Adresse: \FormField[5cm] \\[0.15cm]
+\textbf{Identitätsprüfung} & \q~Geburtsdatum \q~Adresse \q~Weitere: \FormField[3cm] \\
+& \q~Identität bestätigt \q~Nachfrage erforderlich \\[0.15cm]
+\textbf{Art der Anfrage} & \q~Auskunft (Art. 15) \q~Berichtigung (Art. 16) \\
+& \q~Löschung (Art. 17) \q~Einschränkung (Art. 18) \\
+& \q~Datenübertragbarkeit (Art. 20) \q~Widerspruch (Art. 21) \\[0.15cm]
+\textbf{Beschreibung} & Konkrete Anfrage/gewünschte Maßnahme: \\
+& \FormField[6cm] \\
+& \FormField[6cm] \\[0.15cm]
+\textbf{Fristberechnung} & Eingang: \FormField[2.5cm] Antwortfrist: \FormField[2.5cm] \\
+& \q~Fristverlängerung (+2 Mon.) Neue Frist: \FormField[2.5cm] \\[0.15cm]
+\textbf{Datenbestandsprüfung} & \q~PVS/\PVSName{} \q~E-Mail-Archive \q~Papierakten \q~Backups \\
+& \q~Weitere Systeme: \FormField[4cm] \\[0.15cm]
+\textbf{Ergebnis} & \q~Vollständig erfüllt \q~Teilweise erfüllt \\
+& \q~Begründet abgelehnt \q~Nicht möglich \\
+& Begründung: \FormField[5cm] \\[0.15cm]
+\textbf{Antwort versendet} & Datum: \FormField[2.5cm] \q~Brief \q~E-Mail \\
+& \q~Datenauskunft \q~Bestätigung \q~Ablehnung \q~Rechtsverweis \\[0.15cm]
+\textbf{Nachweise/Anlagen} & \q~Kopie Anfrage \q~Kopie Antwort \q~Datenauskunft \\
+& \q~Identitätsprüfung Ablageort: \FormField[4cm] \\[0.15cm]
+\textbf{Bearbeitung} & Verantwortlich: \FormField[3cm] Datum: \FormField[2cm] \\
+& Unterschrift: \FormField[4cm] \\
+\bottomrule
+\end{longtable}
+
+}% Ende der footnotesize-Gruppe
+
+\textbf{Rechtliche Grundlagen:}
+
+\textbf{Bearbeitungsfristen:}
+\begin{itemize}
+  \item \textbf{Regelfall:} 1 Monat • \textbf{Komplexe Fälle:} +2 Monate • \textbf{Identitätszweifel:} Frist nach Klärung
+\end{itemize}
+
+\textbf{Häufige Anfragen:}
+\begin{itemize}
+  \item \textbf{Art. 15:} Auskunft • \textbf{Art. 16:} Berichtigung • \textbf{Art. 17:} Löschung • \textbf{Art. 21:} Widerspruch
+\end{itemize}
+
+\textbf{Ablehnungsgründe:}
+\begin{itemize}
+  \item Aufbewahrungspflicht (§ 630f BGB - 10 Jahre) • Berechtigte Interessen • Identität unklar
+\end{itemize}
+
+\BestandteilZehnJahre
+
+\Legende \fbox{\cmark} = Erledigt, \fbox{\xmark} = Fehler aufgetreten, \q = Noch nicht durchgeführt

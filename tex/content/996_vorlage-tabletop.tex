@@ -1,0 +1,70 @@
+\section{Vorlage – Tabletop-Übung (Notfallsimulation)}
+\label{sec:vorlage-tabletop}
+
+\Hinweis Template für jährliche Notfall-Tabletop-Übungen zur Überprüfung
+der Business-Continuity-Prozesse. 10 Jahre Aufbewahrung.
+
+%% Präambel - definiere nur wenn nicht schon vorhanden
+\providecommand{\qsize}{1.05ex}
+\renewcommand{\qsize}{1.05ex}
+\providecommand{\q}{\fbox{\rule{0pt}{\qsize}\rule{\qsize}{0pt}}}
+\renewcommand{\q}{\fbox{\rule{0pt}{\qsize}\rule{\qsize}{0pt}}}
+
+{%
+\renewcommand{\arraystretch}{1.0}
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+
+\begin{longtable}{p{0.30\textwidth} p{0.66\textwidth}}
+\toprule
+\AccessibleTableHeader{Tabletop-Übung Protokoll}{}
+\midrule
+\textbf{Datum / Uhrzeit} & \FormField[4cm] \quad Dauer: \FormField[2cm] Min \\[0.15cm]
+\textbf{Teilnehmende} & \FormField[6cm] \\
+& \FormField[6cm] \\[0.15cm]
+\textbf{Szenario} & \q~Ransomware \q~Geräteverlust \q~Netzwerkausfall \q~Datenschutzvorfall \\
+& \q~Sonstiges: \FormField[4cm] \\[0.15cm]
+\textbf{Szenario-Details} & Beschreibung der simulierten Situation: \\
+& \FormField[6cm] \\
+& \FormField[6cm] \\[0.15cm]
+\textbf{Rollenverteilung} & Incident Commander: \FormField[3cm] \\
+& IT-Ansprechpartner: \FormField[3cm] \\
+& Weitere Rollen: \FormField[3cm] \\[0.15cm]
+\textbf{Durchgeführte Maßnahmen} & \q~Sofortmaßnahmen \q~Eskalationswege \q~Kommunikation \\
+& \q~Wiederherstellung \q~Dokumentation \\[0.15cm]
+\textbf{Erkenntnisse} & Was lief gut? \FormField[5cm] \\
+& Was war unklar/problematisch? \FormField[4cm] \\[0.15cm]
+\textbf{Identifizierte Lücken} & Prozess-Lücken: \FormField[4cm] \\
+& Schulungsbedarf: \FormField[4cm] \\
+& Technische Verbesserungen: \FormField[4cm] \\[0.15cm]
+\textbf{Maßnahmen} & 1. \FormField[4cm] bis \FormField[1.5cm] \\
+& 2. \FormField[4cm] bis \FormField[1.5cm] \\
+& 3. \FormField[4cm] bis \FormField[1.5cm] \\[0.15cm]
+\textbf{Nächste Übung} & Geplant für: \FormField[3cm] Fokus: \FormField[3cm] \\[0.15cm]
+\textbf{Freigabe} & Übungsleiter: \FormField[3cm] Datum: \FormField[2cm] \\
+& Unterschrift: \FormField[4cm] \\
+\bottomrule
+\end{longtable}
+
+}% Ende der footnotesize-Gruppe
+
+\textbf{Typische Szenarien:}
+
+\textbf{Ransomware-Angriff:}
+\begin{itemize}
+  \item Verschlüsselung der Praxis-IT • Fokus: Isolation, Backup-Wiederherstellung, Meldung
+\end{itemize}
+
+\textbf{Geräteverlust/Diebstahl:}
+\begin{itemize}
+  \item MacBook mit Patientendaten gestohlen • Fokus: Meldung, Betroffeneninformation
+\end{itemize}
+
+\textbf{Netzwerkausfall:}
+\begin{itemize}
+  \item Internet/Telefon ausgefallen • Fokus: Alternative Kommunikation, Wiederanlauf
+\end{itemize}
+
+\BestandteilZehnJahre
+
+\Legende \fbox{\cmark} = Erfolgreich durchgeführt, \fbox{\xmark} = Verbesserungsbedarf, \q = Noch nicht bearbeitet

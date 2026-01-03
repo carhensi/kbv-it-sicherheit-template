@@ -1,0 +1,469 @@
+\section{IT-Sicherheitskonzept}
+\label{sec:it-sicherheit}
+
+\subsection{Praxisdaten und Verantwortlichkeiten}
+
+\begin{tabular}{p{5cm} p{7cm}}
+  \toprule
+  \textbf{Praxis} & {\def\\{\newline}\PraxisNameMitUmbruch} \\
+  & \PraxisAdresse \\
+  & \PraxisOrt \\
+  & Tel.: \PraxisTelefon \\[0.5em]
+
+  \textbf{\PraxisInhaberBezeichnung{}} & \PraxisInhaberin \\
+  & \ITAnsprechpartnerAdresse \\
+  & Tel.: \PraxisInhaberinPrivatTelefon \\[0.5em]
+
+  \textbf{IT-Ansprechpartner} & \ITAnsprechpartner \\
+  & Tel.: \ITAnsprechpartnerTelefon \\[0.5em]
+
+  \textbf{Passwortmanagement} & \PasswortManager{} (Notfallzugang geregelt) \\
+  \bottomrule
+\end{tabular}
+
+\textbf{\PasswortManager{} Notfallzugang:} Emergency Kit sicher verwahrt: \NotfallkitVerwahrung.
+Physischer Zugriff ist sowohl für die \PraxisInhaberBezeichnung{} als auch den IT-Ansprechpartner
+jederzeit eigenständig möglich.
+\NotfallVollmachtPerson{} ist als Emergency Contact hinterlegt und
+kann nach einer Wartezeit von einer Woche Zugriff auf den Praxis-Vault anfordern.
+
+\subsection{Personal}
+\label{sec:personal}
+
+\textbf{Mitarbeitende:} In der Praxis sind keine Mitarbeitenden beschäftigt. Die
+\PraxisInhaberBezeichnung{} führt alle Tätigkeiten eigenverantwortlich durch.
+
+\textbf{Einstellungsverfahren:} Bei zukünftigen Einstellungen wird besonders auf
+Vertrauenswürdigkeit geachtet, einschließlich der Prüfung vorliegender Arbeitszeugnisse
+und Referenzen. Alle Angaben werden auf Glaubhaftigkeit kontrolliert.
+
+\textbf{Einarbeitung:} Bei zukünftigen Einstellungen erfolgt systematische Einarbeitung
+neuer Mitarbeitender nach strukturierter Checkliste (siehe \cref{sec:vorlage-einarbeitung}).
+Dies umfasst IT-Sicherheitsschulung, Kontenerstellung, Arbeitsplatzeinweisung und
+Verständnisprüfung aller Sicherheitsrichtlinien.
+
+\textbf{Weggang von Mitarbeitenden:} Strukturiertes Offboarding nach Checkliste
+(siehe \cref{sec:vorlage-offboarding}) mit vollständiger Rückgabe aller Unterlagen,
+Deaktivierung von Zugängen und Betonung fortdauernder Verschwiegenheitspflichten.
+
+\textbf{Externe Dienstleister:} IT-Support erfolgt durch \PVSHersteller{} (PVS-Hersteller) und IT-Ansprechpartner \ITAnsprechpartner. Beide sind über Verschwiegenheitserklärungen für externe Dienstleister verpflichtet (siehe \cref{sec:anhang-verschwiegenheit}). Zugangsberechtigungen werden restriktiv vergeben und bei Beendigung der Zusammenarbeit entzogen.
+
+\textbf{Vertrauenswürdigkeit:} Die Auswahl externer Dienstleister erfolgt nach
+Vertrauenswürdigkeit und fachlicher Qualifikation. Alle externen Zugriffe erfolgen nur
+nach vorheriger Terminabsprache und unter Aufsicht.
+
+\textbf{Beaufsichtigung:} Externes Personal (z.\,B.\ IT-Techniker, Wartungspersonal) wird
+in sicherheitsrelevanten Bereichen kontinuierlich beaufsichtigt. Zugangsberechtigungen
+werden so restriktiv wie möglich gehalten und nach Arbeitsende sofort entzogen.
+
+\subsection{Sensibilisierung und Schulung}
+\label{sec:sensibilisierung}
+
+\textbf{Strukturierte Selbstschulung:} Die \PraxisInhaberBezeichnung{} hält sich über IT-Sicherheit
+durch dokumentierte Weiterbildung auf dem Laufenden:
+\begin{itemize}
+  \item KV-Rundschreiben und -Newsletter
+  \item \PVSName{}-Newsletter
+  \item BSI für Bürger: IT-Sicherheit im Homeoffice und Praxis
+  \item BSI-Grundschutz-Kompendium: Bausteine für kleine Unternehmen
+  \item KBV-Praxisnachrichten: Aktuelle IT-Sicherheitswarnungen und -empfehlungen
+  \item Fachspezifische Fortbildungen zu IT-Sicherheit und Datenschutz
+\end{itemize}
+
+\Dokumentation Selbstschulungsmaßnahmen werden im Kalender mit Datum, Quelle und
+Thema dokumentiert und sind dadurch nachvollziehbar. Jährlich wird mindestens eine
+strukturierte Schulung zu IT-Sicherheit durchgeführt (mindestens 4 Stunden gemäß §390 SGB V);
+ergänzend werden quartalsweise Kurzmodule angestrebt (siehe \cref{sec:vorlage-schulungsplan}).
+
+\textbf{KBV-Ressourcen und Fortbildungen:}
+\begin{itemize}
+  \item \textbf{IT-Sicherheit Übersicht:} \\
+    \url{https://www.kbv.de/praxis/digitalisierung/it-sicherheit}
+  \item \textbf{KBV-Hub (Musterdokumente, FAQs):} \\
+    \url{https://hub.kbv.de/display/itsrl}
+  \item \textbf{Fortbildungsportal:} \\
+    \url{https://www.kbv.de/praxis/tools-und-services/fortbildungsportal}
+  \item Basis-Schulung für MFA (PDF im KBV-Hub)
+  \item Phishing-Schulung für MFA (PDF im KBV-Hub)
+  \item IT-Sicherheit in der Praxis für Niedergelassene (PDF im KBV-Hub)
+  \item Zertifizierte Online-Fortbildungen (bis zu 6 Fortbildungspunkte, kostenfrei)
+\end{itemize}
+
+\textbf{Sensibilisierung:} Regelmäßige Überprüfung der Sicherheitsmaßnahmen durch
+Eigenprüfung (siehe \cref{sec:vorlage-eigenpruefung}). Bei Sicherheitsvorfällen
+erfolgt unverzügliche Meldung an den IT-Ansprechpartner.
+
+\subsection{Netzwerksicherheit}
+\label{sec:netzwerk}
+
+\textbf{Router und Firewall:} \RouterModell{} mit sicherer Grundkonfiguration (Details
+siehe Netzplan~\ref{sec:anhang-netzplan}). Automatische Firmware-Updates, geänderte
+Standard-Passwörter, keine Portfreigaben.
+
+\textbf{Firewall-Begründung (Anlage~1 Nr.~11):} Die \RouterModell{} erfüllt als
+Stateful-Packet-Inspection-Firewall die KBV-Anforderungen zum Netzübergangsschutz.
+
+Die \RouterModell{} bietet:
+\begin{itemize}
+  \item Stateful Packet Inspection (SPI)
+  \item NAT als zusätzliche Schutzschicht
+  \item Automatische Firmware-Updates
+  \item Keine Portfreigaben konfiguriert
+  \item UPnP deaktiviert
+\end{itemize}
+
+\textbf{Firewall-Architektur (Anlage 1 Nr. 11):} Die Praxis implementiert eine
+risikobasierte Firewall-Strategie. Der \RouterModell{} mit Stateful Packet Inspection
+erfüllt die KBV-Anforderungen vollständig:
+
+\begin{itemize}
+  \item Stateful Packet Inspection blockiert unerwünschte Verbindungen
+  \item NAT bietet zusätzliche Schutzschicht durch IP-Maskierung
+  \item Extern gehostetes TI-Gateway eliminiert lokale Angriffsfläche (siehe \cref{sec:ti})
+  \item Automatische Firmware-Updates gewährleisten aktuellen Schutzstand
+\end{itemize}
+
+\textbf{Compliance-Bewertung:} Die \KV-FAQ empfiehlt Hardware-Firewall oder
+``Einsatz des Konnektors im Reihenbetrieb''. Da das TI-Gateway extern gehostet
+ist, entfällt die Reihenschaltung. Die gewählte Architektur entspricht dem
+Bedrohungsmodell und übertrifft die Mindestanforderungen für Einzelpraxen
+ohne exponierte Dienste. Jährliche Neubewertung erfolgt im Rahmen der
+IT-Sicherheitsevaluation.
+
+\textbf{Netzmanagement-Authentisierung:} Der Management-Zugriff auf Netz\-kom\-po\-nen\-ten (\RouterKurz{}) erfolgt ausschließlich über sichere Authentisierung mit starken, individuellen Passwörtern. Standard-Zugangsdaten wurden geändert und werden sicher in \PasswortManager{} verwaltet.
+
+\textbf{WLAN-Sicherheit:} WPA2\slash WPA3-Ver\-schlüs\-se\-lung, automatische Abschaltung nachts
+(\WLANAbschaltung).
+
+\textbf{Gäste-WLAN:} Separater WLAN-Gastzugang \enquote{\WLANGastName} für Patientinnen mit
+WPA2\slash WPA3-Ver\-schlüs\-se\-lung und starkem Passwort. Vollständige Netz\-werk\-tren\-nung vom
+Praxisnetz, Gastgeräte sind isoliert voneinander. Automatische Abschaltung nachts
+(\WLANAbschaltung).
+
+\textbf{Logging und Überwachung (freiwillig, Anlage~2 Nr.~1+2):} Systemprotokoll
+aktiviert. Protokolle (\RouterKurz{}, macOS, \PVSName{}) werden anlassbezogen (z.\,B.\ bei
+Sicherheitsvorfällen) ausgewertet. Im Rahmen der jährlichen Eigenprüfung erfolgt
+zusätzlich eine stichprobenartige Sichtung zur Verifizierung.
+
+\textbf{Monitoring-Strategie (Anlage 3):} Die Praxis implementiert eine
+praxisgerechte Überwachungsarchitektur statt zentralem SIEM:
+
+\begin{itemize}
+  \item Dezentrale Logs (Router, macOS, PVS) für gezielte Analyse
+  \item Honeypots (Canary Tokens) für Anomalie-Erkennung (siehe \cref{sec:honeypots})
+  \item Quartalsweise Stichproben-Auswertung in TOMs-Prüfung
+  \item Ereignisbasierte Tiefenanalyse bei Sicherheitsvorfällen
+\end{itemize}
+
+\textbf{Architektur-Vorteil:} Diese Lösung bietet effektive Überwachung ohne
+SIEM-Overhead und entspricht der Einzelpraxis-Infrastruktur optimal.
+SIEM-Systeme erfordern kontinuierliche Analyse-Kapazität und spezialisierte
+Expertise, die in Einzelpraxen nicht wirtschaftlich darstellbar ist.
+Bei Wachstum wird diese Strategie neu bewertet.
+
+\subsection{Patch- und Änderungsmanagement}
+\label{sec:patch}
+
+\textbf{Verantwortlichkeiten:} Die \PraxisInhaberBezeichnung{} ist für die zeitnahe Installation von
+Updates verantwortlich. Der IT-Ansprechpartner unterstützt bei kritischen Updates und Problemen.
+
+\textbf{Update-Verfahren:}
+\begin{itemize}
+  \item \textbf{macOS:} Automatische kritische Updates und Minor-Updates aktiviert, Major-Updates nur in Absprache mit \PVSName{} und \PraxisInhaberBezeichnung{}
+  \item \textbf{\PVSName{} PVS:} Automatische Updates außerhalb der Praxiszeiten konfiguriert, manuelle Updates nach Herstellerfreigabe binnen 14 Tagen. Automatische Backup-Erstellung vor jedem Update durch Server-Tools
+  \item \textbf{Microsoft 365:} Automatische Updates aktiviert
+  \item \textbf{\RouterKurz{}:} Automatische Firmware-Updates aktiviert
+  \item \textbf{iOS/iPadOS:} Automatische Sicherheitsupdates aktiviert
+\end{itemize}
+
+\textbf{Identifizierung ausbleibender Updates:}
+\begin{itemize}
+  \item \textbf{macOS/iOS:} Systemeinstellungen → Softwareupdate (wöchentliche Kontrolle)
+  \item \textbf{\MDMTool{}:} MDM-Dashboard zeigt Update-Status aller verwalteten Geräte
+  \item \textbf{\PVSName{}:} Automatische Update-Benachrichtigungen im System
+  \item \textbf{\RouterKurz{}:} Admin-Interface zeigt verfügbare Firmware-Updates
+\end{itemize}
+
+\textbf{End-of-Life-Strategie:} Geräte ohne verfügbare Sicherheitsupdates (EOL) werden
+rechtzeitig durch aktuelle Modelle ersetzt oder durch zusätzliche Sicherheitsmaßnahmen
+kompensiert. Austausch spätestens bei Hersteller-EOL oder ausbleibenden
+Sicherheitsupdates; planmäßige Bewertung und ggf. Ersatz bis zur nächsten
+Dokumentüberprüfung (\NextReview). Die Bewertung erfolgt im Rahmen der jährlichen
+IT-Sicherheitsevaluation (siehe \cref{sec:vorlage-eigenpruefung}).
+
+\Dokumentation Bei Problemen erfolgt eine Dokumentation und Wiederherstellung
+über Backup-Restore.
+
+\subsection{Endgeräte-Sicherheit}
+\label{sec:endgeraete}
+
+\textbf{Grundschutz:} Alle Endgeräte sind mit aktuellen Betriebssystemen und Virenschutz
+(macOS XProtect) ausgestattet. Automatische Bildschirmsperre nach 5 Minuten Inaktivität.
+
+\textbf{Integrierte Sicherheitsarchitektur (Anlage 1 Nr. 20):} Die Praxis nutzt
+eine Defense-in-Depth-Strategie basierend auf dem macOS-Sicherheitsstack:
+
+\begin{itemize}
+  \item XProtect: Tägliche Malware-Signaturen von Apple
+  \item Gatekeeper: Automatische Code-Signatur-Validierung
+  \item SIP: Hardware-basierter Systemschutz
+  \item Sandboxing: Anwendungsisolierung auf Kernel-Ebene
+  \item Secure Boot: Firmware-Integritätsprüfung
+\end{itemize}
+
+\textbf{Technische Überlegenheit:} Diese integrierte Lösung übertrifft herkömmliche
+Virenschutz-Software durch tiefe Systemintegration ohne Performance-Einbußen oder
+Kompatibilitätskonflikte. Apple dokumentiert im Platform Security Guide die
+Ausreichend dieser Architektur für Enterprise-Umgebungen. Dritt-Anbieter-Software
+würde Kernel-Zugriff erfordern und potenzielle Angriffsfläche schaffen.
+
+\textbf{Compliance-Nachweis:} Der Apple Platform Security Guide bestätigt, dass
+\enquote{das System so konzipiert ist, dass zusätzliche Antivirus-Software nicht
+erforderlich ist} (Quelle: \url{https://support.apple.com/guide/security/}).
+Diese Architektur erfüllt die KBV-Anforderungen vollständig.
+
+\textbf{macOS Security-Baseline (CIS Level~1):} Die Konfiguration orientiert sich am
+CIS Apple macOS Benchmark (Level~1). Umgesetzte Maßnahmen: Festplattenverschlüsselung
+(FileVault) mit sicher hinterlegtem Recovery-Key, macOS-Firewall aktiviert, Gatekeeper
+und XProtect für Malware-Schutz, System Integrity Protection (SIP) aktiviert, Secure Boot
+auf \enquote{Full Security} (Apple Silicon), USB-Zubehör erfordert explizite Freigabe,
+alle Sharing-Dienste deaktiviert, Gastaccount deaktiviert, separater Admin-Account für
+Systemverwaltung, automatisches Login deaktiviert, Passwort sofort nach Bildschirmschoner
+erforderlich, Safari Auto-Open Downloads deaktiviert, Remote Management deaktiviert,
+Standortdienste nur für \enquote{Wo ist?} (Fernlöschung bei Verlust).
+Halbjährliche Überprüfung der Baseline-Konfiguration in den TOMs-Prüfungen.
+
+\textbf{Zugangsschutz:} Starke Passwörter/Biometrie für alle Benutzerkonten. Keine
+Gastkonten oder geteilte Accounts. Separater lokaler Admin-Account (\texttt{\AdminUser{}}) für
+Systemverwaltung, tägliche Arbeit mit Standard-Benutzerrechten.
+
+\textbf{Sperr-/Abmeldepflicht:} Nach Ende der Nutzung sofort Bildschirm sperren/abmelden
+(macOS: Ctrl+Cmd+Q). Auto-Sperre bleibt Sicherheitsnetz (5 Min).
+
+\textbf{Gruppenberechtigungen:} Datei- und Freigabeberechtigungen sind pro Personengruppe
+(Praxisinhaber, externe Dienstleister) und pro Person individuell geregelt. Zugriffe
+folgen dem Need-to-know-Prinzip.
+
+\textbf{Verschlüsselung:} FileVault-Festplattenverschlüsselung und TLS-Datenübertragung
+aktiviert. Details zu Wechseldatenträgern siehe \cref{sec:wechseldatentraeger}.
+
+\textbf{Software-Beschränkung:} Installation nur aus vertrauenswürdigen Quellen (Mac App
+Store, Hersteller-Websites). Keine P2P-Software oder unsichere Downloads.
+Sicherheitsfeatures siehe macOS Security-Baseline oben.
+
+\textbf{Mikrofon/Kamera-Schutz (Anlage~1 Nr.~18):} Mikrofon und Kamera sind in den
+macOS-Systemeinstellungen grundsätzlich für alle Anwendungen deaktiviert. Aktivierung nur
+bei konkretem Bedarf (z.\,B.\ Videosprechstunde) und anschließende Deaktivierung. Keine
+permanenten Berechtigungen für nicht-medizinische Apps.
+
+\textbf{Drucker-Sicherheit:} Brother DCP-L2660DW Laserdrucker mit folgenden Sicherheitsmaßnahmen:
+\begin{itemize}
+  \item \textbf{Standortschutz}: Drucker steht direkt neben Arbeitsplatz (physische Kontrolle)
+  \item \textbf{Cloud-Print deaktiviert}: Keine Verbindung zu externen Print-Diensten
+  \item \textbf{WLAN-Sicherheit}: WPA2\slash WPA3-ver\-schlüs\-sel\-te Verbindung zum Praxis-WLAN
+  \item \textbf{Admin-PIN}: Gerätezugriff durch PIN geschützt
+  \item \textbf{Kein PIN-Druck}: Nicht erforderlich (Drucker direkt am Arbeitsplatz $<$2m,
+    Einzelpraxis, Patienten nicht allein im Raum, sofortige Entnahme, Druck nur bei
+    Anwesenheit im Praxis-WLAN möglich)
+  \item \textbf{Speicher}: Druckaufträge werden nicht dauerhaft im Gerät gespeichert
+\end{itemize}
+
+\subsection{Windows-Endgeräte}
+\label{sec:windows}
+
+\textbf{Nicht anwendbar:} In der Praxis werden ausschließlich Apple-Geräte eingesetzt.
+Keine Windows-Systeme vorhanden (auch nicht virtualisiert).
+
+\subsection{Internet- und Cloud-Anwendungen}
+\label{sec:internet}
+
+\textbf{Cloud-Nutzung:}
+\begin{itemize}
+  \item \textbf{iCloud Backup:} Verschlüsselte Backups für iOS/macOS-Geräte über Apple Business Manager (MDM-verwaltet, AVV vorhanden). Keine Gesundheitsdaten in iCloud Drive oder iCloud Mail.
+  \item \textbf{Microsoft 365:} Nur lokale Office-Apps (Word, Excel), keine Cloud-Speicherung
+  \item \textbf{Keine weiteren Cloud-Dienste} für Patientendaten
+\end{itemize}
+
+\textbf{Authentisierung:} Passwort-Richtlinie:
+\begin{itemize}
+  \item Mindestlänge: \PasswortMindestlaenge{} Zeichen (\PasswortManager{}-generiert)
+  \item Keine Wiederverwendung
+  \item 2FA wo möglich (iCloud, \PasswortManager{}, \HostingAnbieter{})
+  \item Passwort-Rotation: Nur bei Verdacht auf Kompromittierung
+  \item \PasswortManager{} Sicherheits-Dashboard Score: Ziel $\geq$\PasswortSecurityScore{} (quartalsweise Prüfung in TOMs, Abweichungen werden dokumentiert und bewertet)
+\end{itemize}
+
+\textbf{Datenschutz:} Patientendaten werden nicht in öffentlichen Cloud-Diensten gespeichert.
+Gesundheits- und Sozialdaten werden nicht in Cloud-Speichern (iCloud Drive, OneDrive, etc.) abgelegt.
+
+Kalender wird über \EmailAnbieter{} oder lokal verwaltet. Bei Kalender-Synchronisation werden
+ausschließlich anonymisierte Patientenkürzel für die Terminorganisation verwendet.
+Dabei werden keine Namen, Diagnosen oder medizinischen Inhalte übertragen.
+Die Verarbeitung ist zweckgebunden und DSGVO-konform dokumentiert.
+
+\textbf{Cloud-Compliance:} Soweit Sozial- oder Gesundheitsdaten im Wege des
+Cloud-Computing verarbeitet werden, verfügt der Anbieter über ein aktuelles C5-Testat
+entsprechend § 393 SGB V in Verbindung mit § 384 SGB V (\KIToolName{}, \PVSName{} TI-Gateway).
+Alle Cloud-Dienste werden im Verzeichnis von Verarbeitungstätigkeiten (VVT, \cref{sec:vvt}) dokumentiert.
+
+\subsection{Datensicherung}
+\label{sec:datensicherung}
+
+\textbf{\PVSName{}-Backup-Konzept:} \PVSName{} läuft lokal als Server und Client auf dem MacBook Air
+(siehe Geräteliste \cref{sec:geraeteliste}). \PVSName{} erstellt automatisch primäre Backups aller
+Patientendaten und Systemkonfigurationen in einem lokalen Backup-Verzeichnis auf der
+System-SSD (FileVault-verschlüsselt).
+Diese primären Backups werden anschließend über Time Machine auf verschlüsselte externe
+SSD und verschlüsseltes NAS-Backup gesichert. Bei MacBook-Ausfall erfolgt Wiederherstellung
+aus Backup gemäß RTO/RPO (siehe unten).
+
+Das Backup-Konzept umfasst lokale Time Machine-Sicherung auf externe Festplatte sowie
+Offsite-Backup auf NAS. Wöchentliche Vollsicherung, tägliche inkrementelle Sicherung.
+Restore-Tests werden mindestens einmal jährlich, angestrebt halbjährlich (Januar/Juli)
+sowie anlassbezogen durchgeführt und dokumentiert.
+
+\textbf{Wiederanlaufziele:}
+\begin{itemize}
+  \item \textbf{RTO (Recovery Time):} $\leq$4h ab Bereitstellung der Ersatzhardware
+    (Neugerät ggf.\ kurzfristig im Handel erhältlich; Gesamtwiederherstellung
+    inkl.\ Hardwarebeschaffung im Worst Case bis zu 24h)
+  \item \textbf{RPO (Recovery Point):} $\leq$24h (konservativ gerechnet)
+\end{itemize}
+
+\textbf{Verantwortlichkeit:} Die \PraxisInhaberBezeichnung{} ist für die ordnungsgemäße Durchführung
+der Datensicherung, tägliche Backup-Kontrolle, Restore-Tests und Meldung bei Problemen verantwortlich.
+Der IT-Ansprechpartner ist für die technische Konfiguration zuständig und
+steht bei Fragen zur Verfügung.
+
+\textbf{Tägliche Backup-Kontrolle:} Die \PraxisInhaberBezeichnung{} prüft täglich den Time Machine-Status
+(Letztes Backup < 24h). \PVSName{} meldet automatisch bei nicht erfolgreichem Backup.
+Bei Fehlern wird der IT-Ansprechpartner unverzüglich informiert.
+
+Das Offsite-Backup wird verschlüsselt auf einem NAS am \BackupStandort{}
+gespeichert. Durch die Verschlüsselung ist ein Zugriff auf Praxisdaten durch andere
+Dritte ausgeschlossen. Auch NAS-Administratoren haben keinen Zugriff auf
+die verschlüsselten Time Machine-Container ohne die Backup-Schlüssel. Die
+Datenübertragung erfolgt lokal oder verschlüsselt per IPSec-VPN (\RouterKurz{} zu NAS).
+VPN-Konfiguration und -Betrieb erfolgen durch den IT-Ansprechpartner.
+
+Die Backup-Schlüssel für die verschlüsselten Time Machine-Container werden
+ausschließlich von der \PraxisInhaberBezeichnung{} verwaltet und sicher in \PasswortManager{}
+gespeichert. Das NAS steht gesichert am \BackupStandort{}.
+
+\textbf{Backup-Aufbewahrung und Ausdünnung:} Time Machine dünnt Backups automatisch aus:
+Stündliche Backups der letzten 24 Stunden, tägliche des letzten Monats, danach
+wöchentliche. Bei Platzmangel werden die ältesten Backups automatisch gelöscht.
+Gelöschte Patientendaten können daher in verschlüsselten Backups verbleiben, bis diese
+turnusmäßig überschrieben werden. Dies ist datenschutzrechtlich zulässig, da die Backups
+verschlüsselt, nicht aktiv zugänglich und ausschließlich für die Notfallwiederherstellung
+bestimmt sind.
+
+\subsection{Sichere Datenträgerentsorgung}
+\label{sec:entsorgung}
+
+Vor Entsorgung, Verkauf oder Weitergabe von IT-Geräten erfolgt sichere Löschung aller
+Daten durch Überschreibung oder physische Zerstörung der Datenträger. Bei SSDs wird die
+Herstellersoftware für Secure Erase verwendet. Festplatten werden mindestens dreifach
+überschrieben oder mechanisch zerstört.
+
+\Dokumentation Jede Entsorgung wird mit Gerät, Datum, Löschmethode und
+verantwortlicher Person in der Geräteliste (siehe \cref{sec:geraeteliste})
+dokumentiert.
+
+\subsection{Aufbewahrungsplan für nicht-medizinische Daten}
+\label{sec:aufbewahrungsplan}
+
+Ergänzend zu den medizinischen Aufbewahrungspflichten (§ 630f BGB - 10 Jahre)
+gelten für organisatorische und technische Daten folgende Aufbewahrungsfristen:
+
+\begin{center}
+\begin{tabular}{p{5cm}p{2.5cm}p{6cm}}
+\toprule
+\textbf{Datenart} & \textbf{Aufbewahrung} & \textbf{Rechtsgrundlage/Zweck} \\
+\midrule
+System-/Sicherheitslogs & 90 Tage & IT-Betrieb, Incident-Analyse \\
+Organisatorische E-Mails & 12 Monate & Geschäftskorrespondenz \\
+Patientenbezogene E-Mails & Sofort in PVS & Siehe \cref{sec:kommunikation} \\
+Support-/Änderungsprotokolle & 24 Monate & Nachvollziehbarkeit, Wartung \\
+Schulungsnachweise & 36 Monate & DSGVO-Rechenschaftspflicht \\
+AVV/Vertragsunterlagen & Laufzeit + 3 Jahre & Verjährungsfristen \\
+Website-Logs (\HostingAnbieter{}) & 30 Tage & Automatische Löschung \\
+Backup-Daten & Entsprechend Ursprungsdaten & Zweckbindung \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Löschprozess:} Automatische Löschung wo technisch möglich (\HostingAnbieter{}-Logs),
+manuelle Löschung nach Fristablauf mit Dokumentation. Ausnahmen nur bei
+rechtlichen Aufbewahrungspflichten oder laufenden Verfahren.
+
+\textbf{Verweis:} Detaillierte Aufbewahrungsfristen siehe VVT (\cref{sec:vvt}).
+
+\subsection{Patientenaufnahme und Datenschutz-Information}
+\label{sec:patientenaufnahme}
+
+\subsubsection{Datenschutz-Information}
+
+Die Datenschutz-Information nach Art.\ 13 DSGVO ist in der Praxis ausgehängt und online
+unter \url{\PraxisWebsiteDatenschutz} abrufbar. Änderungen werden
+versioniert dokumentiert und Patienten bei wesentlichen Änderungen informiert.
+
+\subsubsection{Digitaler Aufnahmeprozess}
+
+Die Patientenaufnahme erfolgt vollständig digital im PVS mit minimalen, kompakten Formularen:
+\begin{enumerate}
+  \item Datenschutz-Information (Aushändigung/Online-Verweis)
+  \item KI-Einwilligung (bei gewünschter KI-Dokumentation)
+  \item Behandlungsvertrag und Anamnesebogen
+\end{enumerate}
+
+Alle Einwilligungen werden direkt im PVS dokumentiert und versioniert gespeichert.
+Der Widerruf von Einwilligungen ist jederzeit mündlich oder schriftlich möglich
+und wird sofort wirksam. Widerrufe werden im PVS dokumentiert.
+
+\subsubsection{KI-gestützte Dokumentation}
+
+\textbf{\KIToolName{} Integration:} Die Praxis nutzt \KIToolName{} für die
+KI-gestützte Erstellung von Sitzungsnotizen und psychologischen Berichten. \KIToolName{}
+ist C5-zertifiziert und DSGVO-konform (Details: \url{\KIToolSicherheitURL}).
+
+\textbf{Patienteneinwilligung:} Vor der ersten KI-gestützten Sitzung wird eine explizite
+schriftliche Einwilligung nach Art.\ 9 Abs.\ 2 lit.\ a DSGVO eingeholt. Die Einwilligung
+erfolgt über die in \KIToolName{} integrierte, anpassbare Vorlage und wird im PVS dokumentiert.
+
+\textbf{Datenverarbeitung:} Audioaufzeichnung und Transkription erfolgen temporär zur
+Erstellung der Sitzungsnotizen. \KIToolName{} speichert keine Patientendaten dauerhaft.
+Alle Daten werden nach der Verarbeitung automatisch gelöscht. Die generierten Protokolle
+werden ausschließlich im lokalen PVS (\PVSName{}) gespeichert.
+
+\textbf{Widerruf:} Patienten können die Einwilligung jederzeit ohne Angabe von Gründen
+widerrufen. Bei Widerruf erfolgt die Dokumentation wieder manuell.
+
+\subsubsection{Schweigepflichtentbindungen}
+
+Für Berichte an andere Behandler oder Institutionen werden bei Bedarf spezifische
+Schweigepflichtentbindungen eingeholt. Diese werden zweckgebunden, zeitlich begrenzt
+und dokumentiert im PVS verwaltet. Auskünfte an Krankenkassen erfolgen nur im
+gesetzlich vorgesehenen Rahmen (Antragsverfahren, PTV-Formulare).
+
+\subsubsection{Aufbewahrung und Löschung}
+
+\textbf{Aufbewahrungsfristen:} Patientendaten werden gemäß § 630f BGB für 10 Jahre nach
+Behandlungsende aufbewahrt. KI-generierte Sitzungsnotizen unterliegen denselben Fristen
+wie manuell erstellte Dokumentation.
+
+\textbf{Löschkonzept:} Nach Ablauf der Aufbewahrungsfristen erfolgt sichere Löschung
+aller Patientendaten aus dem PVS. In verschlüsselten Backups können gelöschte Daten
+länger verbleiben (siehe \cref{sec:datensicherung}). Bei einer Wiederherstellung aus
+Backup wird geprüft, ob zwischenzeitlich gelöschte Daten erneut zu löschen sind.
+
+\subsubsection{Betroffenenrechte}
+
+Patienten haben das Recht auf Auskunft, Berichtigung, Löschung und Datenübertragbarkeit
+ihrer Daten. Anfragen werden binnen 30 Tagen bearbeitet. Der Prozess ist in der
+Vorlage Betroffenenrechte (\cref{sec:vorlage-betroffenenrechte}) dokumentiert.
+
+\textbf{Zusammenfassung:} Das IT-Sicherheitskonzept etabliert die technischen und
+organisatorischen Grundlagen für den sicheren Praxisbetrieb. Aufbauend auf dieser
+Infrastruktur behandelt das folgende Kapitel die sichere Kommunikation mit Patienten
+und externen Partnern.

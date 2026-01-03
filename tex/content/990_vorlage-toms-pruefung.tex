@@ -1,0 +1,122 @@
+\section{Vorlage – TOMS-Überprüfungen}\label{sec:vorlage-toms-pruefung}
+
+% Nur unteren Rand kleiner für mehr Platz
+%\newgeometry{bottom=1cm}
+
+\Hinweis Template zum handschriftlichen Ausfüllen. TOMS-Überprüfungen gemäß
+Art.\ 32 DSGVO quartalsweise/jährlich durchführen und 10 Jahre Aufbewahrung.
+
+%% Präambel - definiere nur wenn nicht schon vorhanden
+\providecommand{\qsize}{1.05ex}
+\renewcommand{\qsize}{1.05ex}
+\providecommand{\q}{\fbox{\rule{0pt}{\qsize}\rule{\qsize}{0pt}}}
+\renewcommand{\q}{\fbox{\rule{0pt}{\qsize}\rule{\qsize}{0pt}}}
+\providecommand{\QRow}{\q\kern0.25em\q\kern0.25em\q\kern0.25em\q}
+\renewcommand{\QRow}{\q\kern0.25em\q\kern0.25em\q\kern0.25em\q}
+\providecommand{\JRow}{\q}
+\renewcommand{\JRow}{\q}
+
+{%
+\renewcommand{\arraystretch}{1.0}
+\setlength{\tabcolsep}{3pt}
+\footnotesize
+
+\begin{longtable}{p{0.48\textwidth} p{0.05\textwidth} p{0.10\textwidth} p{0.25\textwidth}}
+  \toprule
+  \textbf{DSGVO-Maßnahme} & \textbf{Turnus} & \textbf{Erfüllt?} & \textbf{Bemerkungen} \\
+  \midrule
+  \ifaccessible\else\endhead\fi
+
+  \AccessibleSectionHeader{Zugangs-/Zutrittskontrolle}
+  \midrule
+  Praxisräume abschließbar, Schlüssel nur Inhaberin & J & \JRow & \\
+  Starke Authentifizierung (\PasswortManager{}, 2FA) & J & \JRow & \\
+  \PasswortManager{} Sicherheits-Dashboard geprüft (Warnungen behoben) & Q & \QRow & \\
+  Mobile Geräte mit Passcode/Touch ID gesichert & Q & \QRow & \\
+  Automatische Bildschirmsperre aktiv & Q & \QRow & \\
+  \midrule
+
+  \AccessibleSectionHeader{Zugriffs-/Weitergabekontrolle}
+  \midrule
+  Rollenbasierte Zugriffe im PVS (\PVSName{}) & Q & \QRow & \\
+  Keine gemeinsam genutzten Accounts & Q & \QRow & \\
+  Verschlüsselte Datenübertragung (HTTPS) & Q & \QRow & \\
+  \midrule
+
+  \AccessibleSectionHeader{Eingabe-/Auftragskontrolle}
+  \midrule
+  \PVSName{}-Zugriffsprotokolle aktiviert & Q & \QRow & \\
+  Auftragsverarbeitungsverträge (AVV) aktuell & J & \JRow & \\
+  \midrule
+
+  \AccessibleSectionHeader{Verfügbarkeits-/Trennungskontrolle}
+  \midrule
+  Backup-Konzept funktionsfähig & Q & \QRow & \\
+  Separate Benutzerkonten für verschiedene Aufgaben & J & \JRow & \\
+  \midrule
+
+  \AccessibleSectionHeader{Verschlüsselung/Pseudonymisierung}
+  \midrule
+  Festplattenverschlüsselung (FileVault) aktiv & Q & \QRow & \\
+  E-Mail-Verschlüsselung (S/MIME) funktionsfähig & Q & \QRow & \\
+  S/MIME-Zertifikat gültig (>30 Tage) & Q & \QRow & \\
+  S/MIME-Backup verfügbar & Q & \QRow & \\
+  DMARC-Reports geprüft (postmaster@) & Q & \QRow & \\
+  Verschlüsselte Backups und Wechseldatenträger & Q & \QRow & \\
+  \midrule
+
+  \AccessibleSectionHeader{Netzwerk-/Systemsicherheit}
+  \midrule
+  Firewall-Konfiguration (\RouterKurz{}) & Q & \QRow & \\
+  Software-Updates und Patches aktuell & Q & \QRow & \\
+  macOS-Firewall aktiviert & Q & \QRow & \\
+  Gatekeeper und XProtect aktiv & Q & \QRow & \\
+  System Integrity Protection (SIP) aktiviert & Q & \QRow & \\
+  Secure Boot \enquote{Full Security} konfiguriert & Q & \QRow & \\
+  USB-Zubehör bei Sperre blockiert & Q & \QRow & \\
+  Sharing-Dienste deaktiviert & Q & \QRow & \\
+  FileVault Recovery-Key sicher hinterlegt & Q & \QRow & \\
+  \midrule
+
+  \AccessibleSectionHeader{Physische Sicherheit}
+  \midrule
+  IT-Geräte in abschließbaren Räumen & J & \JRow & \\
+  Bildschirme vor Einsicht geschützt, Sichtschutzfolien & J & \JRow & \\
+  \midrule
+
+  \AccessibleSectionHeader{Mobile Device Management (MDM)}
+  \midrule
+  Alle Geräte MDM-compliant (\MDMTool{}) & Q & \QRow & \\
+  Blueprint-Konfiguration aktuell & Q & \QRow & \\
+  Keine verbotenen Apps installiert & Q & \QRow & \\
+  Remote Wipe verfügbar und konfiguriert & Q & \QRow & \\
+  \midrule
+
+  \AccessibleSectionHeader{Organisatorische Maßnahmen}
+  \midrule
+  Mitarbeiterschulungen durchgeführt & J & \JRow & \\
+  Incident-Response-Verfahren aktuell & J & \JRow & \\
+  Eigenprüfungsprotokoll (§390 SGB V) erstellt & J & \JRow & \\
+  VVT (Verzeichnis Verarbeitungstätigkeiten) aktuell & J & \JRow & \\
+  \bottomrule
+
+\end{longtable}
+}% Ende der footnotesize-Gruppe für Tabelle
+
+{\footnotesize
+\Legende \fbox{\cmark} = Erfüllt, \fbox{\xmark} = Nicht erfüllt, \fbox{$\bullet$} = Nicht zutreffend • J=Jährlich, Q=Quartalsweise (Q1 Q2 Q3 Q4)
+}% Ende der footnotesize-Gruppe für Legende
+
+\noindent\textbf{Ergebnis:} TOMS-Überprüfung am \rule{2.5cm}{0.3pt} durchgeführt.
+Alle Anforderungen \BoxEmpty~erfüllt / Anpassungen \BoxEmpty~erforderlich.
+
+\praxissignatur
+
+%\textbf{Verwendung:} Ausdrucken → ankreuzen → unterschreiben → abheften •
+% \Legende J=Jährlich, Q=Quartalsweise (4 Boxen = Q1 Q2 Q3 Q4)
+
+%\textbf{Hinweise:} Aufbewahrung 10 Jahre • Backup-Tests:~\ref{sec:vorlage-restore-tests}
+% • IT-Evaluation:~\ref{sec:vorlage-eigenpruefung}
+
+% Geometry für folgende Seiten zurücksetzen
+\restoregeometry

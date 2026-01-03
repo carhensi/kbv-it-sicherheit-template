@@ -1,0 +1,11 @@
+Kategorie,Name,Seriennummer,Verschluesselung,Standort,Eigentum,Nutzung,Backup,Verantwortlich,Bemerkungen,EOL
+Router,Muster-Router,SN-ROUTER-001234,N/A,Praxis,Praxis,Netzwerk,N/A,Dr. Erika Mustermann,,06/2031
+Laptop,Apple MacBook Pro 14 M3 (2023),SN-LAPTOP-001234,FileVault: ja,Praxis,Praxis,Dienstlich,Ja,Dr. Erika Mustermann,,03/2029
+Smartphone,Apple iPhone 15,SN-PHONE-001234,Standard iOS,Praxis,Praxis,Dienstlich,N/A,Dr. Erika Mustermann,siehe Kap. 5,11/2029
+NAS,QNAP TS-264,SN-NAS-00001234,ja,georedundanter externer Standort,Partnerpraxis,Offsite-Backup,Ja,Dr. Erika Mustermann,Standort: Partnerpraxis - NAS gemeinsam genutzt - aber Praxis-Backup verschlüsselt - kein Zugriff auf Praxisdaten durch Dritte,08/2031
+Speicher,Samsung T7 Shield 2TB,SN-SSD-00001234,ja,Praxis,Praxis,Backup,Ja,Dr. Erika Mustermann,Primaerbackup,04/2029
+Drucker,HP LaserJet Pro M404dn,SN-PRINTER-1234,N/A,Praxis,Praxis,Dienstlich,N/A,Dr. Erika Mustermann,,09/2028
+Terminal,Worldline Healthcare ORGA 6141,SN-TERMINAL-123,N/A,Praxis,Praxis,Dienstlich,N/A,Dr. Erika Mustermann,,12/2029
+TI-Karte,SMC-B (Praxis),ICCSN-SMCB-BEISPIEL,Hardware-verschlüsselt,Terminal (versiegelt),Praxis,TI-Auth.,N/A,Dr. Erika Mustermann,Dauerhaft im Terminal - versiegelt,03/2031
+TI-Karte,eHBA,ICCSN-EHBA-BEISPIEL,Hardware-verschlüsselt,Sicher verwahrt,Kammer,TI-Sig.,N/A,Dr. Erika Mustermann,Nur bei Bedarf einsetzen - nicht dauerhaft,02/2027
+TI-Service,TI-Gateway (PVS-Anbieter),SN-TIGATEWAY-1234,TLS,PVS (extern),PVS-Anbieter,TI-Kon.,N/A,PVS-Anbieter GmbH,,11/2029

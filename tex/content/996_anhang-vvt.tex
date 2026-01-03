@@ -1,0 +1,135 @@
+\section{Anhang – Verzeichnis von Verarbeitungstätigkeiten (VVT)}
+\label{sec:vvt}
+
+Das Verzeichnis von Verarbeitungstätigkeiten gemäß Art.\ 30 DSGVO dokumentiert alle
+Datenverarbeitungen der Praxis systematisch. Jede Verarbeitungstätigkeit wird mit
+Zweck, betroffenen Personen, Datenkategorien, Empfängern und Löschfristen erfasst.
+
+\textbf{Hinweis:} Dieses VVT wird jährlich im Rahmen der IT-Sicherheitsevaluation
+überprüft und bei Bedarf aktualisiert. Änderungen werden im Changelog dokumentiert.
+
+\textbf{Rechtliche Grundlagen:}
+\begin{itemize}
+  \item Art.\ 6 Abs.\ 1 lit.\ b DSGVO (Vertragserfüllung)
+  \item Art.\ 6 Abs.\ 1 lit.\ c DSGVO (rechtliche Verpflichtung)
+  \item Art.\ 9 Abs.\ 2 lit.\ h DSGVO (Gesundheitsvorsorge)
+\end{itemize}
+
+\textbf{Datenschutzbeauftragte:} \Datenschutzbeauftragte{} (nicht
+erforderlich gem. Art. 37 DSGVO: Einzelpraxis unter 20 Mitarbeitenden,
+keine systematische Überwachung, Gesundheitsdatenverarbeitung nicht umfangreich)
+
+\begin{samepage}
+\VVTBox
+  {blue!20}
+  {Verarbeitungstätigkeit 1: Patientenbehandlung und Praxisverwaltung}
+  {01.09.2025}
+  {01.09.2025}
+  {Behandlungsdokumentation, Terminplanung, Abrechnung mit Krankenkassen, Kommunikation mit anderen Leistungserbringern über KIM}
+  {Patienten, gesetzliche Vertreter}
+  {Stammdaten (Name, Adresse, Geburtsdatum), Gesundheitsdaten (Diagnosen, Behandlungsverläufe), Abrechnungsdaten, Kontaktdaten}
+  {\textbf{Intern:} \PraxisInhaberBezeichnung{} \newline \textbf{Extern:} Krankenkassen, \KVLang, Ärztekammer \Bundesland, andere Ärzte/Psychotherapeuten (bei Überweisung), Finanzamt (rechtliche Verpflichtung), Steuerberater (Auftragsverarbeiter/Beratung), \PVSName{} GmbH (Auftragsverarbeiter)}
+  {\VVTFooter{Nein}{10 Jahre nach Behandlungsende (§\,630f BGB)}}
+\end{samepage}
+
+\begin{samepage}
+\VVTBox
+  {green!20}
+  {Verarbeitungstätigkeit 2: Praxiskommunikation und Terminorganisation}
+  {01.09.2025}
+  {01.09.2025}
+  {E-Mail-Kommunikation mit Patienten, Terminplanung, organisatorische Absprachen. \textbf{Wichtig:} Keine Übermittlung von Gesundheitsdaten per E-Mail; sensible Inhalte ausschließlich über \PatKomTool{}.}
+  {Patienten, Interessenten, Geschäftspartner}
+  {E-Mail-Adressen, Termininfos mit Patientenkürzel, organisatorische Kommunikationsinhalte (KEINE Diagnosen, Symptome, Befunde). Bei Erhalt medizinischer Inhalte: Löschung + Hinweis an Patienten.}
+  {\textbf{Intern:} \PraxisInhaberBezeichnung{} \newline \textbf{Extern:} \EmailAnbieter{} (E-Mail-Hosting, Deutschland), E-Mail-Empfänger}
+  {\VVTFooter{Nein (\EmailAnbieter{}, Deutschland)}{Organisatorische Kommunikation max. 1 Jahr}}
+\end{samepage}
+
+\begin{samepage}
+\VVTBox
+  {orange!20}
+  {Verarbeitungstätigkeit 3: Praxis-Website und Online-Präsenz}
+  {01.09.2025}
+  {01.09.2025}
+  {Praxisdarstellung, Patienteninformation, Kontaktmöglichkeit}
+  {Website-Besucher, Interessenten}
+  {IP-Adressen, Browsertyp, Betriebssystem, Referrer-URL, Zugriffszeitpunkt (Server-Logs)}
+  {\textbf{Intern:} \PraxisInhaberBezeichnung{} \newline \textbf{Extern:} \HostingAnbieter{} – Auftragsverarbeiter, Region \HostingRegion{}}
+  {\VVTFooter{Ja (\CDNService{} global, \DNSService{} global - Website-Traffic und Besucherdaten werden weltweit verarbeitet, jedoch keine Gesundheitsdaten). Hosting in \HostingRegion{}. \HostingAnbieter{} verfügt über BSI-C5-Testat und Angemessenheitsbeschluss USA}{Server-Logs werden nach 30 Tagen automatisch gelöscht}}
+\end{samepage}
+
+\begin{samepage}
+\VVTBox
+  {gray!20}
+  {Verarbeitungstätigkeit 4: Datensicherung und Backup}
+  {01.09.2025}
+  {01.09.2025}
+  {Datensicherheit, Wiederherstellung bei Datenverlust, Geschäftskontinuität. Backups verschlüsselt, Zugriff nur durch \PraxisInhaberBezeichnung{}.}
+  {Patienten, gesetzliche Vertreter (indirekt durch Backup der Behandlungsdaten)}
+  {Vollständige Kopie aller Praxisdaten (Patientendaten, E-Mails, Dokumente)}
+  {\textbf{Intern:} \PraxisInhaberBezeichnung{} \newline \textbf{Extern:} Keine (lokale Speicherung auf externen Festplatten und NAS am \BackupStandort{})}
+  {\VVTFooter{Nein}{Automatische Ausdünnung durch Time Machine, Löschung bei Platzmangel. Gelöschte Daten verbleiben verschlüsselt bis zur Überschreibung.}}
+\end{samepage}
+
+\begin{samepage}
+\VVTBox
+  {purple!20}
+  {Verarbeitungstätigkeit 5: Sichere Patientenkommunikation über \PatKomTool{}}
+  {01.09.2025}
+  {01.09.2025}
+  {Verschlüsselte Übertragung sensibler Inhalte (Diagnosen, Befunde, Therapieinhalte)}
+  {Patienten, gesetzliche Vertreter}
+  {Behandlungsdaten, Diagnosen, Befunde, Therapieinhalte, Kontaktdaten}
+  {\textbf{Intern:} \PraxisInhaberBezeichnung{} \newline \textbf{Extern:} \PatKomTool{} GmbH (Auftragsverarbeiter), Patienten (Empfänger)}
+  {\VVTFooter{Nein}{Automatische Löschung, entsprechend der Aufbewahrungspflicht (10 Jahre)}}
+\end{samepage}
+
+\begin{samepage}
+\VVTBox
+  {cyan!20}
+  {Verarbeitungstätigkeit 6: KI-gestützte Sitzungsdokumentation (\KIToolName{})}
+  {01.09.2025}
+  {01.09.2025}
+  {Automatisierte Erstellung von Sitzungsnotizen und psychologischen Berichten mittels KI-Technologie. Temporäre Audioaufzeichnung und Transkription zur Dokumentationserstellung.}
+  {Patienten (mit expliziter Einwilligung nach Art. 9 Abs. 2 lit. a DSGVO)}
+  {Audioaufzeichnungen (temporär), Transkripte (temporär), Sitzungsinhalte, generierte Protokolle und Berichte}
+  {\textbf{Intern:} \PraxisInhaberBezeichnung{}, Therapeut/in \newline \textbf{Extern:} \KIToolAnbieter{} (Auftragsverarbeiter, C5-zertifiziert), Microsoft Azure/Amazon Bedrock/Google Cloud (Sub-Auftragsverarbeiter für LLM-Services, alle C5-zertifiziert)}
+  {\VVTFooter{Ja (EU-Verarbeitung durch C5-zertifizierte Cloud-Anbieter: Microsoft Azure EU, Amazon Bedrock EU, Google Cloud EU). Keine Datenspeicherung bei \KIToolName{} - automatische Löschung nach Verarbeitung}{Generierte Protokolle: 10 Jahre (wie Behandlungsdokumentation). Audio/Transkripte: Sofortige Löschung nach Protokollerstellung}}
+\end{samepage}
+
+\begin{samepage}
+\VVTBox
+  {red!20}
+  {Verarbeitungstätigkeit 7: Mobile Device Management (\MDMTool{})}
+  {01.09.2025}
+  {01.09.2025}
+  {Verwaltung und Sicherheit mobiler Geräte (iPhone/iPad), Konfiguration, App-Verteilung, Compliance-Überwachung, Remote-Management}
+  {\PraxisInhaberBezeichnung{} (indirekt durch Geräteverwaltung)}
+  {Geräte-IDs, Gerätename, Betriebssystemversion, App-Inventar, Konfigurationsstatus, Standortdaten (nur bei Verlust), Netzwerkinformationen}
+  {\textbf{Intern:} \PraxisInhaberBezeichnung{} \newline \textbf{Extern:} \MDMTool{} Software LLC (Auftragsverarbeiter, USA mit EU-U.S. Data Privacy Framework)}
+  {\VVTFooter{Ja (USA) – \MDMTool{} Software LLC ist EU-U.S. Data Privacy Framework zertifiziert und verfügt über DSGVO-konformen Auftragsverarbeitungsvertrag}{Gerätedaten werden nach Geräte-Deregistrierung gelöscht, spätestens nach 3 Jahren}}
+\end{samepage}
+
+\begin{samepage}
+\VVTBox
+  {yellow!20}
+  {Verarbeitungstätigkeit 8: Praxistelefonie und Patientenkommunikation}
+  {01.09.2025}
+  {01.09.2025}
+  {Terminvereinbarung, Patientenberatung, organisatorische Absprachen}
+  {Patienten, gesetzliche Vertreter, Interessenten}
+  {Telefonnummern, Verbindungsdaten, Gesprächsinhalte (temporär)}
+  {\textbf{Intern:} \PraxisInhaberBezeichnung{} \newline \textbf{Extern:} \MobilfunkAnbieter{} (TK-Anbieter), Patienten}
+  {\VVTFooter{Nein}{Verbindungsdaten nach gesetzlichen Vorgaben, keine Aufzeichnung von Gesprächen}}
+\end{samepage}
+
+\subsection*{Hinweise zur Pflege}
+
+\textbf{Regelmäßige Prüfung:} Dieses VVT wird jährlich auf Vollständigkeit und Aktualität
+geprüft und bei Änderungen der Verarbeitungstätigkeiten entsprechend aktualisiert.
+
+\Dokumentation Das VVT ist bei Prüfungen durch Aufsichtsbehörden oder im Rahmen
+von Compliance-Checks vorzulegen.
+
+\textbf{Verantwortlichkeit:} Die \PraxisInhaberBezeichnung{} ist für die Vollständigkeit und
+Aktualität des VVT verantwortlich.

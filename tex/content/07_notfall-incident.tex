@@ -1,0 +1,201 @@
+\section{Notfall- und Incident-Management}
+\label{sec:notfall}
+
+\subsection{Notfallkontakte}
+
+% Tagging: Keine Header-Zeile (Key-Value Tabelle)
+\begin{tabular}{p{0.35\textwidth} p{0.55\textwidth}}
+  \textbf{\PraxisInhaberBezeichnung{}:} & \PraxisInhaberin \\
+  & Praxis: \PraxisTelefon, Privat: \PraxisInhaberinPrivatTelefon \\
+  & E-Mail: info@\PraxisDomain \\[0.5em]
+  \textbf{IT-Ansprechpartner:} & \ITAnsprechpartner \\
+  & Mobil: \ITAnsprechpartnerTelefon \\
+  & Adresse: \ITAnsprechpartnerAdresse \\[0.5em]
+  \textbf{Externe Dienstleister:} & \PVSName{}, \InternetAnbieter{} (Internet) \\
+  \textbf{Behörden:} & \KV{} (IT-Sicherheit), \Kammer{} (Kammer) \\
+  & \Datenschutzbehoerde{} (Datenschutz-Aufsichtsbehörde): \DatenschutzbehoerdeAdresse \\
+\end{tabular}
+
+\subsection{Verfügbarkeitsziele}
+\label{sec:verfuegbarkeit}
+
+\textbf{Kritische Systeme (Praxisbetrieb gefährdet):}
+\begin{itemize}
+  \item \textbf{\PVSName{} PVS:} Max. 4h Ausfall, Ziel 99,5\% Verfügbarkeit
+  \item \textbf{Internet/E-Mail:} Max. 2h Ausfall, Ziel 99,8\% Verfügbarkeit
+  \item \textbf{Telefon:} Max. 1h Ausfall, Ziel 99,9\% Verfügbarkeit
+\end{itemize}
+
+\textbf{Wichtige Systeme (Betrieb eingeschränkt):}
+\begin{itemize}
+  \item \textbf{Drucker:} Max. 72h Ausfall, Ziel 95\% Verfügbarkeit
+  \item \textbf{Mobile Geräte:} Max. 8h Ausfall, Ziel 99\% Verfügbarkeit
+\end{itemize}
+
+\textbf{Unkritische Systeme:}
+\begin{itemize}
+  \item \textbf{Website:} Max. 72h Ausfall, Ziel 95\% Verfügbarkeit
+\end{itemize}
+
+\subsection{Datenschutzvorfall-Management}
+
+Bei Datenschutzverletzungen erfolgen binnen 24 Stunden die Dokumentation des Vorfalls
+(Was, Wann, Wie, betroffene Daten), Schadensbegrenzung, Information des
+IT-Ansprechpartners und eine Risikobewertung (siehe \cref{sec:vorlage-breach-register}).
+
+Die Meldepflicht an die Aufsichtsbehörde LfD erfolgt binnen 72 Stunden mit Angabe der
+Art der Verletzung, Kategorien betroffener Daten, ungefähre Anzahl Betroffener, Folgen
+und ergriffene Maßnahmen. Bei hohem Risiko für Rechte und Freiheiten werden Betroffene
+unverzüglich in verständlicher Sprache informiert.
+
+\subsection{IT-Security-Incident-Response}
+
+IT-Sicherheitsvorfälle werden nach Kategorien behandelt: Malware/Virus-Befall, unbefugter
+Zugriff, Datenverlust/Hardware-Ausfall und Netzwerk-/Internet-Ausfall.
+
+\textbf{Incident-Response-Timeline:}
+
+\textbf{Sofortmaßnahmen (0–15 Min):}
+\begin{itemize}
+  \item Isolation: Betroffenes Gerät sofort vom Netz trennen (WLAN aus, Kabel ziehen)
+  \item Schadensbegrenzung: Weitere Systeme prüfen und ggf. isolieren
+  \item Erste Dokumentation: Was, Wann, Wo in Stichpunkten notieren
+\end{itemize}
+
+\textbf{Meldung und Analyse (15 Min - 2h):}
+\begin{itemize}
+  \item IT-Ansprechpartner informieren: Binnen 30 Min (außer nachts)
+  \item Incident-Log erstellen: Binnen 1h strukturiert dokumentieren
+  \item Erste Ursachenanalyse: Binnen 2h Verdacht eingrenzen
+\end{itemize}
+
+\textbf{Wiederherstellung (2h - 24h):}
+\begin{itemize}
+  \item Bereinigung:
+    \begin{itemize}
+      \item Malware-Befall: 2–4h (Neuinstallation aus Backup)
+      \item Ransomware: 4–8h (vollständige Systemwiederherstellung)
+      \item Hardware-Ausfall: 24h (Ersatzbeschaffung)
+    \end{itemize}
+  \item System-Wiederherstellung: \PVSName{} binnen 4h, andere Systeme binnen 24h
+  \item Vollständige Dokumentation: Binnen 24h abgeschlossen
+\end{itemize}
+
+\textbf{Nachbereitung (24h - 72h):}
+\begin{itemize}
+  \item Ursachenanalyse final: Binnen 48h
+  \item Lessons Learned: Binnen 72h dokumentiert
+  \item Maßnahmen-Update: Binnen 1 Woche umgesetzt
+\end{itemize}
+
+\textbf{Eskalation:} Nach 2h ohne Lösung → Externe Hilfe (\PVSName{}). Nach 4h → Praxisbetrieb gefährdet → Notfallmodus.
+
+\subsection{Frühwarnsystem (Honeypots)}
+\label{sec:honeypots}
+
+Zur frühzeitigen Erkennung unbefugter Zugriffe sind digitale Köder (Canary Tokens)
+im Praxisnetzwerk platziert. Diese inaktiven Dateien simulieren vertrauliche Inhalte
+und lösen bei Zugriff automatisch Alarm aus.
+
+\textbf{Implementierung:}
+\begin{itemize}
+  \item Mehrere Köderdateien verschiedener Typen an strategischen Speicherorten
+  \item Dateinamen suggerieren sensiblen Inhalt (z.\,B. Patientendaten, Abrechnungen)
+  \item Bei Zugriff: Automatische E-Mail-Benachrichtigung an Praxisinhaberin
+  \item Alarminhalt: Zeitstempel, IP-Adresse, Gerätekennung
+\end{itemize}
+
+\textbf{Reaktion bei Auslösung:}
+\begin{enumerate}
+  \item Sofortige Prüfung: Legitimer Zugriff (Fehlalarm) oder Sicherheitsvorfall?
+  \item Bei Verdacht: Incident-Response-Prozess gemäß vorherigem Abschnitt einleiten
+  \item Dokumentation im Vorfallprotokoll
+\end{enumerate}
+
+\textit{Hinweis: Genaue Dateitypen, Namen und Speicherorte werden aus Sicherheitsgründen
+nicht dokumentiert und sind nur der Praxisinhaberin bekannt.}
+
+\subsection{Backup-Wiederherstellung}
+
+Die Wiederherstellung erfolgt primär über lokales Time Machine-Backup, sekundär über das
+NAS am \BackupStandort{}. Verantwortlich ist \ITAnsprechpartner{} mit Zugriff über
+\ITAnsprechpartnerAdresse.
+
+Der Wiederanlauf erfolgt in folgender Reihenfolge: Netzwerk und Internet, Betriebssystem
+und Grundkonfiguration, Praxisverwaltungssoftware (\PVSName{}), E-Mail und Kommunikation,
+Patientendaten und Dokumentation.
+
+\subsection{IT-Risikobewertung}
+\label{sec:risikobewertung}
+
+\begin{center}
+\small
+\begin{tabular}{p{2.5cm}p{2cm}p{1.8cm}p{1.5cm}p{3cm}}
+\toprule
+\textbf{Bedrohung} & \textbf{Wahrschein-lichkeit} & \textbf{Schaden} & \textbf{Risiko-Score} & \textbf{Maßnahmen} \\
+\midrule
+Ransomware & Mittel & Kritisch & HOCH & Backup, Schulung, macOS Security \\
+Gerätediebstahl & Niedrig & Hoch & MITTEL & FileVault, Remote Wipe \\
+Internetausfall & Hoch & Mittel & MITTEL & Mobilfunk-Backup \\
+Datenverlust & Niedrig & Kritisch & MITTEL & 3–2-1 Backup-Regel \\
+Phishing & Mittel & Mittel & MITTEL & S/MIME, Schulung \\
+\bottomrule
+\end{tabular}
+\end{center}
+\normalsize
+
+\textbf{Risiko-Score:} Niedrig×Niedrig=NIEDRIG, Niedrig×Mittel=NIEDRIG,
+Mittel×Mittel=MITTEL, Hoch×Hoch=KRITISCH
+
+\subsection{KI-Dokumentationsausfall}
+
+Bei Ausfall der KI-gestützten Dokumentation erfolgt die Sitzungsdokumentation
+direkt digital im PVS. Patientenbehandlung ist nicht beeinträchtigt, da die
+manuelle Dokumentation den regulären Behandlungsstandard darstellt.
+
+\subsection{Eskalation}
+
+Die Eskalation erfolgt stufenweise: IT-Ansprechpartner (\ITAnsprechpartner), externe
+Dienstleister (\PVSName{}, Provider), Behörden (bei Datenschutzvorfällen), Kammer und sofern
+vorhanden Versicherung (bei schweren Vorfällen).
+
+Die Erreichbarkeit ist während der Praxiszeiten nach Absprache mobil gewährleistet,
+außerhalb der Zeiten über Privat \PraxisInhaberinPrivatTelefon. IT-Support erfolgt über
+\ITAnsprechpartner{} \ITAnsprechpartnerTelefon.
+
+\subsection{IT-Sicherheits-KPIs}
+\label{sec:kpis}
+
+\textbf{Monatliche Metriken:}
+\begin{itemize}
+  \item \textbf{Backup-Erfolgsrate:} Ziel >99\% (Time Machine + NAS)
+  \item \textbf{Update-Compliance:} Ziel 100\% binnen 14 Tagen
+  \item \textbf{Phishing-Tests:} Quartalsweise Selbsttest
+  \item \textbf{Passwort-Hygiene:} \PasswortManager{} Security Score >80
+\end{itemize}
+
+\textbf{Jährliche Reviews:}
+\begin{itemize}
+  \item Penetration-Test (Selbsttest mit Online-Tools, angestrebt)
+  \item Compliance-Audit (Eigenprüfung gegen KBV-Anforderungen)
+  \item Risikobewertung-Update
+  \item Notfallplan-Test (Tabletop-Übung, mindestens jährlich, angestrebt halbjährlich)
+\end{itemize}
+
+\textbf{Eskalation bei Unterschreitung:}
+Backup <95\% → Sofortige Prüfung, Updates >30 Tage → Risikobewertung
+
+\subsection{Jährliche Tabletop-Übung}
+
+Zur Überprüfung der Notfallprozesse und Schulung der Beteiligten wird
+mindestens jährlich, angestrebt halbjährlich, eine 30-minütige Tabletop-Übung durchgeführt. Typische Szenarien:
+Ransomware-Angriff, Geräteverlust/Diebstahl, Netzwerkausfall oder Datenschutzvorfall.
+
+\textbf{Ablauf:} Szenario-Präsentation, Rollenverteilung, Durchspielen der Maßnahmen
+nach Notfallplan, Identifikation von Lücken und Verbesserungsmaßnahmen, Dokumentation
+der Erkenntnisse und Ableitung von Anpassungen.
+
+\textbf{Teilnehmende:} \PraxisInhaberBezeichnung{}, IT-Ansprechpartner, ggf. weitere Mitarbeitende.
+
+\Dokumentation Strukturierte Protokollierung nach Arbeitsvorlage in
+\cref{sec:vorlage-tabletop} mit Szenario, Ablauf, Erkenntnissen und Maßnahmen.
