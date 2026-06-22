@@ -22,7 +22,10 @@
 \setstretch{1.15}
 
 % PDF und Hyperlinks
-\usepackage[
+% Printable (PDF/X-1a): hyperref wurde bereits von pdfx geladen -> nur \hypersetup,
+% sonst "Option clash for package hyperref". pdfa-Modus entfällt (pdfx setzt PDF/X-1a).
+\ifprintable
+  \hypersetup{
     bookmarks=true,
     bookmarksopen=true,
     bookmarksnumbered=true,
@@ -32,9 +35,23 @@
     urlcolor=blue,
     citecolor=black,
     pdfstartview=FitH,
-    pdfpagelayout=OneColumn,
-    pdfa
-]{hyperref}
+    pdfpagelayout=OneColumn
+  }
+\else
+  \usepackage[
+      bookmarks=true,
+      bookmarksopen=true,
+      bookmarksnumbered=true,
+      hidelinks,
+      colorlinks=true,
+      linkcolor=black,
+      urlcolor=blue,
+      citecolor=black,
+      pdfstartview=FitH,
+      pdfpagelayout=OneColumn,
+      pdfa
+  ]{hyperref}
+\fi
 \usepackage{hyperxmp} % richer PDF metadata (load after hyperref)
 
 % Fix für hyperref PDF-String Warnungen

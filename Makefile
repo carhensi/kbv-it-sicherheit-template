@@ -5,7 +5,7 @@ SHELL := bash
 .DELETE_ON_ERROR:
 
 # === CORE CONFIG ===
-TEXLIVE_IMAGE = maxkratz/texlive:2025-python
+TEXLIVE_IMAGE = maxkratz/texlive:2026-python
 MERMAID_IMAGE = ghcr.io/mermaid-js/mermaid-cli/mermaid-cli:10.6.1
 DOCKER_TEX = docker run --rm -v $(PWD):/workspace -w /workspace/tex $(TEXLIVE_IMAGE)
 DOCKER_SCRIPTS = docker run --rm -v $(PWD):/workspace -w /workspace/scripts $(TEXLIVE_IMAGE)
@@ -16,7 +16,7 @@ BUILD_CMD = rm -f *.log *.fls *.fdb_latexmk && for i in 1 2 3; do lualatex -inte
 DOC_BASENAME := IT-Sicherheitsdokumentation
 
 # === MAIN TARGETS ===
-all: clean version mermaid build-both ## Build both versions with version update
+all: clean version mermaid build-all ## Build all versions with version update
 
 build: build-standard ## Build standard version
 build-standard: version ## Build standard version (PDF/A-3u)
@@ -31,8 +31,17 @@ build-accessible: version ## Build accessible version (PDF/A-3u + PDF/UA-1)
 	@test -s tex/main-accessible.pdf || (echo "❌ PDF build failed!" && exit 1)
 	@echo "✅ Accessible build complete: tex/main-accessible.pdf"
 
+build-printable: version ## Build printable version (PDF/X-1a for professional printing)
+	@echo "🐳 Building printable version..."
+	$(DOCKER_TEX) sh -c "$(BUILD_CMD) -jobname=main-printable '\\def\\printable{}\\input{main}'; done" || true
+	@test -s tex/main-printable.pdf || (echo "❌ PDF build failed!" && exit 1)
+	@echo "✅ Printable build complete: tex/main-printable.pdf"
+
 build-both: build-standard build-accessible ## Build both versions
 	@echo "✅ Both versions built successfully"
+
+build-all: build-standard build-accessible build-printable ## Build all three versions
+	@echo "✅ All versions built successfully"
 
 # === SAMPLE BUILDS (Pipeline) ===
 build-sample-standard: use-sample version ## Build sample standard version
@@ -47,8 +56,15 @@ build-sample-accessible: use-sample version ## Build sample accessible version
 	@test -s tex/main-accessible.pdf || (echo "❌ PDF build failed!" && exit 1)
 	@echo "✅ Sample accessible build complete"
 
-build-sample: use-sample version mermaid build-sample-both ## Build with sample data
+build-sample-printable: use-sample version ## Build sample printable version
+	@echo "🐳 Building sample printable version..."
+	$(DOCKER_TEX) sh -c "$(BUILD_CMD) -jobname=main-printable '\\def\\printable{}\\def\\samplebuild{}\\input{main}'; done" || true
+	@test -s tex/main-printable.pdf || (echo "❌ PDF build failed!" && exit 1)
+	@echo "✅ Sample printable build complete"
+
+build-sample: use-sample version mermaid build-sample-all ## Build with sample data
 build-sample-both: build-sample-standard build-sample-accessible ## Build both sample versions
+build-sample-all: build-sample-standard build-sample-accessible build-sample-printable ## Build all sample versions
 
 # === UTILS ===
 version: ## Update version to current date
@@ -70,7 +86,7 @@ mermaid: ## Generate Mermaid diagrams
 
 clean: ## Clean all generated files
 	@echo "🧹 Cleaning up..."
-	$(DOCKER_TEX) sh -c "rm -f *.aux *.log *.toc *.out *.fls *.fdb_latexmk *.synctex.gz *.bbl *.blg *.bcf *.run.xml *.auxlock main.pdf main-standard.pdf main-accessible.pdf"
+	$(DOCKER_TEX) sh -c "rm -f *.aux *.log *.toc *.out *.fls *.fdb_latexmk *.synctex.gz *.bbl *.blg *.bcf *.run.xml *.auxlock main.pdf main-standard.pdf main-accessible.pdf main-printable.pdf"
 	@echo "✅ Cleanup complete"
 
 test: ## Run Python unit tests
@@ -118,6 +134,11 @@ rename: ## Rename PDFs with version and generate checksums
 		sha256sum "$(DOC_BASENAME)_v$$v-accessible.pdf" > "$(DOC_BASENAME)_v$$v-accessible.sha256"; \
 		echo "✅ Created $(DOC_BASENAME)_v$$v-accessible.pdf"; \
 	fi
+	@if [ -f tex/main-printable.pdf ]; then \
+		cp tex/main-printable.pdf "$(DOC_BASENAME)_v$$v-printable.pdf"; \
+		sha256sum "$(DOC_BASENAME)_v$$v-printable.pdf" > "$(DOC_BASENAME)_v$$v-printable.sha256"; \
+		echo "✅ Created $(DOC_BASENAME)_v$$v-printable.pdf"; \
+	fi
 
 # === DEVELOPMENT ===
 shell: ## Open shell in LaTeX container
@@ -130,4 +151,4 @@ help: ## Show this help message
 # Aliases
 rebuild: clean all ## Force rebuild everything
 
-.PHONY: all build build-standard build-accessible build-both build-sample build-sample-standard build-sample-accessible build-sample-both version mermaid clean test validate use-sample use-real rename shell help rebuild
+.PHONY: all build build-standard build-accessible build-printable build-both build-all build-sample build-sample-standard build-sample-accessible build-sample-printable build-sample-both build-sample-all version mermaid clean test validate use-sample use-real rename shell help rebuild

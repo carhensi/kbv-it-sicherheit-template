@@ -1,12 +1,18 @@
-% PDF/A-3u + optional PDF/UA-1 Compliance
-% Zwei Varianten: Standard (kompakt) vs. Accessible (mit Tagging)
-% Build: make build-standard / make build-accessible
+% PDF/A-3u + optional PDF/UA-1 Compliance + PDF/X-1a für Druck
+% Drei Varianten: Standard (kompakt) vs. Accessible (mit Tagging) vs. Printable (PDF/X-1a)
+% Build: make build-standard / make build-accessible / make build-printable
 
-% Switch für Build-Varianten (wird per CLI gesetzt: \def\accessible{})
+% Switch für Build-Varianten (wird per CLI gesetzt: \def\accessible{} oder \def\printable{})
 \newif\ifaccessible
+\newif\ifprintable
 \ifdefined\accessible\accessibletrue\else\accessiblefalse\fi
+\ifdefined\printable\printabletrue\else\printablefalse\fi
 
-\ifaccessible
+\ifprintable
+  % Printable-Version: PDF/X-1a für professionellen Druck
+  \documentclass[ngerman,twoside,11pt]{scrartcl}
+  \RequirePackage[x-1a]{pdfx}
+\else\ifaccessible
   % Accessible-Version: PDF/A-3u + PDF/UA-1 mit Tagging (article statt scrartcl)
   \DocumentMetadata{
     pdfversion  = 1.7,
@@ -26,7 +32,7 @@
   }
   \PassOptionsToClass{11pt}{scrartcl}
   \documentclass[ngerman,twoside]{scrartcl}
-\fi
+\fi\fi
 
 % Tagging-Setup für Accessible-Version (nach \documentclass!)
 \ifaccessible
@@ -254,7 +260,7 @@ für Psychotherapie \PraxisInhaberin}
 \input{content/996_anhang-vvt.tex}
 
 \clearpage
-\input{content/993_anhang-changelog.tex}
+\input{includes/993_anhang-changelog.tex}
 
 \clearpage
 \input{content/999_glossar.tex}
