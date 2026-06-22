@@ -10,8 +10,9 @@ Diese Vorlage liefert eine **praxisnahe, auditfähige IT-Sicherheitsdokumentatio
 
 **📄 Beispiel-PDFs herunterladen:**
 
-- [Standard-Version](https://github.com/carhensi/kbv-it-sicherheit-template/releases/latest/download/IT-Sicherheitsdokumentation_v2026.06.22.pdf) (PDF/A-3u)
-- [Barrierefreie Version](https://github.com/carhensi/kbv-it-sicherheit-template/releases/latest/download/IT-Sicherheitsdokumentation_v2026.06.22-accessible.pdf) (PDF/A-3u + PDF/UA-1)
+- [Standard-Version](https://github.com/carhensi/kbv-it-sicherheit-template/releases/latest/download/IT-Sicherheitsdokumentation.pdf) (PDF/A-3u)
+- [Barrierefreie Version](https://github.com/carhensi/kbv-it-sicherheit-template/releases/latest/download/IT-Sicherheitsdokumentation-accessible.pdf) (PDF/A-3u + PDF/UA-1)
+- [Druckversion](https://github.com/carhensi/kbv-it-sicherheit-template/releases/latest/download/IT-Sicherheitsdokumentation-printable.pdf) (PDF/X-1a)
 
 [![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
 [![Latest Release](https://img.shields.io/github/v/release/carhensi/kbv-it-sicherheit-template)](https://github.com/carhensi/kbv-it-sicherheit-template/releases/latest)

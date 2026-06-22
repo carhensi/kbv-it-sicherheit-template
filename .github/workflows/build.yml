@@ -2,7 +2,7 @@ name: Build Documentation
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ develop ]
     tags: [ 'v[0-9]*' ]
   pull_request:
     branches: [ main ]
@@ -173,8 +173,46 @@ jobs:
         path: tex/main-accessible.pdf
         retention-days: 1
 
+  build-printable:
+    needs: prepare
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download sources
+      uses: actions/download-artifact@v8
+      with:
+        name: tex-sources
+
+    - name: Build printable PDF
+      run: |
+        if [ "${{ vars.USE_SAMPLE_DATA }}" = "true" ]; then
+          if [ -n "${{ needs.prepare.outputs.version_date }}" ]; then
+            make build-sample-printable VERSION_DATE="${{ needs.prepare.outputs.version_date }}"
+          else
+            make build-sample-printable
+          fi
+        else
+          if [ -n "${{ needs.prepare.outputs.version_date }}" ]; then
+            make build-printable VERSION_DATE="${{ needs.prepare.outputs.version_date }}"
+          else
+            make build-printable
+          fi
+        fi
+
+    - name: Verify printable output
+      run: |
+        test -s tex/main-printable.pdf \
+          && echo "✅ Druckversion erstellt (PDF/X-1a; verapdf prüft kein PDF/X)" \
+          || (echo "❌ printable PDF fehlt" && exit 1)
+
+    - name: Upload printable PDF
+      uses: actions/upload-artifact@v7
+      with:
+        name: pdf-printable
+        path: tex/main-printable.pdf
+        retention-days: 1
+
   package:
-    needs: [prepare, build-standard, build-accessible]
+    needs: [prepare, build-standard, build-accessible, build-printable]
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.version.outputs.version }}
@@ -192,6 +230,12 @@ jobs:
       uses: actions/download-artifact@v8
       with:
         name: pdf-accessible
+        path: pdfs/
+
+    - name: Download printable PDF
+      uses: actions/download-artifact@v8
+      with:
+        name: pdf-printable
         path: pdfs/
 
     - name: Extract version
@@ -225,11 +269,11 @@ jobs:
         | Document Version | ${{ steps.version.outputs.version }} | |
         EOF
 
-    - name: Rename and checksum
+    - name: Rename PDFs (versionslose Asset-Namen für stabile latest-Links)
       run: |
-        VERSION="${{ steps.version.outputs.version }}"
-        mv pdfs/main-standard.pdf "IT-Sicherheitsdokumentation_v${VERSION}.pdf"
-        mv pdfs/main-accessible.pdf "IT-Sicherheitsdokumentation_v${VERSION}-accessible.pdf"
+        mv pdfs/main-standard.pdf "IT-Sicherheitsdokumentation.pdf"
+        mv pdfs/main-accessible.pdf "IT-Sicherheitsdokumentation-accessible.pdf"
+        mv pdfs/main-printable.pdf "IT-Sicherheitsdokumentation-printable.pdf"
 
     - name: Generate SBOM
       uses: anchore/sbom-action@v0
@@ -243,8 +287,9 @@ jobs:
       with:
         name: IT-Sicherheitsdokumentation_v${{ steps.version.outputs.version }}
         path: |
-          IT-Sicherheitsdokumentation_v${{ steps.version.outputs.version }}.pdf
-          IT-Sicherheitsdokumentation_v${{ steps.version.outputs.version }}-accessible.pdf
+          IT-Sicherheitsdokumentation.pdf
+          IT-Sicherheitsdokumentation-accessible.pdf
+          IT-Sicherheitsdokumentation-printable.pdf
           IT-Sicherheitsdokumentation_v${{ steps.version.outputs.version }}.sbom.json
         if-no-files-found: error
         retention-days: 90
@@ -267,17 +312,19 @@ jobs:
         tag_name: "v${{ needs.package.outputs.version }}"
         name: "IT-Sicherheitsdokumentation v${{ needs.package.outputs.version }}"
         files: |
-          IT-Sicherheitsdokumentation_v${{ needs.package.outputs.version }}.pdf
-          IT-Sicherheitsdokumentation_v${{ needs.package.outputs.version }}-accessible.pdf
+          IT-Sicherheitsdokumentation.pdf
+          IT-Sicherheitsdokumentation-accessible.pdf
+          IT-Sicherheitsdokumentation-printable.pdf
         generate_release_notes: true
         make_latest: true
         body: |
           📄 **IT-Sicherheitsdokumentation nach §390 SGB V**
-          
-          **Zwei Versionen:**
+
+          **Drei Versionen:**
           - **Standard**: PDF/A-3u
           - **Accessible**: PDF/A-3u + PDF/UA-1 (100%)
-          
+          - **Druckversion**: PDF/X-1a
+
           Die PDFs können über GitHub's automatische SHA256-Hashes verifiziert werden.
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
