@@ -70,10 +70,7 @@
   \titleformat{\subsection}{\normalsize\bfseries\sffamily}{\thesubsection}{1em}{}
   \titleformat{\subsubsection}{\normalsize\bfseries\sffamily}{\thesubsubsection}{1em}{}
 \else
-  % Standard: KOMA RedeclareSectionCommand
-  \RedeclareSectionCommand[beforeskip=1.0\baselineskip,afterskip=0.5\baselineskip]{section}
-  \RedeclareSectionCommand[beforeskip=0.8\baselineskip,afterskip=0.4\baselineskip]{subsection}
-
+  % Standard: KOMA-Schriftarten (Sektionsabstände werden weiter unten gesetzt)
   \setkomafont{section}{\large\bfseries}
   \setkomafont{subsection}{\normalsize\bfseries}
   \setkomafont{subsubsection}{\normalsize\bfseries}
@@ -90,9 +87,12 @@
 \tolerance=1000
 \hbadness=1000
 
-% Listen-Konfiguration
-\RequirePackage{enumitem}
-\setlist{nosep,leftmargin=2.2em}
+% Listen-Konfiguration (enumitem nur außerhalb des Accessible-Builds – schützt PDF/UA-Tagging,
+% konsistent mit der Konditionale in config/packages.tex)
+\ifaccessible\else
+  \RequirePackage{enumitem}
+  \setlist{nosep,leftmargin=2.2em}
+\fi
 
 % Professionelle Typografie: Sans-Serif für Überschriften
 \AccessibleSwitch{

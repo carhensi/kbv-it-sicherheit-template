@@ -59,8 +59,11 @@
     \textbf{#1} & & & \\
   }
 \else
-  % Standard: multicolumn wie gewohnt
-  \NewDocumentCommand{\AccessibleTableHeader}{m m}{%
+  % Standard: multicolumn-Header.
+  % WICHTIG: klassisch \newcommand (expandierbar) statt \NewDocumentCommand.
+  % Ein \protected-Makro (xparse) wird beim Start einer Tabellenzelle nicht
+  % expandiert; \multicolumn/\omit gilt dann als \enquote{Misplaced \omit}.
+  \newcommand{\AccessibleTableHeader}[2]{%
     \multicolumn{2}{l}{\textbf{#1}} \\
   }
   \NewDocumentCommand{\AccessibleSectionHeader}{m}{%

@@ -3,19 +3,15 @@ name: Build Documentation
 on:
   push:
     branches: [ main, develop ]
+    tags: [ 'v[0-9]*' ]
   pull_request:
     branches: [ main ]
   workflow_dispatch:
     inputs:
-      initial_release:
-        description: 'Use fixed initial release date'
+      release_date:
+        description: 'Optional: Version für manuelles Release (YYYY.MM.DD); leer = aus Tag/Metadata'
         required: false
-        default: 'false'
-        type: boolean
-      initial_release_date:
-        description: 'Fixed date for initial release (YYYY.MM.DD)'
-        required: false
-        default: '2025.09.01'
+        default: ''
         type: string
 
 permissions:
@@ -26,8 +22,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  INITIAL_RELEASE: ${{ github.event.inputs.initial_release || 'false' }}
-  INITIAL_RELEASE_DATE: ${{ github.event.inputs.initial_release_date || '2025.09.01' }}
+  RELEASE_DATE: ${{ github.event.inputs.release_date || '' }}
 
 jobs:
   prepare:
@@ -36,7 +31,7 @@ jobs:
       version_date: ${{ steps.date.outputs.version_date }}
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
       with:
         fetch-depth: 0
 
@@ -53,8 +48,8 @@ jobs:
     - name: Determine version date
       id: date
       run: |
-        if [ "${{ env.INITIAL_RELEASE }}" = "true" ]; then
-          echo "version_date=$(echo '${{ env.INITIAL_RELEASE_DATE }}' | sed 's/\./-/g')" >> $GITHUB_OUTPUT
+        if [ -n "${{ env.RELEASE_DATE }}" ]; then
+          echo "version_date=$(echo '${{ env.RELEASE_DATE }}' | sed 's/\./-/g')" >> $GITHUB_OUTPUT
         elif [[ "${{ github.ref_name }}" =~ ^v[0-9]{4}\.[0-9]{2}\.[0-9]{2}$ ]]; then
           echo "version_date=$(echo '${{ github.ref_name }}' | sed 's/^v//' | sed 's/\./-/g')" >> $GITHUB_OUTPUT
         else
@@ -62,7 +57,7 @@ jobs:
         fi
 
     - name: Upload tex sources
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: tex-sources
         path: |
@@ -77,7 +72,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Download sources
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v8
       with:
         name: tex-sources
 
@@ -112,7 +107,7 @@ jobs:
         echo "✅ PDF/A-3u: $PASSED checks passed"
 
     - name: Upload standard PDF
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: pdf-standard
         path: tex/main-standard.pdf
@@ -123,7 +118,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Download sources
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v8
       with:
         name: tex-sources
 
@@ -172,7 +167,7 @@ jobs:
         echo "✅ PDF/UA-1: $PASSED checks passed"
 
     - name: Upload accessible PDF
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: pdf-accessible
         path: tex/main-accessible.pdf
@@ -185,16 +180,16 @@ jobs:
       version: ${{ steps.version.outputs.version }}
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
 
     - name: Download standard PDF
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v8
       with:
         name: pdf-standard
         path: pdfs/
 
     - name: Download accessible PDF
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v8
       with:
         name: pdf-accessible
         path: pdfs/
@@ -244,7 +239,7 @@ jobs:
         output-file: IT-Sicherheitsdokumentation_v${{ steps.version.outputs.version }}.sbom.json
 
     - name: Upload final artifacts
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: IT-Sicherheitsdokumentation_v${{ steps.version.outputs.version }}
         path: |
@@ -255,19 +250,19 @@ jobs:
         retention-days: 90
 
   release:
-    if: github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch'
+    if: startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main')
     needs: package
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
     - name: Download artifacts
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v8
       with:
         name: IT-Sicherheitsdokumentation_v${{ needs.package.outputs.version }}
 
     - name: Create Release
-      uses: softprops/action-gh-release@v2
+      uses: softprops/action-gh-release@v3
       with:
         tag_name: "v${{ needs.package.outputs.version }}"
         name: "IT-Sicherheitsdokumentation v${{ needs.package.outputs.version }}"

@@ -12,7 +12,12 @@
 
   % Bild + Überschrift im TikZ-Rahmen
   \begin{center}
-    \begin{tikzpicture}[alt={Überschrift-Overlay für Netzplan-Diagramm}]
+    % alt-Key nur im Accessible-Build (Tagging) verfügbar; im Standard-Build undefiniert
+    \ifaccessible
+      \begin{tikzpicture}[alt={Überschrift-Overlay für Netzplan-Diagramm}]
+    \else
+      \begin{tikzpicture}
+    \fi
       % Bild-Knoten: seitenfüllend, linksbündig
       \node[inner sep=0, anchor=north west] (img) at (0,0) {%
         \includegraphics[

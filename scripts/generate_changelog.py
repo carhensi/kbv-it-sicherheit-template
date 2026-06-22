@@ -31,7 +31,7 @@ LATEX_HEADER = [
     r'  \toprule',
     r'  \textbf{Version} & \textbf{Änderungen} \\',
     r'  \midrule',
-    r'  \endhead',
+    r'  \ifaccessible\else\endhead\fi',
     '',
 ]
 
@@ -47,6 +47,7 @@ class ChangelogEntry(TypedDict):
     version: str
     date: str
     changes: Dict[str, List[str]]
+    summary: str
 
 
 def parse_changelog(changelog_path: Path) -> List[ChangelogEntry]:
@@ -69,10 +70,11 @@ def parse_changelog(changelog_path: Path) -> List[ChangelogEntry]:
         if i < len(sections):
             section_content = sections[i].strip()
             
-            # Extract changes by category
+            # Extract changes by category (+ optionale Zusammenfassungszeile vor der ersten Kategorie)
             changes: Dict[str, List[str]] = {}
             current_category: str | None = None
-            
+            summary_lines: List[str] = []
+
             for line in section_content.split('\n'):
                 line = line.strip()
                 if line.startswith('### '):
@@ -80,11 +82,14 @@ def parse_changelog(changelog_path: Path) -> List[ChangelogEntry]:
                     changes[current_category] = []
                 elif line.startswith('- ') and current_category:
                     changes[current_category].append(line[2:].strip())
-            
+                elif line and not line.startswith('#') and current_category is None:
+                    summary_lines.append(line)
+
             entries.append({
                 'version': version,
                 'date': date,
-                'changes': changes
+                'changes': changes,
+                'summary': ' '.join(summary_lines)
             })
     
     return entries
@@ -112,25 +117,15 @@ def generate_latex_changelog(entries: List[ChangelogEntry], max_entries: int = 1
     
     # Add actual entries (newest first)
     for entry in entries[:max_entries]:
-        date_german = format_date_german(entry['date'])
         version = entry['version']
-        
-        # Create summary
-        total_changes = sum(len(items) for items in entry['changes'].values())
-        
-        if version == "2025.09.01":
-            changes_text = (
-                f"Initial Release der vollständigen IT-Sicherheitsdokumentation "
-                f"nach §390 SGB V mit {total_changes} implementierten "
-                f"Sicherheitsmaßnahmen und Richtlinien"
-            )
+
+        # Kuratierte Zusammenfassungszeile (aus CHANGELOG.md); Fallback: Kategorie-Zähler
+        summary = entry.get('summary', '').strip()
+        if summary:
+            changes_text = summary
         else:
-            categories = list(entry['changes'].keys())
-            if categories:
-                main_category = categories[0]
-                changes_text = f"{main_category}: {total_changes} Änderungen"
-            else:
-                changes_text = "Keine Änderungen dokumentiert"
+            parts = [f"{cat} ({len(items)})" for cat, items in entry['changes'].items() if items]
+            changes_text = ", ".join(parts) if parts else "Keine Änderungen dokumentiert"
         
         # Escape LaTeX special characters
         changes_text = escape_latex(changes_text)

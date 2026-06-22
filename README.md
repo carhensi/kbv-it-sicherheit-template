@@ -10,14 +10,15 @@ Diese Vorlage liefert eine **praxisnahe, auditfähige IT-Sicherheitsdokumentatio
 
 **📄 Beispiel-PDFs herunterladen:**
 
-- [Standard-Version](https://github.com/carhensi/kbv-it-sicherheit-template/releases/latest/download/IT-Sicherheitsdokumentation_v2025.09.01.pdf)
-- [Barrierefreie Version](https://github.com/carhensi/kbv-it-sicherheit-template/releases/latest/download/IT-Sicherheitsdokumentation_v2025.09.01-accessible.pdf)
+- [Standard-Version](https://github.com/carhensi/kbv-it-sicherheit-template/releases/latest/download/IT-Sicherheitsdokumentation_v2026.06.22.pdf) (PDF/A-3u)
+- [Barrierefreie Version](https://github.com/carhensi/kbv-it-sicherheit-template/releases/latest/download/IT-Sicherheitsdokumentation_v2026.06.22-accessible.pdf) (PDF/A-3u + PDF/UA-1)
 
 [![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
 [![Latest Release](https://img.shields.io/github/v/release/carhensi/kbv-it-sicherheit-template)](https://github.com/carhensi/kbv-it-sicherheit-template/releases/latest)
 [![Build](https://github.com/carhensi/kbv-it-sicherheit-template/actions/workflows/build.yml/badge.svg)](https://github.com/carhensi/kbv-it-sicherheit-template/actions/workflows/build.yml)
 [![PDF/A-3u](https://img.shields.io/badge/PDF%2FA--3u-100%25-brightgreen)](#archivierbarkeit)
 [![PDF/UA-1](https://img.shields.io/badge/PDF%2FUA--1-100%25-brightgreen)](#barrierefreiheit)
+[![PDF/X-1a](https://img.shields.io/badge/PDF%2FX--1a-100%25-blue)](#druckversion)
 
 <table>
 <tr>
@@ -160,12 +161,14 @@ git merge upstream/main
 
 ### Build-Kommandos
 ```bash
-make all          # Vollständiger Build
-make build        # Schneller Build (nur bei Änderungen)
-make version      # Version aktualisieren
-make mermaid      # Netzplan generieren
-make use-sample   # Sample-Daten für CI
-make use-real     # Echte Daten (lokal)
+make all                # Vollständiger Build (alle 3 Versionen)
+make build              # Standard-Version (PDF/A-3u)
+make build-accessible   # Barrierefreie Version (PDF/A-3u + PDF/UA-1)
+make build-printable    # Druckversion (PDF/X-1a)
+make version            # Version aktualisieren
+make mermaid            # Netzplan generieren
+make use-sample         # Sample-Daten für CI
+make use-real           # Echte Daten (lokal)
 ```
 
 ### Projektstruktur
@@ -194,11 +197,15 @@ scripts/              # Build-Skripte
 
 | Anlage | Zielgruppe | Abdeckung | Hinweis |
 |--------|------------|-----------|---------|
-| **Anlage 1** | Alle Praxen (≤5 Personen) | 41/41 (100%) | 9 Windows-Anforderungen n.a. für macOS |
-| **Anlage 2** | Mittlere Praxen (6–20 Personen) | 8/10 (80%) | Kerberos n.a., SIEM überdimensioniert |
+| **Anlage 1** | Alle Praxen (≤5 Personen) | 41/41 anwendbare (100%) | 9 von 50 n.a. (Windows, Datenträgerversand, Webdienst-Anbieter) |
+| **Anlage 2** | Mittlere Praxen (6–20 Personen) | 8/9 anwendbare (89%) | freiwillig; 1 teilw. (SIEM), 1 n.a. (Kerberos) |
 | **Anlage 3** | Große Praxen (>20 Personen) | – | Nicht Zielgruppe dieser Vorlage |
 | **Anlage 4** | Medizinische Großgeräte | – | CT, MRT, PET – nicht abgedeckt |
 | **Anlage 5** | Telematikinfrastruktur | 9/9 (100%) | TI-Gateway, eHBA, SMC-B |
+
+> ⚠️ **Wichtig – die Zahlen gelten für die mitgelieferte Musterpraxis:** Die Abdeckungswerte beziehen sich auf die **fiktive Beispielpraxis** (Einzelpraxis, macOS-only, extern gehostetes TI-Gateway). Sie zeigen, **wie** eine vollständige Dokumentation aussehen kann – sie sind **kein Compliance-Versprechen für Ihre Praxis**. Jede Praxis muss ihren eigenen Erfüllungsstatus selbst ermitteln. Es gilt der Grundsatz: *„Schreibe nur auf, was du tust – und tue, was du aufgeschrieben hast."*
+
+> ℹ️ **NIS2 / Cybersicherheitsrecht (seit 06.12.2025):** Das NIS2-Umsetzungsgesetz (novelliertes BSI-Gesetz) betrifft im Gesundheitswesen vor allem Krankenhäuser sowie **größere Praxen/MVZ** (ab 50 Beschäftigten *oder* ab 10 Mio. € Umsatz **und** Bilanzsumme). **Kleine Praxen sind in der Regel nicht betroffen** – maßgeblich bleibt die KBV-Richtlinie nach § 390 SGB V. Betroffenheit prüfen: [NIS2-Betroffenheitsprüfung des BSI](https://betroffenheitspruefung-nis-2.bsi.de). *(Stand der Rechtsangaben: Juni 2026 – Gesetzeslage/Fristen/Schwellenwerte können sich ändern, bitte vor Übernahme auf Aktualität prüfen.)*
 
 
 ## 📋 PDF-Compliance
@@ -215,7 +222,14 @@ Das PDF erfüllt **PDF/UA-1** (ISO 14289-1) und **WCAG 2.1** für Barrierefreihe
 - Screenreader-kompatibel
 - Lesereihenfolge definiert
 
-Beide Standards werden im CI/CD automatisch validiert – der Build schlägt bei Abweichungen fehl.
+### Druckversion
+Das PDF erfüllt **PDF/X-1a:2001** für professionellen Druck:
+- CMYK-Farbmodell (keine RGB-Farben)
+- Eingebettete Fonts
+- Keine Transparenzen
+- Optimiert für Druckmaschinen
+
+Alle Standards werden im CI/CD automatisch validiert – der Build schlägt bei Abweichungen fehl.
 
 
 ## 🔮 Geplant
