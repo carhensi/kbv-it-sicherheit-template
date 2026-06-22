@@ -7,6 +7,14 @@ and this project adheres to date-based versioning (YYYY.MM.DD).
 
 ## [Unreleased]
 
+### Hinzugefügt
+- Druckversion (PDF/X-1a) wird in CI gebaut und ans Release angehängt
+
+### Geändert
+- Release-Assets versionslos benannt → stabile `latest/download`-Links in der README (keine Pflege pro Release)
+- CI baut nicht mehr bei jedem main-Push (Validierung via PR, Release via Tag)
+- metadata-sample auf 2026.06.22 aktualisiert; `*.diff` in .gitignore
+
 ## [2026.06.22] - 2026-06-22
 
 NIS2-/Cybersicherheits-Hinweis, KBV-Präzisierungen (§390, Compliance-Mapping, Anlagen), Tabellen-/Build-Fixes, Auto-Changelog, TeXLive 2026 und tag-getriebenes Release.
