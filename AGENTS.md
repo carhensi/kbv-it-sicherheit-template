@@ -51,6 +51,11 @@ Output: `tex/main-{standard,accessible,printable}.pdf`. Der Build läuft `lualat
 - **Kein** chktex/aspell-Gate. `.aspell.de.pws`/`.chktexrc` sind nur lokale Editor-Configs.
 - **printable wird in CI nicht gebaut** – nach Änderungen an gemeinsamen Dateien lokal
   `make build-printable` gegenprüfen.
+- CI läuft auf `ubuntu-latest` mit Docker-in-Docker; das Build-Image kommt aus
+  `TEXLIVE_IMAGE` im Makefile (kein `container:`). `vars.USE_SAMPLE_DATA=true` → Build mit
+  `metadata-sample.tex` (`metadata.tex` ist gitignored).
+- Release-Assets: nur **Standard + Accessible** PDF (kein printable).
+- Repo erlaubt nur **Squash-Merge**.
 
 ## Fallstricke (wichtig!)
 
@@ -89,9 +94,31 @@ Bei Änderungen dieser Angaben Stand-Datum und Quelle (KBV/BSI) mitpflegen.
 1. `make build-standard` **und** `make build-accessible` (bei Style/Tabellen/Paket-Änderungen
    zusätzlich `make build-printable`).
 2. Log auf `! ` (Fehler) und `Misplaced` prüfen → muss 0 sein.
-3. Broken Refs: `pdftotext main-*.pdf - | grep -c '??'` → muss 0 sein.
+3. Broken Refs: PDF-Text extrahieren, auf `??` prüfen. **`pdftotext` ist NICHT im
+   TeXLive-Image** → poppler-Container nutzen:
+   `docker run --rm -v "$PWD/tex":/data debian:stable-slim sh -c 'apt-get update -qq && apt-get install -y -qq poppler-utils && pdftotext /data/main-standard.pdf - | grep -c "??"'`
+   ⚠️ Fehlt das Tool, ist die Pipe leer → `grep -c`=0 = **falscher** Pass. Tool-Existenz prüfen!
 4. PDF/A & PDF/UA: verapdf (`--flavour 3u` / `--flavour ua1`) → `failedChecks="0"`.
 5. `make test` grün.
+
+**Signatur lokal:** `git log/tag -v` zeigt „N" ohne `gpg.ssh.allowedSignersFile` — die
+Signatur ist trotzdem da. Mit ephemerer allowed_signers-Datei (`<email> <ssh-key>`) verifizieren.
+**CI-Status:** `gh run watch` bricht unzuverlässig vorzeitig ab → besser
+`gh run view <id> --json status --jq .status` pollen.
+
+## Release (tag-getrieben)
+
+1. Summary-Zeile (+ Bullets) unter neuem `## [vYYYY.MM.DD] - YYYY-MM-DD` in `CHANGELOG.md`.
+2. PR → **Squash-Merge** nach `main`.
+3. Signierten Tag setzen + pushen:
+   `git tag -s vYYYY.MM.DD -m "Release …" && git push origin vYYYY.MM.DD`
+4. Der Tag-Push triggert `build.yml` (`push: tags`); der `release`-Job baut + erstellt das
+   GitHub-Release (Version aus dem Tag-Namen) via softprops auf dem vorhandenen signierten Tag.
+
+Kein `gh workflow run`/`initial_release`-Flag mehr. Der `release`-Job läuft **nur** beim
+Tag-Push (im PR übersprungen) — also erstmalig „echt" beim Release; Lauf beobachten.
+README-Download-Links sind versions-hartkodiert → pro Release anpassen (offener TODO:
+versionslose Asset-Namen).
 
 ## Git
 
